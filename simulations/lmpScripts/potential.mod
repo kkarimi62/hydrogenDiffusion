@@ -11,8 +11,11 @@
 #pair_style meam/c
 #pair_coeff * * ${PathEam}/library_CoNiCrFeMn.meam Co Ni Cr Fe Mn ${PathEam}/parameters_CoNiCrFeMn.meam Co Ni Cr Fe Mn
 
+#pair_style meam/c
+#pair_coeff * * ${PathEam}/library_CoNiCrFeMn.meam Ni Co Cr Fe Mn ${PathEam}/parameters_CoNiCrFeMn.meam Ni Co Cr Fe Mn
+
 pair_style meam/c
-pair_coeff * * ${PathEam}/library_CoNiCrFeMn.meam Ni Co Cr Fe Mn ${PathEam}/parameters_CoNiCrFeMn.meam Ni Co Cr Fe Mn
+pair_coeff * * ${PathEam}/library_AlH.meam Al ${PathEam}/parameters_AlH.meam Al
 
 # Setup neighbor style
 #neighbor 1.0 nsq

@@ -97,7 +97,7 @@ if __name__ == '__main__':
 					10:' -var ParseData 1 -var DataFile swapped_600.dat',
 					'p0':' swapped_600.dat 10.0 %s'%(os.getcwd()+'/../postprocess'),
 					'p1':' swapped_600.dat ElasticConst.txt DumpFileModu.xyz %s'%(os.getcwd()+'/../postprocess'),
-					'p2':' %s 3.52 135.0 67.0 135.0 data.txt 5'%(os.getcwd()+'/lmpScripts'),
+					'p2':' %s 3.52 135.0 67.0 135.0 data_minimized.txt 5'%(os.getcwd()+'/lmpScripts'),
 					'p3':' data_minimized.txt init_xyz.conf %s 1400.0'%(os.getcwd()+'/lmpScripts'),
 					'p4':' data_minimized.txt data_minimized.txt %s 1'%(os.getcwd()+'/lmpScripts'),
 					'p5':' ',
@@ -108,7 +108,7 @@ if __name__ == '__main__':
 		#--- different scripts in a pipeline
 		indices = {
 					0:[5,7,6], #--- minimize, thermalize, shear(disp. controlled)
-					1:['p2'], #,5,7,8],
+					1:['p2',51],#7,8], #--- put a dislocation, minimize
 				  }[1]
 		Pipeline = list(map(lambda x:LmpScript[x],indices))
 	#	Variables = list(map(lambda x:Variable[x], indices))
