@@ -118,7 +118,7 @@ if __name__ == '__main__':
 		EXEC_lmp = ['lmp_g++_openmpi'][0]
 		durtn = ['95:59:59','00:59:59','167:59:59'][ 2 ]
 		mem = '22gb'
-		partition = ['INTEL_PHI'][0]
+		partition = ['INTEL_PHI','INTEL_CASCADE'][1]
 		#--
 		DeleteExistingFolder = True
 		if DeleteExistingFolder:
