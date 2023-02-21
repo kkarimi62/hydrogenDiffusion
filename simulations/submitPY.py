@@ -21,7 +21,7 @@ if __name__ == '__main__':
 	#---
 	count = 0
 	for keys_t in Temps:
-		temp = Temps[keys_t]
+				temp = Temps[keys_t]
 			#---	densities
 				inums = lnums[ 0 ] - 1
 				string[ inums ] = "\t3:\'hydrogenDiffusionInAlMultipleTemp/Temp%sK\',\n"%(temp) #--- change job name
