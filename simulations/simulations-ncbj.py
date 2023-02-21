@@ -111,8 +111,8 @@ if __name__ == '__main__':
 		indices = {
 					0:[5,7,6], #--- minimize, thermalize, shear(disp. controlled)
 					1:['p2','p6', 51],#7,8], #--- put a dislocation, add interstitial, minimize
-#					2:['p2', 51],#7,8], #--- put a dislocation, add interstitial, minimize
-				  }[2]
+					2:['p2', 51],#7,8], #--- put a dislocation, add interstitial, minimize
+				  }[1]
 		Pipeline = list(map(lambda x:LmpScript[x],indices))
 	#	Variables = list(map(lambda x:Variable[x], indices))
 		EXEC = list(map(lambda x:np.array(['lmp_g++_openmpi','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
