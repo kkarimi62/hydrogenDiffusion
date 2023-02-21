@@ -79,7 +79,7 @@ if __name__ == '__main__':
 											'p3':'kartInput.py',
 											'p4':'takeOneOut.py',
 											'p5':'bash-to-csh.py',
-											'p6':'AddAtom.py',
+											'p6':'addAtom.py',
 											1.0:'kmc.sh', #--- bash script
 											2.0:'kmcUniqueCRYST.sh', #--- bash script
 					} 
