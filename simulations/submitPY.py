@@ -18,21 +18,10 @@ if __name__ == '__main__':
 				6:1400,
 #				7:1600,
 			}
-	Rates  = {
-#				0:0.5e-4,
-#				1:1e-4,
-#				2:4e-4,
-#				3:8e-4,
-#				4:8e-3,
-#				5:8e-2,
-			}
 	#---
 	count = 0
 	for keys_t in Temps:
 		temp = Temps[keys_t]
-		for keys_r in Rates:
-			#---
-				rate = Rates[keys_r]
 			#---	densities
 				inums = lnums[ 0 ] - 1
 				string[ inums ] = "\t3:\'hydrogenDiffusionInAlMultipleTemp/Temp%sK\',\n"%(temp) #--- change job name
