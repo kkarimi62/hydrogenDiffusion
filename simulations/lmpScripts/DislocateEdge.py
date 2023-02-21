@@ -84,7 +84,7 @@ var2=m+1
 bmag = a / 2.0 ** 0.5
 os.system('rm *.cfg *.lmp *.xyz *.xsf')
 #--- Crystallographic orientation of the system
-os.system('atomsk --create fcc %s Ni orient 110 -111 1-12 Al_unitcell.cfg'%a)
+os.system('atomsk --create fcc %s Al orient 110 -111 1-12 Al_unitcell.cfg'%a)
 os.system('atomsk Al_unitcell.cfg -duplicate %s %s %s Al_supercell.cfg'%(m,n,k))
 #--- Introduce an edge dislocation at constant number of atoms
 if method == '2':
