@@ -110,7 +110,7 @@ if __name__ == '__main__':
 		#--- different scripts in a pipeline
 		indices = {
 					0:[5,7,6], #--- minimize, thermalize, shear(disp. controlled)
-					1:['p2','p6', 51, 7] #,8], #--- put a dislocation, add interstitial, minimize, thermalize
+					1:['p2','p6', 51, 7], #,8], #--- put a dislocation, add interstitial, minimize, thermalize
 					2:['p2', 51],#7,8], #--- put a dislocation, add interstitial, minimize
 				  }[1]
 		Pipeline = list(map(lambda x:LmpScript[x],indices))
