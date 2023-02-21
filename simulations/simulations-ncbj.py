@@ -102,7 +102,7 @@ if __name__ == '__main__':
 					'p3':' data_minimized.txt init_xyz.conf %s 1400.0'%(os.getcwd()+'/lmpScripts'),
 					'p4':' data_minimized.txt data_minimized.txt %s 1'%(os.getcwd()+'/lmpScripts'),
 					'p5':' ',
-					'p6':' %s data_atom_added.txt'%(os.getcwd()+'/lmpScripts'),
+					'p6':' %s data_atom_added.txt 30'%(os.getcwd()+'/lmpScripts'),
 									 1.0:'DataFile=data_minimized.txt',
 									 2.0:'DataFile=data_minimized.txt',
 					} 

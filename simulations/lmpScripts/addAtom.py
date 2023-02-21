@@ -143,11 +143,12 @@ def isEmpty( val ):
 
 lib_path = sys.argv[1]
 outpt = sys.argv[2]
+natom = int(sys.argv[3])
 
 sys.path.append(lib_path)
 import LammpsPostProcess2nd as lp
 
-os.system('atomsk final.cfg -add-atom H random 1 final2nd.cfg')
+os.system('atomsk final.cfg -add-atom H random %s final2nd.cfg'%(natom))
 os.system('atomsk final2nd.cfg lmp')
 os.system('mv final2nd.lmp %s'%outpt)
 
