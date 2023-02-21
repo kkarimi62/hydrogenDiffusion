@@ -5,7 +5,7 @@ import sys
 import os
 import pdb
 
-def WriteDataFile(AtomskOutpt, mass, LmpInput):
+def WriteDataFile(AtomskOutpt, mass, ratios, LmpInput):
     #--- read data file
     lmpData = lp.ReadDumpFile( AtomskOutpt )
     lmpData.ReadData()
@@ -30,20 +30,28 @@ def WriteDataFile(AtomskOutpt, mass, LmpInput):
     atoms.z -= rcent[2]
 
     if len(mass) > 1: #--- multi-component alloy: assign random types
+		
         dff=pd.DataFrame(atoms.__dict__)
-        dff['type']=1
+        itype = 1
+        dff['type']=itype
         indices = dff.index
         ntype=len(mass)
         sizeTot = len(dff)
-        size = int(np.floor((1.0*sizeTot/ntype)))
-        assert size * ntype <= sizeTot
+
+		#--- add up to one!
+        sizes = (ratios * sizeTot).astype(int)
+        sizes[-1] = sizeTot - np.sum(sizes[:-1])
+        sizes=dict(zip(range(1,ntype+1),sizes))
+		
+#        assert size * ntype <= sizeTot
         indxxx = {}
-        for itype in range(ntype-1):
+        for itype in range(2,ntype+1):
+            size = sizes[itype]
             indxxx[itype] = np.random.choice(indices, size=size, replace=None)
 #            dff.iloc[indxxx[itype]]['type'] = ntype - itype
             row_indexer = indxxx[itype]
             col_indexer = 'type'
-            dff.loc[row_indexer,col_indexer] = ntype - itype 
+            dff.loc[row_indexer,col_indexer] = itype 
             indices = list(set(indices)-set(indxxx[itype]))
             sizeTot -= size		
         atoms = lp.Atoms( **dff.to_dict(orient='series') )
@@ -60,6 +68,7 @@ import LammpsPostProcess2nd as lp
 #--- modify atom types and associated masses 
 ntype = int(sys.argv[8])
 mass=dict(zip(range(1,ntype+1),np.ones(ntype))) #{1:58.693, # Ni
+ratio = np.array(list(map(float,sys.argv[9:])))
 #        2:58.933195, # Co
 #        3:51.9961 #Cr,
 #       } 
@@ -97,4 +106,4 @@ if method == '5':
 os.system('atomsk data.cfg -center com final.cfg')
 os.system('atomsk final.cfg lmp')
 #
-WriteDataFile('final.lmp',mass, sys.argv[6])
+WriteDataFile('final.lmp',mass, ratio, sys.argv[6])
