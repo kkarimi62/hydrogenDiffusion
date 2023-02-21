@@ -58,43 +58,43 @@ import LammpsPostProcess2nd as lp
 
 
 #--- modify atom types and associated masses 
-if 1: #Atomsk:
-    mass={1:58.693, # Ni
+ntype = int(sys.argv[8])
+mass=dict(zip(range(1,ntype+1),np.ones(ntype))) #{1:58.693, # Ni
 #        2:58.933195, # Co
 #        3:51.9961 #Cr,
-       } 
-	#
-    a = float(sys.argv[2]) #3.52
-    lx, ly, lz = float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5]) #40.0, 20.0, 40.0 Angstrom
-    method = sys.argv[7]
-    m,n,k = int(lx/a*4.0**(1.0/3)), int(ly/a), int(lz/a)
-    #
-    var1=int(n/2)
-    var2=m+1
-    #
-    bmag = a / 2.0 ** 0.5
-    os.system('rm *.cfg *.lmp *.xyz *.xsf')
-    #--- Crystallographic orientation of the system
-    os.system('atomsk --create fcc %s Ni orient 110 -111 1-12 Al_unitcell.cfg'%a)
-    os.system('atomsk Al_unitcell.cfg -duplicate %s %s %s Al_supercell.cfg'%(m,n,k))
-    #--- Introduce an edge dislocation at constant number of atoms
-    if method == '2':
-        os.system('atomsk Al_supercell.cfg -dislocation 0.51*box 0.51*box edge Z Y %s 0.33 data.cfg'%(bmag))
-    #--- Insert a half-plane above the glide plane
-    if method == '3':
-        os.system('atomsk Al_supercell.cfg -dislocation 0.51*box 0.51*box edge_add Z Y %s 0.33 data.cfg'%(bmag))
-    #---  Remove a half-plane below the glide plane
-    if method == '4':
-        os.system('atomsk Al_supercell.cfg -dislocation 0.51*box 0.51*box edge_rm Z Y %s 0.33 data.cfg'%(bmag))
-    #--- Construct a dislocation by superimposing two crystals
-    if method == '5':
-        epsilon = 0.5 / m
-        os.system('atomsk Al_unitcell.cfg -duplicate %s %s %s -deform X %s 0.0 bottom.xsf'%(m,var1,k,epsilon))
-        epsilon = -0.5 / (m+1)
-        os.system('atomsk Al_unitcell.cfg -duplicate %s %s %s -deform X %s 0.0 top.xsf'%(var2,var1,k,epsilon))
-        os.system('atomsk --merge Y 2 bottom.xsf top.xsf data.cfg') 
+#       } 
+#
+a = float(sys.argv[2]) #3.52
+lx, ly, lz = float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5]) #40.0, 20.0, 40.0 Angstrom
+method = sys.argv[7]
+m,n,k = int(lx/a*4.0**(1.0/3)), int(ly/a), int(lz/a)
+#
+var1=int(n/2)
+var2=m+1
+#
+bmag = a / 2.0 ** 0.5
+os.system('rm *.cfg *.lmp *.xyz *.xsf')
+#--- Crystallographic orientation of the system
+os.system('atomsk --create fcc %s Ni orient 110 -111 1-12 Al_unitcell.cfg'%a)
+os.system('atomsk Al_unitcell.cfg -duplicate %s %s %s Al_supercell.cfg'%(m,n,k))
+#--- Introduce an edge dislocation at constant number of atoms
+if method == '2':
+    os.system('atomsk Al_supercell.cfg -dislocation 0.51*box 0.51*box edge Z Y %s 0.33 data.cfg'%(bmag))
+#--- Insert a half-plane above the glide plane
+if method == '3':
+    os.system('atomsk Al_supercell.cfg -dislocation 0.51*box 0.51*box edge_add Z Y %s 0.33 data.cfg'%(bmag))
+#---  Remove a half-plane below the glide plane
+if method == '4':
+    os.system('atomsk Al_supercell.cfg -dislocation 0.51*box 0.51*box edge_rm Z Y %s 0.33 data.cfg'%(bmag))
+#--- Construct a dislocation by superimposing two crystals
+if method == '5':
+    epsilon = 0.5 / m
+    os.system('atomsk Al_unitcell.cfg -duplicate %s %s %s -deform X %s 0.0 bottom.xsf'%(m,var1,k,epsilon))
+    epsilon = -0.5 / (m+1)
+    os.system('atomsk Al_unitcell.cfg -duplicate %s %s %s -deform X %s 0.0 top.xsf'%(var2,var1,k,epsilon))
+    os.system('atomsk --merge Y 2 bottom.xsf top.xsf data.cfg') 
 
-    os.system('atomsk data.cfg -center com final.cfg')
-    os.system('atomsk final.cfg lmp')
-    #
-    WriteDataFile('final.lmp',mass, sys.argv[6])
+os.system('atomsk data.cfg -center com final.cfg')
+os.system('atomsk final.cfg lmp')
+#
+WriteDataFile('final.lmp',mass, sys.argv[6])
