@@ -98,7 +98,7 @@ if __name__ == '__main__':
 					10:' -var ParseData 1 -var DataFile swapped_600.dat',
 					'p0':' swapped_600.dat 10.0 %s'%(os.getcwd()+'/../postprocess'),
 					'p1':' swapped_600.dat ElasticConst.txt DumpFileModu.xyz %s'%(os.getcwd()+'/../postprocess'),
-					'p2':' %s 3.52 10.0 10.0 10.0 data_minimized.txt 5 1 1.0'%(os.getcwd()+'/lmpScripts'),
+					'p2':' %s 3.52 10.0 10.0 10.0 data_minimized.txt 5 2 1.0 0.0'%(os.getcwd()+'/lmpScripts'),
 					'p3':' data_minimized.txt init_xyz.conf %s 1400.0'%(os.getcwd()+'/lmpScripts'),
 					'p4':' data_minimized.txt data_minimized.txt %s 1'%(os.getcwd()+'/lmpScripts'),
 					'p5':' ',
