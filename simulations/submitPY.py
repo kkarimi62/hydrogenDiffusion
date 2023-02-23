@@ -5,7 +5,7 @@ if __name__ == '__main__':
 	#---
 #	lnums = [ 30, 90, 86   ]
 #	string=open('simulations.py').readlines() #--- python script
-	lnums = [ 33, 94   ]
+	lnums = [ 33, 97   ]
 	string=open('simulations-ncbj.py').readlines() #--- python script
 	#---
 	Temps  = {
@@ -25,7 +25,7 @@ if __name__ == '__main__':
 				string[ inums ] = "\t3:\'hydrogenDiffusionInAlMultipleTemp/Temp%sK\',\n"%(temp) #--- change job name
 			#---
 				inums = lnums[ 1 ] - 1
-				string[ inums ] = "\t7:\' -var buff 0.0 -var T %s -var P 0.0 -var nevery 100 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData Equilibrated_%s.dat\',\n"%(temp,temp)
+				string[ inums ] = "\t7:\' -var buff 0.0 -var T %s -var nevery 10 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData Equilibrated_%s.dat\',\n"%(temp,temp)
 			#---
 				sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
 				os.system( 'python junk%s.py'%count )
