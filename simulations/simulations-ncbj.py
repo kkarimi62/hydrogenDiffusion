@@ -66,6 +66,7 @@ if __name__ == '__main__':
 						2:'relaxWalls.in', 
 						7:'in.Thermalization', 
 						71:'in.Thermalization', 
+						72:'in.ThermalizationConstantVolume', 
 						4:'in.vsgc', 
 						5:'in.minimization', 
 						51:'in.minimization', 
@@ -93,6 +94,7 @@ if __name__ == '__main__':
 					51:' -var buff 0.0 -var nevery 1000 -var ParseData 1 -var DataFile data_atom_added.txt -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt', 
 					7:' -var buff 0.0 -var T 1500.0 -var P 0.0 -var nevery 100 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData Equilibrated_300.dat',
 					71:' -var buff 0.0 -var T 0.1 -var P 0.0 -var nevery 100 -var ParseData 1 -var DataFile swapped_600.dat -var DumpFile dumpThermalized2.xyz -var WriteData Equilibrated_0.dat',
+					72:' -var buff 0.0 -var T 1500.0 -var nevery 100 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData Equilibrated_300.dat',
 					8:' -var buff 0.0 -var T 300.0 -var sigm 1.0 -var sigmdt 0.0001 -var ndump 100 -var ParseData 1 -var DataFile Equilibrated_0.dat -var DumpFile dumpSheared.xyz',
 					9:' -var natoms 1000 -var cutoff 3.52 -var ParseData 1',
 					10:' -var ParseData 1 -var DataFile swapped_600.dat',
@@ -110,7 +112,7 @@ if __name__ == '__main__':
 		#--- different scripts in a pipeline
 		indices = {
 					0:[5,7,6], #--- minimize, thermalize, shear(disp. controlled)
-					1:['p2','p6', 51, 7], #--- put a dislocation, add interstitial, minimize, thermalize
+					1:['p2','p6', 51, 72], #--- put a dislocation, add interstitial, minimize, thermalize
 				  }[1]
 		Pipeline = list(map(lambda x:LmpScript[x],indices))
 	#	Variables = list(map(lambda x:Variable[x], indices))
