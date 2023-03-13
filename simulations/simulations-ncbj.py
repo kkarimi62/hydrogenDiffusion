@@ -31,14 +31,16 @@ if __name__ == '__main__':
 		#
 		jobname  = {
 					3:'hydrogenDiffusionInAlMultipleTemp/Temp300K', 
-				   }[3]
+					4:'mitStuff', 
+				   }[4]
 		sourcePath = os.getcwd() +\
 					{	
 						0:'/junk',
 						1:'/../postprocess/NiCoCrNatom1K',
 						2:'/NiCoCrNatom1KTemp0K',
 						5:'/dataFiles/reneData',
-					}[0] #--- must be different than sourcePath. set it to 'junk' if no path
+						6:'/mitPotential',
+					}[6] #--- must be different than sourcePath. set it to 'junk' if no path
 			#
 		sourceFiles = { 0:False,
 						1:['Equilibrated_300.dat'],
@@ -47,7 +49,8 @@ if __name__ == '__main__':
 						4:['data_minimized.txt'],
 						5:['data_init.txt','ScriptGroup.0.txt'], #--- only one partition! for multiple ones, use 'submit.py'
 						6:['FeNi_2000.dat'], 
-					 }[0] #--- to be copied from the above directory. set it to '0' if no file
+						7:['compressed_model.pb','frozen_model.pb','init.lmp'], 
+					 }[7] #--- to be copied from the above directory. set it to '0' if no file
 		#
 		EXEC_DIR = '/mnt/home/kkarimi/Project/git/lammps-27May2021/src' #--- path for executable file
 		kmc_exec = '/mnt/home/kkarimi/Project/git/kart-master/src/KMCART_exec'
@@ -74,15 +77,16 @@ if __name__ == '__main__':
 						8:'in.shearLoadTemp',
 						9:'in.elastic',
 						10:'in.elasticSoftWall',
+						11:'in.relax',
 						'p0':'partition.py', #--- python file
 						'p1':'WriteDump.py',
 						'p2':'DislocateEdge.py',
-											'p3':'kartInput.py',
-											'p4':'takeOneOut.py',
-											'p5':'bash-to-csh.py',
-											'p6':'addAtom.py',
-											1.0:'kmc.sh', #--- bash script
-											2.0:'kmcUniqueCRYST.sh', #--- bash script
+						'p3':'kartInput.py',
+						'p4':'takeOneOut.py',
+						'p5':'bash-to-csh.py',
+						'p6':'addAtom.py',
+						1.0:'kmc.sh', #--- bash script
+						2.0:'kmcUniqueCRYST.sh', #--- bash script
 					} 
 		#
 		def SetVariables():
@@ -98,6 +102,7 @@ if __name__ == '__main__':
 					8:' -var buff 0.0 -var T 300.0 -var sigm 1.0 -var sigmdt 0.0001 -var ndump 100 -var ParseData 1 -var DataFile Equilibrated_0.dat -var DumpFile dumpSheared.xyz',
 					9:' -var natoms 1000 -var cutoff 3.52 -var ParseData 1',
 					10:' -var ParseData 1 -var DataFile swapped_600.dat',
+					11:' ',
 					'p0':' swapped_600.dat 10.0 %s'%(os.getcwd()+'/../postprocess'),
 					'p1':' swapped_600.dat ElasticConst.txt DumpFileModu.xyz %s'%(os.getcwd()+'/../postprocess'),
 					'p2':' %s 3.52 26.0 18.0 26.0 data_init.txt 4 2 1.0 0.0'%(os.getcwd()+'/lmpScripts'),
@@ -105,24 +110,25 @@ if __name__ == '__main__':
 					'p4':' data_minimized.txt data_minimized.txt %s 1'%(os.getcwd()+'/lmpScripts'),
 					'p5':' ',
 					'p6':' %s data_atom_added.txt 30'%(os.getcwd()+'/lmpScripts'),
-									 1.0:'DataFile=data_minimized.txt',
-									 2.0:'DataFile=data_minimized.txt',
+					 1.0:'DataFile=data_minimized.txt',
+					 2.0:'DataFile=data_minimized.txt',
 					} 
 			return Variable
 		#--- different scripts in a pipeline
 		indices = {
 					0:[5,7,6], #--- minimize, thermalize, shear(disp. controlled)
 					1:['p2','p6', 51, 72], #--- put a dislocation, add interstitial, minimize, thermalize
-				  }[1]
+					2:[11], #--- mit stuff
+				  }[2]
 		Pipeline = list(map(lambda x:LmpScript[x],indices))
 	#	Variables = list(map(lambda x:Variable[x], indices))
 		EXEC = list(map(lambda x:np.array(['lmp_g++_openmpi','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
 	#        print('EXEC=',EXEC)
 		#
 		EXEC_lmp = ['lmp_g++_openmpi'][0]
-		durtn = ['95:59:59','00:59:59','167:59:59'][ 2 ]
-		mem = '22gb'
-		partition = ['INTEL_PHI','INTEL_CASCADE'][1]
+		durtn = ['95:59:59','00:14:59','167:59:59'][ 1 ]
+		mem = '8gb'
+		partition = ['INTEL_PHI','INTEL_CASCADE'][0]
 		#--
 		DeleteExistingFolder = True
 		if DeleteExistingFolder:

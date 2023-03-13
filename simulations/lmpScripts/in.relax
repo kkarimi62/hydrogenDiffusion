@@ -1,0 +1,35 @@
+# temperature
+variable T equal 300 
+variable rn equal round(random(1,100000,5239))
+variable a equal 2.5
+variable dump_every equal 200
+
+units metal
+atom_style atomic
+atom_modify map array
+boundary p s p
+
+read_data init.lmp
+
+mass 1 58.933
+mass 2 51.996
+mass 3 55.845
+mass 4 1.008
+mass 5 54.938
+
+# interactions
+pair_style deepmd compressed_model.pb 
+pair_coeff * *
+
+neighbor 2.0 bin
+neigh_modify delay 10 every 1 check yes
+
+thermo 100
+thermo_style custom step temp pe pyz etotal press pxx pyy pzz vol lx ly lz
+thermo_modify norm no
+
+dump 1 all custom 200 traj.dump id type x y z
+
+velocity all create $T ${rn} rot yes mom yes dist gaussian
+fix 1 all npt temp $T $T $(dt*100) x 0 0 $(dt*1000) z 0 0 $(dt*1000)
+run 10000
