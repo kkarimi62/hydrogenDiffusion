@@ -3,7 +3,7 @@ def makeOAR( EXEC_DIR, node, core, time ):
 	print >> someFile, '#!/bin/bash\n'
 	print >> someFile, 'EXEC_DIR=%s\n' %( EXEC_DIR )
 	print >> someFile, 'MEAM_library_DIR=%s\n' %( MEAM_library_DIR )
-#	print >> someFile, 'module load mpich/3.2.1-gnu\n'
+	print >> someFile, 'source ~/Project/opt/deepmd-kit/bin/activate ~/Project/opt/deepmd-kit\nOMP_NUM_THREADS=%s'%(nThreads*nNode) #--- deep potential stuff
 	print >> someFile, 'module load openmpi/4.0.2-gnu730\nmodule load lib/openblas/0.3.13-gnu\n'
 
 	#--- run python script 
@@ -11,7 +11,7 @@ def makeOAR( EXEC_DIR, node, core, time ):
 #	cutoff = 1.0 / rho ** (1.0/3.0)
 	for script,var,indx, execc in zip(Pipeline,Variables,range(100),EXEC):
 		if execc == 'lmp': #_mpi' or EXEC == 'lmp_serial':
-			print >> someFile, "mpirun --oversubscribe -np %s $EXEC_DIR/lmp_mpi < %s -echo screen -var OUT_PATH \'%s\' -var PathEam %s -var INC \'%s\' %s\n"%(nThreads*nNode, script, OUT_PATH, '${MEAM_library_DIR}', SCRPT_DIR, var)
+			print >> someFile, "mpirun --oversubscribe -np %s $EXEC_DIR/%s < %s -echo screen -var OUT_PATH \'%s\' -var PathEam %s -var INC \'%s\' %s\n"%(nThreads*nNode, EXEC_lmp, script, OUT_PATH, '${MEAM_library_DIR}', SCRPT_DIR, var)
 		elif execc == 'py':
 			print >> someFile, "python3 %s %s\n"%(script, var)
 		elif execc == 'kmc':
@@ -32,7 +32,7 @@ if __name__ == '__main__':
 		#
 		jobname  = {
 					3:'hydrogenDiffusionInAlMultipleTemp/Temp300K', 
-					4:'mitStuff', 
+					4:'mitStuff2nd', 
 				   }[4]
 		sourcePath = os.getcwd() +\
 					{	
@@ -53,7 +53,8 @@ if __name__ == '__main__':
 						7:['compressed_model.pb','frozen_model.pb','init.lmp'], 
 					 }[7] #--- to be copied from the above directory. set it to '0' if no file
 		#
-		EXEC_DIR = '/home/kamran.karimi1/Project/git/lammps2nd/lammps/src' #--- path for executable file
+#		EXEC_DIR = '/home/kamran.karimi1/Project/git/lammps2nd/lammps/src' #--- path for executable file
+		EXEC_DIR = '/home/kamran.karimi1/Project/opt/deepmd-kit/bin' #--- path for executable file
 		#
 		MEAM_library_DIR='/home/kamran.karimi1/Project/git/lammps2nd/lammps/potentials'
 		#
@@ -125,7 +126,7 @@ if __name__ == '__main__':
 		EXEC = list(map(lambda x:np.array(['lmp','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
 	#        print('EXEC=',EXEC)
 		#
-		EXEC_lmp = ['lmp_mpi','lmp_serial'][0]
+		EXEC_lmp = ['lmp_mpi','lmp_serial','_lmp'][2]
 		durtn = ['95:59:59','00:14:59','167:59:59'][ 1 ]
 		mem = '22gb'
 		partition = ['gpu-v100','parallel','cpu2019','single'][2]
