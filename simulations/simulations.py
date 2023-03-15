@@ -31,9 +31,9 @@ if __name__ == '__main__':
 		nNode	 = 1
 		#
 		jobname  = {
-					3:'hydrogenDiffusionInAlMultipleTemp/Temp300K', 
+					3:'hydrogenDiffusionInAlMultipleTemp/test', 
 					4:'mitStuff2nd', 
-				   }[4]
+				   }[3]
 		sourcePath = os.getcwd() +\
 					{	
 						0:'/junk',
@@ -41,7 +41,7 @@ if __name__ == '__main__':
 						2:'/NiCoCrNatom1KTemp0K',
 						5:'/dataFiles/reneData',
 						6:'/mitPotential',
-					}[6] #--- must be different than sourcePath. set it to 'junk' if no path
+					}[0] #--- must be different than sourcePath. set it to 'junk' if no path
 			#
 		sourceFiles = { 0:False,
 						1:['Equilibrated_300.dat'],
@@ -51,10 +51,10 @@ if __name__ == '__main__':
 						5:['data_init.txt','ScriptGroup.0.txt'], #--- only one partition! for multiple ones, use 'submit.py'
 						6:['FeNi_2000.dat'], 
 						7:['compressed_model.pb','frozen_model.pb','init.lmp'], 
-					 }[7] #--- to be copied from the above directory. set it to '0' if no file
+					 }[0] #--- to be copied from the above directory. set it to '0' if no file
 		#
-#		EXEC_DIR = '/home/kamran.karimi1/Project/git/lammps2nd/lammps/src' #--- path for executable file
-		EXEC_DIR = '/home/kamran.karimi1/Project/opt/deepmd-kit/bin' #--- path for executable file
+		EXEC_DIR = '/home/kamran.karimi1/Project/git/lammps2nd/lammps/src' #--- path for executable file
+#		EXEC_DIR = '/home/kamran.karimi1/Project/opt/deepmd-kit/bin' #--- path for executable file
 		#
 		MEAM_library_DIR='/home/kamran.karimi1/Project/git/lammps2nd/lammps/potentials'
 		#
@@ -95,8 +95,8 @@ if __name__ == '__main__':
 					0:' -var natoms 100000 -var cutoff 3.52 -var ParseData 0 -var ntype 3 -var DumpFile dumpInit.xyz -var WriteData data_init.txt',
 					6:' -var buff 0.0 -var T 300 -var P 0.0 -var gammaxy 1.0 -var gammadot 1.0e-04 -var nthermo 10000 -var ndump 1000 -var ParseData 1 -var DataFile Equilibrated_300.dat -var DumpFile dumpSheared.xyz',
 					4:' -var T 600.0 -var t_sw 20.0 -var DataFile Equilibrated_600.dat -var nevery 100 -var ParseData 1 -var WriteData swapped_600.dat', 
-					5:' -var buff 0.0 -var nevery 1000 -var ParseData 0 -var natoms 50000 -var ntype 5 -var cutoff 3.54  -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt -var seed0 %s -var seed1 %s -var seed2 %s -var seed3 %s'%tuple(np.random.randint(1001,9999,size=4)), 
-					51:' -var buff 0.0 -var nevery 1000 -var ParseData 1 -var DataFile data_atom_added.txt -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt', 
+					5:' -var buff 0.0 -var nevery 1000 -var ParseData 0 -var natoms 1000 -var ntype 1 -var cutoff 3.54  -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt -var seed0 %s -var seed1 %s -var seed2 %s -var seed3 %s'%tuple(np.random.randint(1001,9999,size=4)), 
+					51:' -var buff 0.0 -var nevery 1000 -var ParseData 1 -var DataFile data_atom_added.txt -var DumpFile dumpMin.xyz -var WriteData data_atom_added_minimized.txt', 
 					7:' -var buff 0.0 -var T 1500.0 -var P 0.0 -var nevery 100 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData Equilibrated_300.dat',
 					71:' -var buff 0.0 -var T 0.1 -var P 0.0 -var nevery 100 -var ParseData 1 -var DataFile swapped_600.dat -var DumpFile dumpThermalized2.xyz -var WriteData Equilibrated_0.dat',
 					72:' -var buff 0.0 -var T 1500.0 -var nevery 100 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData Equilibrated_300.dat',
@@ -110,7 +110,7 @@ if __name__ == '__main__':
 					'p3':' data_minimized.txt init_xyz.conf %s 1400.0'%(os.getcwd()+'/lmpScripts'),
 					'p4':' data_minimized.txt data_minimized.txt %s 1'%(os.getcwd()+'/lmpScripts'),
 					'p5':' ',
-					'p6':' %s data_atom_added.txt 30'%(os.getcwd()+'/lmpScripts'),
+					'p6':' %s data_minimized.txt data_atom_added.txt 1'%(os.getcwd()+'/lmpScripts'),
 					 1.0:'DataFile=data_minimized.txt',
 					 2.0:'DataFile=data_minimized.txt',
 					} 
@@ -120,13 +120,14 @@ if __name__ == '__main__':
 					0:[5,7,6], #--- minimize, thermalize, shear(disp. controlled)
 					1:['p2','p6', 51, 72], #--- put a dislocation, add interstitial, minimize, thermalize
 					2:[11], #--- mit stuff
-				  }[2]
+					4:[5, 'p6',51],#,'p3','p5',1.0], #--- create lattice, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
+				  }[4]
 		Pipeline = list(map(lambda x:LmpScript[x],indices))
 	#	Variables = list(map(lambda x:Variable[x], indices))
 		EXEC = list(map(lambda x:np.array(['lmp','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
 	#        print('EXEC=',EXEC)
 		#
-		EXEC_lmp = ['lmp_mpi','lmp_serial','_lmp'][2]
+		EXEC_lmp = ['lmp_mpi','lmp_serial','_lmp'][0]
 		durtn = ['95:59:59','00:14:59','167:59:59'][ 1 ]
 		mem = '22gb'
 		partition = ['gpu-v100','parallel','cpu2019','single'][2]
