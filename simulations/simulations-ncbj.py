@@ -30,7 +30,7 @@ if __name__ == '__main__':
 		nNode	 = 1
 		#
 		jobname  = {
-					3:'hydrogenDiffusionInAlMultipleTemp/Temp300K', 
+					3:'hydrogenDiffusionInAlMultipleTemp/test', 
 					4:'mitStuff', 
 				   }[3]
 		sourcePath = os.getcwd() +\
