@@ -111,8 +111,8 @@ if __name__ == '__main__':
 					'p4':' data_minimized.txt data_minimized.txt %s 1'%(os.getcwd()+'/lmpScripts'),
 					'p5':' ',
 					'p6':' %s data_minimized.txt data_atom_added.txt 1'%(os.getcwd()+'/lmpScripts'),
-					 1.0:'DataFile=data_minimized.txt',
-					 2.0:'DataFile=data_minimized.txt',
+					 1.0:'-x DataFile=data_minimized.txt',
+					 2.0:'-x DataFile=data_minimized.txt',
 					} 
 			return Variable
 		#--- different scripts in a pipeline

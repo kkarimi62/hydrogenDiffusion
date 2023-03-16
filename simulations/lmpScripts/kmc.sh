@@ -26,9 +26,9 @@ setenv ATOMIC_SYMBOLS					'Al H' #'Ni Co Cr Fe Mn' #"Ni Co Cr" #'Ni Co Cr Fe Mn'
 #setenv NTRAVAILLEUR                     3     # The number of cores associated with forces calculations per ARTnouveau search (default:1)
 ###################################### Restart options #####################################################
 
-setenv RESTART_KMC                   .true.  # IF true, restart from previous run
+setenv RESTART_KMC                   .false.  # IF true, restart from previous run
 setenv RESTART_FILE               "this_conf" # The file name used to continue a simulation from where it was last stopped
-setenv RESTART_IMPORT                .true.  # Start a NEW simulation but with the current KMC event catalogue (events.uft and topos.list)
+setenv RESTART_IMPORT                .false.  # Start a NEW simulation but with the current KMC event catalogue (events.uft and topos.list)
 setenv NEW_CATALOGUE                 .false.  #don't change! IF true, will continue simulation but will rebuild event catalogue from scratch
 
 
@@ -156,5 +156,6 @@ setenv OUTPUT_SPECIFIC   	     .true.
 
 ############### Run the simulation ######################################################################
 unlimit stacksize
-ln -s ../../lmpScripts/${INPUT_LAMMPS_FILE} . #--- lmp script 
+#ln -s ../../lmpScripts/${INPUT_LAMMPS_FILE} . #--- lmp script 
+ln -s ${INCLUDE}/${INPUT_LAMMPS_FILE} . #--- lmp script 
 /home/kamran.karimi1/Project/git/kart/src/KMCART_exec
