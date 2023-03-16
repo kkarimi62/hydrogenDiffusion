@@ -32,8 +32,9 @@ if __name__ == '__main__':
 		#
 		jobname  = {
 					3:'hydrogenDiffusionInAlMultipleTemp/Temp1000K', 
+					5:'hydrogenDiffusionInAlT1000KDislocated', 
 					4:'mitStuff2nd', 
-				   }[3]
+				   }[5]
 		sourcePath = os.getcwd() +\
 					{	
 						0:'/junk',
@@ -54,7 +55,7 @@ if __name__ == '__main__':
 					 }[0] #--- to be copied from the above directory. set it to '0' if no file
 		#
 		EXEC_DIR = '/home/kamran.karimi1/Project/git/lammps2nd/lammps/src' #--- path for executable file
-#		EXEC_DIR = '/home/kamran.karimi1/Project/opt/deepmd-kit/bin' #--- path for executable file
+#		EXEC_DIR = '/home/kamran.karimi1/Project/opt/deepmd-kit/bin' #--- path for executable file: deep potential
 		#
 		MEAM_library_DIR='/home/kamran.karimi1/Project/git/lammps2nd/lammps/potentials'
 		#
@@ -110,7 +111,7 @@ if __name__ == '__main__':
 					'p3':' data_minimized.txt init_xyz.conf %s 1000.0'%(os.getcwd()+'/lmpScripts'),
 					'p4':' data_minimized.txt data_minimized.txt %s 1'%(os.getcwd()+'/lmpScripts'),
 					'p5':' ',
-					'p6':' %s data_minimized.txt data_atom_added.txt 1'%(os.getcwd()+'/lmpScripts'),
+					'p6':' %s data_init.txt data_atom_added.txt 1'%(os.getcwd()+'/lmpScripts'),
 					 1.0:'-x DataFile=data_minimized.txt',
 					 2.0:'-x DataFile=data_minimized.txt',
 					} 
@@ -121,7 +122,8 @@ if __name__ == '__main__':
 					1:['p2','p6', 51, 72], #--- put a dislocation, add interstitial, minimize, thermalize
 					2:[11], #--- mit stuff
 					4:[5, 'p6',51,'p3','p5',1.0], #--- create lattice, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
-				  }[4]
+					5:['p2', 'p6',51,'p3','p5',1.0], #--- put a dislocation, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
+				  }[5]
 		Pipeline = list(map(lambda x:LmpScript[x],indices))
 	#	Variables = list(map(lambda x:Variable[x], indices))
 		EXEC = list(map(lambda x:np.array(['lmp','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
