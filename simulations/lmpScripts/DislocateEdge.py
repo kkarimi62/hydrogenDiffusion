@@ -67,7 +67,7 @@ import LammpsPostProcess2nd as lp
 
 #--- modify atom types and associated masses 
 ntype = int(sys.argv[8])
-mass=dict(zip(range(1,ntype+1),np.ones(ntype))) #{1:58.693, # Ni
+mass=dict(zip(range(1,ntype+1),np.random.random(size=ntype))) #{1:58.693, # Ni
 ratio = np.array(list(map(float,sys.argv[9:])))
 #        2:58.933195, # Co
 #        3:51.9961 #Cr,
@@ -106,4 +106,9 @@ if method == '5':
 os.system('atomsk data.cfg -center com final.cfg')
 os.system('atomsk final.cfg lmp')
 #
-WriteDataFile('final.lmp',mass, ratio, sys.argv[6])
+if ntype == 1:
+    os.system('mv final.lmp %s'%sys.argv[6])
+else:
+    WriteDataFile('final.lmp',mass, ratio, sys.argv[6])
+os.system('rm *.cfg *.xsf *.lmp')
+
