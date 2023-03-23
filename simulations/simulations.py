@@ -48,7 +48,7 @@ if __name__ == '__main__':
 		sourceFiles = { 0:False,
 						1:['data_init.txt','data_minimized.txt'],
 						2:['data.txt','ScriptGroup.txt'],
-						3:['Topo ignore'], 
+						3:['Topo_ignore'], 
 						4:['data_minimized.txt'],
 						5:['data_init.txt','ScriptGroup.0.txt'], #--- only one partition! for multiple ones, use 'submit.py'
 						6:['FeNi_2000.dat'], 
