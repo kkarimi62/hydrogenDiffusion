@@ -33,12 +33,12 @@ if __name__ == '__main__':
 		jobname  = {
 					3:'hydrogenDiffusionInAlMultipleTemp/Temp1000K', 
 					5:'hydrogenDiffusionInAlT1000KDislocated', 
-					6:'test2nd', 
+					6:'test3rd', 
 					4:'mitStuff2nd', 
 				   }[6]
 		sourcePath = os.getcwd() +\
 					{	
-						0:'/junk',
+						0:'/test',
 						1:'/../postprocess/NiCoCrNatom1K',
 						2:'/NiCoCrNatom1KTemp0K',
 						5:'/dataFiles/reneData',
@@ -46,14 +46,14 @@ if __name__ == '__main__':
 					}[0] #--- must be different than sourcePath. set it to 'junk' if no path
 			#
 		sourceFiles = { 0:False,
-						1:['Equilibrated_300.dat'],
+						1:['data_init.txt','data_minimized.txt'],
 						2:['data.txt','ScriptGroup.txt'],
 						3:['data.txt'], 
 						4:['data_minimized.txt'],
 						5:['data_init.txt','ScriptGroup.0.txt'], #--- only one partition! for multiple ones, use 'submit.py'
 						6:['FeNi_2000.dat'], 
 						7:['compressed_model.pb','frozen_model.pb','init.lmp'], 
-					 }[0] #--- to be copied from the above directory. set it to '0' if no file
+					 }[1] #--- to be copied from the above directory. set it to '0' if no file
 		#
 		EXEC_DIR = '/home/kamran.karimi1/Project/git/lammps2nd/lammps/src' #--- path for executable file
 #		EXEC_DIR = '/home/kamran.karimi1/Project/opt/deepmd-kit/bin' #--- path for executable file: deep potential
@@ -124,8 +124,8 @@ if __name__ == '__main__':
 					2:[11], #--- mit stuff
 					4:[5, 'p6',51,'p3','p5',1.0], #--- create lattice, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
 					5:['p2', 'p6',51,'p3','p5',1.0], #--- put a dislocation, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
-					6:['p2',51,'p3','p5',2.0], #--- put a dislocation, minimize, kart input, kart.sh to bash shell ,invoke kart
-				  }[5]
+					6:['p3','p5',2.0], #--- kart input, kart.sh to bash shell ,invoke kart
+				  }[6]
 		Pipeline = list(map(lambda x:LmpScript[x],indices))
 	#	Variables = list(map(lambda x:Variable[x], indices))
 		EXEC = list(map(lambda x:np.array(['lmp','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
@@ -133,7 +133,7 @@ if __name__ == '__main__':
 		#
 		EXEC_lmp = ['lmp_mpi','lmp_serial','_lmp'][0]
 		durtn = ['95:59:59','00:59:59','167:59:59'][ 1 ]
-		mem = '22gb'
+		mem = '8gb'
 		partition = ['gpu-v100','parallel','cpu2019','single'][1]
 		#--
 		DeleteExistingFolder = True
