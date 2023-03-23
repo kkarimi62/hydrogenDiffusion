@@ -33,12 +33,12 @@ if __name__ == '__main__':
 		jobname  = {
 					3:'hydrogenDiffusionInAlMultipleTemp/Temp1000K', 
 					5:'hydrogenDiffusionInAlT1000KDislocated', 
-					6:'test7th', 
+					6:'test8th', 
 					4:'mitStuff2nd', 
 				   }[6]
 		sourcePath = os.getcwd() +\
 					{	
-						0:'/test',
+						0:'/test7th',
 						1:'/../postprocess/NiCoCrNatom1K',
 						2:'/NiCoCrNatom1KTemp0K',
 						5:'/dataFiles/reneData',
@@ -53,7 +53,7 @@ if __name__ == '__main__':
 						5:['data_init.txt','ScriptGroup.0.txt'], #--- only one partition! for multiple ones, use 'submit.py'
 						6:['FeNi_2000.dat'], 
 						7:['compressed_model.pb','frozen_model.pb','init.lmp'], 
-					 }[1] #--- to be copied from the above directory. set it to '0' if no file
+					 }[3] #--- to be copied from the above directory. set it to '0' if no file
 		#
 		EXEC_DIR = '/home/kamran.karimi1/Project/git/lammps2nd/lammps/src' #--- path for executable file
 #		EXEC_DIR = '/home/kamran.karimi1/Project/opt/deepmd-kit/bin' #--- path for executable file: deep potential
@@ -125,7 +125,7 @@ if __name__ == '__main__':
 					4:[5, 'p6',51,'p3','p5',1.0], #--- create lattice, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
 					5:['p2', 'p6',51,'p3','p5',1.0], #--- put a dislocation, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
 					6:['p3','p5',2.0], #--- kart input, kart.sh to bash shell ,invoke kart
-				  }[ 6 ]
+				  }[ 5 ]
 		Pipeline = list(map(lambda x:LmpScript[x],indices))
 	#	Variables = list(map(lambda x:Variable[x], indices))
 		EXEC = list(map(lambda x:np.array(['lmp','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
