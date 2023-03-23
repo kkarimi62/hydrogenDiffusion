@@ -33,7 +33,7 @@ if __name__ == '__main__':
 		jobname  = {
 					3:'hydrogenDiffusionInAlMultipleTemp/Temp1000K', 
 					5:'hydrogenDiffusionInAlT1000KDislocated', 
-					6:'test10th', 
+					6:'test11th', 
 					4:'mitStuff2nd', 
 				   }[6]
 		sourcePath = os.getcwd() +\
@@ -112,7 +112,7 @@ if __name__ == '__main__':
 					'p3':' data_minimized.txt init_xyz.conf %s 1000.0'%(os.getcwd()+'/lmpScripts'),
 					'p4':' data_minimized.txt data_minimized.txt %s 1'%(os.getcwd()+'/lmpScripts'),
 					'p5':' ',
-					'p6':' %s data_init.txt data_atom_added.txt 10'%(os.getcwd()+'/lmpScripts'),
+					'p6':' %s data_init.txt data_atom_added.txt 0'%(os.getcwd()+'/lmpScripts'),
 					 1.0:'-x DataFile=data_minimized.txt',
 					 2.0:'-x DataFile=data_minimized.txt',
 					} 
