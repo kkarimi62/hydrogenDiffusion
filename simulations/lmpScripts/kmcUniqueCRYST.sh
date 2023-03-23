@@ -21,8 +21,8 @@ setenv TEMPERATURE                   ${temp} #500.0    # The simulated temperatu
 
 setenv NUMBER_ATOMS                   ${natom} #864     # The total number of atoms 
 setenv SIMULATION_BOX                ${lx} #21.47   # The size of the simulation box (x, y and z)
-setenv NSPECIES                         1     # The number of different atom types (default: 2)
-setenv ATOMIC_SYMBOLS					"Al"
+setenv NSPECIES                         2     # The number of different atom types (default: 2)
+setenv ATOMIC_SYMBOLS					"Al H"
 #setenv NTRAVAILLEUR                     3     # The number of cores associated with forces calculations per ARTnouveau search (default:1)
 ###################################### Restart options #####################################################
 
@@ -39,11 +39,11 @@ setenv MIN_SIG_BARRIER                 0.1    # Max height of barrier and inv. b
 
 #################################### Topology Params ##################################
 
-setenv TOPO_RADIUS                    3.5     # radius for topology cluster 
-setenv MAX_TOPO_CUTOFF                3.5     # length-cutoff used by default to link two atoms
-setenv MIN_TOPO_CUTOFF                2.6     # minimal length cutoff used when looking at secondary topologies 
+setenv TOPO_RADIUS                    4.0     # radius for topology cluster 
+setenv MAX_TOPO_CUTOFF                3.0     # length-cutoff used by default to link two atoms
+setenv MIN_TOPO_CUTOFF                2.2     # minimal length cutoff used when looking at secondary topologies 
 #setenv CRYST_TOPOID                   1278245  # topo id of the crystalline-like topologies
-setenv CRYST_TOPO_RADIUS              3.5     # radius for crystal-like topologies (default: 4.0 A) 
+setenv CRYST_TOPO_RADIUS              3.0     # radius for crystal-like topologies (default: 4.0 A) 
 setenv TOPOLOGY_FILE 				  'Topologies' # Store info about topologies
 setenv TOPO_STAT_FILE 				  'topos.list' # Store statistics about topologies
 #setenv MAX_NODES_GRAPH				  22 #kam
