@@ -33,9 +33,9 @@ if __name__ == '__main__':
 		jobname  = {
 					3:'hydrogenDiffusionInAlMultipleTemp/Temp1000K', 
 					5:'hydrogenDiffusionInAlT1000KDislocated', 
-					6:'test', 
+					6:'test2nd', 
 					4:'mitStuff2nd', 
-				   }[5]
+				   }[6]
 		sourcePath = os.getcwd() +\
 					{	
 						0:'/junk',
