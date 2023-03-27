@@ -38,12 +38,12 @@ if __name__ == '__main__':
 				   }[4]
 		sourcePath = os.getcwd() +\
 					{	
-						0:'/test11th',
+						0:'/junk',
 						1:'/../postprocess/NiCoCrNatom1K',
 						2:'/NiCoCrNatom1KTemp0K',
 						5:'/dataFiles/reneData',
 						6:'/mitPotential',
-					}[0] #--- must be different than sourcePath. set it to 'junk' if no path
+					}[ 6 ] #--- must be different than sourcePath. set it to 'junk' if no path
 			#
 		sourceFiles = { 0:False,
 						1:['data_init.txt','data_minimized.txt'],
@@ -53,7 +53,7 @@ if __name__ == '__main__':
 						5:['data_init.txt','ScriptGroup.0.txt'], #--- only one partition! for multiple ones, use 'submit.py'
 						6:['FeNi_2000.dat'], 
 						7:['compressed_model.pb','frozen_model.pb','init.lmp'], 
-					 }[0] #--- to be copied from the above directory. set it to '0' if no file
+					 }[7] #--- to be copied from the above directory. set it to '0' if no file
 		#
 #		EXEC_DIR = '/home/kamran.karimi1/Project/git/lammps2nd/lammps/src' #--- path for executable file
 		EXEC_DIR = '/home/kamran.karimi1/Project/opt/deepmd-kit/bin' #--- path for executable file: deep potential
