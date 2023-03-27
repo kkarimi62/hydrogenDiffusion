@@ -35,7 +35,7 @@ if __name__ == '__main__':
 					5:'hydrogenDiffusionInAlT1000KDislocated', 
 					6:'test12th', 
 					4:'mitStuff2nd', 
-				   }[6]
+				   }[4]
 		sourcePath = os.getcwd() +\
 					{	
 						0:'/test11th',
@@ -53,7 +53,7 @@ if __name__ == '__main__':
 						5:['data_init.txt','ScriptGroup.0.txt'], #--- only one partition! for multiple ones, use 'submit.py'
 						6:['FeNi_2000.dat'], 
 						7:['compressed_model.pb','frozen_model.pb','init.lmp'], 
-					 }[3] #--- to be copied from the above directory. set it to '0' if no file
+					 }[0] #--- to be copied from the above directory. set it to '0' if no file
 		#
 #		EXEC_DIR = '/home/kamran.karimi1/Project/git/lammps2nd/lammps/src' #--- path for executable file
 		EXEC_DIR = '/home/kamran.karimi1/Project/opt/deepmd-kit/bin' #--- path for executable file: deep potential
