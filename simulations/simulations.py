@@ -3,8 +3,8 @@ def makeOAR( EXEC_DIR, node, core, time ):
 	print >> someFile, '#!/bin/bash\n'
 	print >> someFile, 'EXEC_DIR=%s\n' %( EXEC_DIR )
 	print >> someFile, 'MEAM_library_DIR=%s\n' %( MEAM_library_DIR )
-#	print >> someFile, 'source ~/Project/opt/deepmd-kit/bin/activate ~/Project/opt/deepmd-kit\nOMP_NUM_THREADS=%s'%(nThreads*nNode) #--- deep potential stuff
-	print >> someFile, 'module load openmpi/4.0.2-gnu730\nmodule load lib/openblas/0.3.13-gnu\n'
+	print >> someFile, 'source ~/Project/opt/deepmd-kit/bin/activate ~/Project/opt/deepmd-kit\nOMP_NUM_THREADS=%s'%(nThreads*nNode) #--- deep potential stuff
+#	print >> someFile, 'module load openmpi/4.0.2-gnu730\nmodule load lib/openblas/0.3.13-gnu\n'
 
 	#--- run python script 
 #	 print >> someFile, "$EXEC_DIR/%s < in.txt -var OUT_PATH %s -var MEAM_library_DIR %s"%( EXEC, OUT_PATH, MEAM_library_DIR )
@@ -55,8 +55,8 @@ if __name__ == '__main__':
 						7:['compressed_model.pb','frozen_model.pb','init.lmp'], 
 					 }[3] #--- to be copied from the above directory. set it to '0' if no file
 		#
-		EXEC_DIR = '/home/kamran.karimi1/Project/git/lammps2nd/lammps/src' #--- path for executable file
-#		EXEC_DIR = '/home/kamran.karimi1/Project/opt/deepmd-kit/bin' #--- path for executable file: deep potential
+#		EXEC_DIR = '/home/kamran.karimi1/Project/git/lammps2nd/lammps/src' #--- path for executable file
+		EXEC_DIR = '/home/kamran.karimi1/Project/opt/deepmd-kit/bin' #--- path for executable file: deep potential
 		#
 		MEAM_library_DIR='/home/kamran.karimi1/Project/git/lammps2nd/lammps/potentials'
 		#
@@ -125,14 +125,14 @@ if __name__ == '__main__':
 					4:[5, 'p6',51,'p3','p5',2.0], #--- create lattice, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
 					5:['p2', 'p6',51,'p3','p5',1.0], #--- put a dislocation, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
 					6:['p3','p5',2.0], #--- kart input, kart.sh to bash shell ,invoke kart
-				  }[ 5 ]
+				  }[ 11 ]
 		Pipeline = list(map(lambda x:LmpScript[x],indices))
 	#	Variables = list(map(lambda x:Variable[x], indices))
 		EXEC = list(map(lambda x:np.array(['lmp','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
 	#        print('EXEC=',EXEC)
 		#
-		EXEC_lmp = ['lmp_mpi','lmp_serial','_lmp'][0]
-		durtn = ['95:59:59','00:59:59','167:59:59'][ 1 ]
+		EXEC_lmp = ['lmp_mpi','lmp_serial','_lmp'][-1]
+		durtn = ['95:59:59','01:59:59','167:59:59'][ 1 ]
 		mem = '8gb'
 		partition = ['gpu-v100','parallel','cpu2019','single'][1]
 		#--
