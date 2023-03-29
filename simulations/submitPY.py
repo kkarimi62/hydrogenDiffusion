@@ -24,7 +24,7 @@ if __name__ == '__main__':
 				temp = Temps[keys_t]
 			#---	densities
 				inums = lnums[ 0 ] - 1
-				string[ inums ] = "\t3:\'hydrogenDiffusionInAlMultipleTopo/topo%s\',\n"%(temp) #--- change job name
+				string[ inums ] = "\t6:\'hydrogenDiffusionInAlMultipleTopo/topo%s\',\n"%(temp) #--- change job name
 			#---
 				inums = lnums[ 1 ] - 1
 				string[ inums ] = "\t\'p7\':\' sortieproc.0 %s Topo_ignore\',\n"%(temp)
