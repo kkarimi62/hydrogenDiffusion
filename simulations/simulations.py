@@ -33,7 +33,7 @@ if __name__ == '__main__':
 		jobname  = {
 					3:'hydrogenDiffusionInAlMultipleTemp/Temp1000K', 
 					5:'hydrogenDiffusionInAlT1000KDislocated', 
-					6:'test0', 
+					6:'test1', 
 					4:'mitStuff2nd', 
 				   }[6]
 		sourcePath = os.getcwd() +\
@@ -44,7 +44,7 @@ if __name__ == '__main__':
 						5:'/dataFiles/reneData',
 						4:'/mitPotential',
 						6:'/test0',
-					}[ 0 ] #--- must be different than sourcePath. set it to 'junk' if no path
+					}[ 6 ] #--- must be different than sourcePath. set it to 'junk' if no path
 			#
 		sourceFiles = { 0:False,
 						1:['data_init.txt','data_minimized.txt'],
@@ -54,7 +54,7 @@ if __name__ == '__main__':
 						5:['data_init.txt','ScriptGroup.0.txt'], #--- only one partition! for multiple ones, use 'submit.py'
 						6:['sortieproc.0'], 
 						7:['compressed_model.pb','frozen_model.pb','init.lmp'], 
-					 }[0] #--- to be copied from the above directory. set it to '0' if no file
+					 }[6] #--- to be copied from the above directory. set it to '0' if no file
 		#
 		EXEC_DIR = '/home/kamran.karimi1/Project/git/lammps2nd/lammps/src' #--- path for executable file
 #		EXEC_DIR = '/home/kamran.karimi1/Project/opt/deepmd-kit/bin' #--- path for executable file: deep potential
@@ -116,7 +116,7 @@ if __name__ == '__main__':
 					'p3':' data_minimized.txt init_xyz.conf %s 1000.0'%(os.getcwd()+'/lmpScripts'),
 					'p4':' data_minimized.txt data_minimized.txt %s 1'%(os.getcwd()+'/lmpScripts'),
 					'p5':' ',
-					'p6':' %s data_init.txt data_atom_added.txt 1'%(os.getcwd()+'/lmpScripts'),
+					'p6':' %s data_init.txt data_init.txt 1'%(os.getcwd()+'/lmpScripts'),
 					'p7':' sortieproc.0 Topo_ignore',
 					 1.0:'-x DataFile=data_minimized.txt',
 					 2.0:'-x DataFile=data_minimized.txt',
@@ -132,7 +132,7 @@ if __name__ == '__main__':
 					6:['p3','p5',2.0], #--- kart input, kart.sh to bash shell ,invoke kart
 					7:['p21',51,'p3','p5',1.0], #--- dislocate, minimize, kart input, kart.sh to bash shell ,invoke kart
 					8:['p2','p6',51,'p7','p3','p5',1.0], #--- dislocate, add H, minimize, create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
-				  }[ 7 ]
+				  }[ 8 ]
 		Pipeline = list(map(lambda x:LmpScript[x],indices))
 	#	Variables = list(map(lambda x:Variable[x], indices))
 		EXEC = list(map(lambda x:np.array(['lmp','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
@@ -164,7 +164,7 @@ if __name__ == '__main__':
 				os.system( 'ln -s %s/%s %s' %( SCRPT_DIR, script, writPath) ) #--- lammps script: periodic x, pxx, vy, load
 			if sourceFiles: 
 				for sf in sourceFiles:
-					os.system( 'ln -s %s/Run%s/%s %s' %(sourcePath, irun, sf, writPath) ) #--- lammps script: periodic x, pxx, vy, load
+					os.system( 'cp -s %s/Run%s/%s %s' %(sourcePath, irun, sf, writPath) ) #--- lammps script: periodic x, pxx, vy, load
 			#---
 			makeOAR( path, 1, nThreads, durtn) # --- make oar script
 			os.system( 'chmod +x oarScript.sh; mv oarScript.sh %s' % ( writPath) ) # --- create folder & mv oar scrip & cp executable
