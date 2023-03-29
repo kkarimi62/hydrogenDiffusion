@@ -26,7 +26,7 @@ if __name__ == '__main__':
 				
 				#--- remove
 				with open('Topo_ignore','w') as sfile:
-					np.savetxt(sfile,np.c_[list(set(topo_ids) - set(temp))],fmt='%d')
+					np.savetxt(sfile,np.c_[list(set(topo_ids) - set([temp]))],fmt='%d')
 				
 
 			#---	densities
