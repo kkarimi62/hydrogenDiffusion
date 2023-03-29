@@ -33,7 +33,7 @@ if __name__ == '__main__':
 		jobname  = {
 					3:'hydrogenDiffusionInAlMultipleTemp/Temp1000K', 
 					5:'hydrogenDiffusionInAlT1000KDislocated', 
-					6:'test0', 
+					6:'test1', 
 					4:'mitStuff2nd', 
 				   }[6]
 		sourcePath = os.getcwd() +\
@@ -126,7 +126,8 @@ if __name__ == '__main__':
 					5:['p2', 'p6',51,'p3','p5',1.0], #--- put a dislocation, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
 					6:['p3','p5',2.0], #--- kart input, kart.sh to bash shell ,invoke kart
 					7:[5,'p3','p5',1.0], #--- create lattice & minimize, kart input, kart.sh to bash shell ,invoke kart
-				  }[ 7 ]
+					8:[5,'p4',51,'p3','p5',1.0], #--- create lattice, vacancy, minimize, kart input, kart.sh to bash shell ,invoke kart
+				  }[ 8 ]
 		Pipeline = list(map(lambda x:LmpScript[x],indices))
 	#	Variables = list(map(lambda x:Variable[x], indices))
 		EXEC = list(map(lambda x:np.array(['lmp','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
