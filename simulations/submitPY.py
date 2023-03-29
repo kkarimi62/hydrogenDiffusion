@@ -17,7 +17,7 @@ if __name__ == '__main__':
 #				3:800,
 #				4:900,
 #				5:1000,
-			}
+#			}
 	#---
 	count = 0
 	for keys_t in Temps:
