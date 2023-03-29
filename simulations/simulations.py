@@ -42,8 +42,9 @@ if __name__ == '__main__':
 						1:'/../postprocess/NiCoCrNatom1K',
 						2:'/NiCoCrNatom1KTemp0K',
 						5:'/dataFiles/reneData',
-						6:'/mitPotential',
-					}[ 0 ] #--- must be different than sourcePath. set it to 'junk' if no path
+						4:'/mitPotential',
+						6:'/test0',
+					}[ 6 ] #--- must be different than sourcePath. set it to 'junk' if no path
 			#
 		sourceFiles = { 0:False,
 						1:['data_init.txt','data_minimized.txt'],
@@ -51,9 +52,9 @@ if __name__ == '__main__':
 						3:['Topo_ignore'], 
 						4:['data_minimized.txt'],
 						5:['data_init.txt','ScriptGroup.0.txt'], #--- only one partition! for multiple ones, use 'submit.py'
-						6:['FeNi_2000.dat'], 
+						6:['sortieproc.0'], 
 						7:['compressed_model.pb','frozen_model.pb','init.lmp'], 
-					 }[0] #--- to be copied from the above directory. set it to '0' if no file
+					 }[6] #--- to be copied from the above directory. set it to '0' if no file
 		#
 		EXEC_DIR = '/home/kamran.karimi1/Project/git/lammps2nd/lammps/src' #--- path for executable file
 #		EXEC_DIR = '/home/kamran.karimi1/Project/opt/deepmd-kit/bin' #--- path for executable file: deep potential
@@ -88,6 +89,7 @@ if __name__ == '__main__':
 						'p4':'takeOneOut.py',
 						'p5':'bash-to-csh.py',
 						'p6':'addAtom.py',
+						'p7':'getTopoDefectFree.py',
 						1.0:'kmc.sh', #--- bash script
 						2.0:'kmcUniqueCRYST.sh', #--- bash script
 					} 
@@ -113,6 +115,7 @@ if __name__ == '__main__':
 					'p4':' data_minimized.txt data_minimized.txt %s 1'%(os.getcwd()+'/lmpScripts'),
 					'p5':' ',
 					'p6':' %s data_init.txt data_atom_added.txt 1'%(os.getcwd()+'/lmpScripts'),
+					'p7':' sortieproc.0 Topo_ignore',
 					 1.0:'-x DataFile=data_minimized.txt',
 					 2.0:'-x DataFile=data_minimized.txt',
 					} 
@@ -126,7 +129,7 @@ if __name__ == '__main__':
 					5:['p2', 'p6',51,'p3','p5',1.0], #--- put a dislocation, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
 					6:['p3','p5',2.0], #--- kart input, kart.sh to bash shell ,invoke kart
 					7:[5,'p3','p5',1.0], #--- create lattice & minimize, kart input, kart.sh to bash shell ,invoke kart
-					8:[5,'p4',51,'p3','p5',1.0], #--- create lattice, vacancy, minimize, kart input, kart.sh to bash shell ,invoke kart
+					8:[5,'p4',51,'p7','p3','p5',1.0], #--- create lattice, vacancy, minimize, create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
 				  }[ 8 ]
 		Pipeline = list(map(lambda x:LmpScript[x],indices))
 	#	Variables = list(map(lambda x:Variable[x], indices))
