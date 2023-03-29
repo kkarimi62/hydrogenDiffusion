@@ -140,7 +140,7 @@ if __name__ == '__main__':
 	#        print('EXEC=',EXEC)
 		#
 		EXEC_lmp = ['lmp_mpi','lmp_serial','_lmp'][0]
-		durtn = ['95:59:59','01:59:59','167:59:59'][ 1 ]
+		durtn = ['95:59:59','00:09:59','167:59:59'][ 1 ]
 		mem = '8gb'
 		partition = ['gpu-v100','parallel','cpu2019','single'][1]
 		#--
