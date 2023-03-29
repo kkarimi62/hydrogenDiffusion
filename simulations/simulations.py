@@ -132,7 +132,7 @@ if __name__ == '__main__':
 		EXEC = list(map(lambda x:np.array(['lmp','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
 	#        print('EXEC=',EXEC)
 		#
-		EXEC_lmp = ['lmp_mpi','lmp_serial','_lmp'][-1]
+		EXEC_lmp = ['lmp_mpi','lmp_serial','_lmp'][0]
 		durtn = ['95:59:59','01:59:59','167:59:59'][ 1 ]
 		mem = '8gb'
 		partition = ['gpu-v100','parallel','cpu2019','single'][1]
