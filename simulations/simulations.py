@@ -131,7 +131,7 @@ if __name__ == '__main__':
 					5:['p2', 'p6',51,'p3','p5',1.0], #--- put a dislocation, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
 					6:['p3','p5',2.0], #--- kart input, kart.sh to bash shell ,invoke kart
 					7:['p21',51,'p3','p5',1.0], #--- dislocate, minimize, kart input, kart.sh to bash shell ,invoke kart
-					8:['p2','p6',51,'p3','p5',1.0], #--- dislocate, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
+					8:['p2','p6',51,'p7','p3','p5',1.0], #--- dislocate, add H, minimize, create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
 				  }[ 8 ]
 		Pipeline = list(map(lambda x:LmpScript[x],indices))
 	#	Variables = list(map(lambda x:Variable[x], indices))
