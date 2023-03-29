@@ -19,15 +19,15 @@ def WriteDataFile(AtomskOutpt, mass, ratios, LmpInput):
     wrap.Set( atoms )
     #--- center
     #--- add box bounds
-    rcent = np.matmul(box.CellVector,np.array([.5,.5,.5]))
-    box.CellOrigin -= rcent
-    loo=box.CellOrigin
-    hii=box.CellOrigin+np.matmul(box.CellVector,np.array([1,1,1]))
-    box.BoxBounds=np.c_[loo,hii,np.array([0,0,0])]
+#    rcent = np.matmul(box.CellVector,np.array([.5,.5,.5]))
+#    box.CellOrigin -= rcent
+#    loo=box.CellOrigin
+#    hii=box.CellOrigin+np.matmul(box.CellVector,np.array([1,1,1]))
+#    box.BoxBounds=np.c_[loo,hii,np.array([0,0,0])]
 
-    atoms.x -= rcent[0]
-    atoms.y -= rcent[1]
-    atoms.z -= rcent[2]
+#    atoms.x -= rcent[0]
+#    atoms.y -= rcent[1]
+#    atoms.z -= rcent[2]
 
     if len(mass) > 1: #--- multi-component alloy: assign random types
 		
