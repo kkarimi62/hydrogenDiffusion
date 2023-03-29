@@ -85,6 +85,7 @@ if __name__ == '__main__':
 						'p0':'partition.py', #--- python file
 						'p1':'WriteDump.py',
 						'p2':'DislocateEdge.py',
+						'p21':'DislocateEdge.py',
 						'p3':'kartInput.py',
 						'p4':'takeOneOut.py',
 						'p5':'bash-to-csh.py',
@@ -111,6 +112,7 @@ if __name__ == '__main__':
 					'p0':' swapped_600.dat 10.0 %s'%(os.getcwd()+'/../postprocess'),
 					'p1':' swapped_600.dat ElasticConst.txt DumpFileModu.xyz %s'%(os.getcwd()+'/../postprocess'),
 					'p2':' %s 3.52 26.0 18.0 26.0 data_init.txt 4 1 1.0'%(os.getcwd()+'/lmpScripts'),
+					'p21':' %s 3.52 26.0 18.0 26.0 data_init.txt 4 2 1.0 0.0'%(os.getcwd()+'/lmpScripts'),
 					'p3':' data_minimized.txt init_xyz.conf %s 1000.0'%(os.getcwd()+'/lmpScripts'),
 					'p4':' data_minimized.txt data_minimized.txt %s 1'%(os.getcwd()+'/lmpScripts'),
 					'p5':' ',
@@ -128,7 +130,7 @@ if __name__ == '__main__':
 					4:[5, 'p6',51,'p3','p5',2.0], #--- create lattice, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
 					5:['p2', 'p6',51,'p3','p5',1.0], #--- put a dislocation, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
 					6:['p3','p5',2.0], #--- kart input, kart.sh to bash shell ,invoke kart
-					7:['p2',51,'p3','p5',1.0], #--- dislocate, minimize, kart input, kart.sh to bash shell ,invoke kart
+					7:['p21',51,'p3','p5',1.0], #--- dislocate, minimize, kart input, kart.sh to bash shell ,invoke kart
 					8:[5,'p4',51,'p7','p3','p5',1.0], #--- create lattice, vacancy, minimize, create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
 				  }[ 7 ]
 		Pipeline = list(map(lambda x:LmpScript[x],indices))
