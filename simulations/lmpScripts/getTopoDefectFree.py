@@ -22,11 +22,12 @@ def Fetch(fp):
 
 
 fp0 = sys.argv[1]
-#fp1 = sys.argv[2]
-fout = sys.argv[2]
+indx = int(sys.argv[2])
+fout = sys.argv[3]
 
 #topo = list(set(Fetch(fp1)) - set(Fetch(fp0)))
 topo = Fetch(fp0) #--- to be ignored
+topo.pop(indx)
 with open(fout,'w') as ff:
     np.savetxt(ff,np.c_[topo],fmt='%d')
 
