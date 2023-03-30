@@ -27,7 +27,7 @@ if __name__ == '__main__':
 				string[ inums ] = "\t6:\'hydrogenDiffusionInAlMultipleDisl/topo%s\',\n"%(temp) #--- change job name
 			#---
 				inums = lnums[ 1 ] - 1
-				string[ inums ] = "\t\'p2\':\' %s 3.52 26.0 18.0 26.0 data_init.txt %temp 1 1.0\'%%(os.getcwd()+\'/lmpScripts\'),\n"%temp
+				string[ inums ] = "\t\'p2\':\' %%s 3.52 26.0 18.0 26.0 data_init.txt %temp 1 1.0\'%%(os.getcwd()+\'/lmpScripts\'),\n"%temp
 #				string[ inums ] = "\t\'p7\':\' sortieproc.0 %s Topo_ignore\',\n"%(temp)
 				
 #				string[ inums ] = "\t72:\' -var buff 0.0 -var T %s -var nevery 10 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData Equilibrated_%s.dat\',\n"%(temp,temp)
