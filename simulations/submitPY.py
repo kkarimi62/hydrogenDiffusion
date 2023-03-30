@@ -25,7 +25,7 @@ if __name__ == '__main__':
 				temp = Temps[keys_t]
 			#---	densities
 				inums = lnums[ 0 ] - 1
-				string[ inums ] = "\t6:\'hydrogenDiffusionInAlMultipleLength/length%s\',\n"%(temp) #--- change job name
+				string[ inums ] = "\t6:\'hydrogenDiffusionInAlMultipleLength/length%s\',\n"%(keys_t) #--- change job name
 			#---
 				inums = lnums[ 1 ] - 1
 				string[ inums ] = "\t\'p21\':\' %%s 3.52 %s 18.0 26.0 data_init.txt 2 2 1.0 0.0\'%%(os.getcwd()+\'/lmpScripts\'),\n"%temp
