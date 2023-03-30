@@ -25,7 +25,7 @@ if __name__ == '__main__':
 		import os
 		import numpy as np
 
-		nruns	 = range(32)
+		nruns	 = range(1)
 		#
 		nThreads = 8
 		nNode	 = 1
@@ -132,9 +132,8 @@ if __name__ == '__main__':
 					6:['p3','p5',2.0], #--- kart input, kart.sh to bash shell ,invoke kart
 					7:['p21',51,'p3','p5',1.0], #--- dislocate, minimize, kart input, kart.sh to bash shell ,invoke kart
 					8:['p2','p6',51,'p7','p3','p5',1.0], #--- dislocate, add H, minimize, create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
-					81:['p21',51,'p7','p3','p5',1.0], #--- dislocate, minimize, create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
 					9:['p7','p3','p5',1.0], #--- create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
-				  }[ 81 ]
+				  }[ 8 ]
 		Pipeline = list(map(lambda x:LmpScript[x],indices))
 	#	Variables = list(map(lambda x:Variable[x], indices))
 		EXEC = list(map(lambda x:np.array(['lmp','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
