@@ -2,6 +2,7 @@
 variable	INC	getenv	INCLUDE
 variable	PathEam	getenv PathEAM
 variable	DataFile getenv	DATAFILE
+variable	buff	getenv	BUFF
 #log             log_kart.lammps # if you want to see output of lammps (becareful huge file)
 
 
@@ -10,6 +11,8 @@ include ${INC}/initSoftWall.mod
 atom_modify     map array
 read_data       ${DataFile} #Equilibrated_500.dat #${DataFile} #conf.sw
 include ${INC}/potential.mod
+#--- fix buffer zone
+include ${INC}/buffer.mod
 
 
 

@@ -9,6 +9,7 @@ set temp=`cat .temp.txt`
 setenv	INCLUDE ${INC}
 setenv	PathEAM ${PathEam}
 setenv	DATAFILE ${DataFile}
+setenv	BUFF ${Buffer}
 
 ###################################### Main Input/Output files ########################################################
 
