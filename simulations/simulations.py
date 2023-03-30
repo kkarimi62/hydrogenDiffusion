@@ -33,7 +33,7 @@ if __name__ == '__main__':
 		jobname  = {
 					3:'hydrogenDiffusionInAlMultipleTemp/Temp1000K', 
 					5:'hydrogenDiffusionInAlT1000KDislocated', 
-					6:'test2', 
+					6:'disl2', 
 					4:'mitStuff2nd', 
 				   }[6]
 		sourcePath = os.getcwd() +\
@@ -43,7 +43,7 @@ if __name__ == '__main__':
 						2:'/NiCoCrNatom1KTemp0K',
 						5:'/dataFiles/reneData',
 						4:'/mitPotential',
-						6:'/test0',
+						6:'/hydrogenDiffusionInAlMultipleLength/length0',
 					}[ 6 ] #--- must be different than sourcePath. set it to 'junk' if no path
 			#
 		sourceFiles = { 0:False,
@@ -111,8 +111,8 @@ if __name__ == '__main__':
 					11:' ',
 					'p0':' swapped_600.dat 10.0 %s'%(os.getcwd()+'/../postprocess'),
 					'p1':' swapped_600.dat ElasticConst.txt DumpFileModu.xyz %s'%(os.getcwd()+'/../postprocess'),
-					'p2':' %s 3.52 26.0 18.0 26.0 data_init.txt 2 1 1.0'%(os.getcwd()+'/lmpScripts'),
-					'p21':' %s 3.52 26.0 18.0 26.0 data_init.txt 4 2 1.0 0.0'%(os.getcwd()+'/lmpScripts'),
+					'p2':' %s 3.52 52.0 18.0 26.0 data_init.txt 2 1 1.0'%(os.getcwd()+'/lmpScripts'),
+					'p21':' %s 3.52 52.0 18.0 26.0 data_init.txt 2 2 1.0 0.0'%(os.getcwd()+'/lmpScripts'),
 					'p3':' data_minimized.txt init_xyz.conf %s 1000.0'%(os.getcwd()+'/lmpScripts'),
 					'p4':' data_minimized.txt data_minimized.txt %s 1'%(os.getcwd()+'/lmpScripts'),
 					'p5':' ',
@@ -133,7 +133,7 @@ if __name__ == '__main__':
 					7:['p21',51,'p3','p5',1.0], #--- dislocate, minimize, kart input, kart.sh to bash shell ,invoke kart
 					8:['p2','p6',51,'p7','p3','p5',1.0], #--- dislocate, add H, minimize, create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
 					9:['p7','p3','p5',1.0], #--- create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
-				  }[ 7 ]
+				  }[ 8 ]
 		Pipeline = list(map(lambda x:LmpScript[x],indices))
 	#	Variables = list(map(lambda x:Variable[x], indices))
 		EXEC = list(map(lambda x:np.array(['lmp','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
