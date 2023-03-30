@@ -9,7 +9,7 @@ if __name__ == '__main__':
 #	string=open('simulations-ncbj.py').readlines() #--- python script
 	#---
 	n=6
-	Temps  = dict(zip(2,range(n),range(2,n)))
+	Temps  = dict(zip(range(2,n),range(2,n)))
 #			{
 #				0:300,
 #				1:600,
