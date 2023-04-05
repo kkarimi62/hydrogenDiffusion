@@ -25,15 +25,15 @@ if __name__ == '__main__':
 		import os
 		import numpy as np
 
-		nruns	 = range(1)
+		nruns	 = range(3)
 		#
-		nThreads = 4
+		nThreads = 8
 		nNode	 = 1
 		#
 		jobname  = {
 					3:'hydrogenDiffusionInAlMultipleTemp/Temp1000K', 
 					5:'hydrogenDiffusionInAlT1000KDislocated', 
-					6:'hydrogenAddedSmallSize', 
+					6:'hydrogenFree',#'hydrogenAddedSmallSize', 
 					4:'mitStuff2nd', 
 				   }[6]
 		sourcePath = os.getcwd() +\
@@ -44,7 +44,7 @@ if __name__ == '__main__':
 						5:'/dataFiles/reneData',
 						4:'/mitPotential',
 						6:'/hydrogenFree',
-					}[ 6 ] #--- must be different than sourcePath. set it to 'junk' if no path
+					}[ 0 ] #--- must be different than sourcePath. set it to 'junk' if no path
 			#
 		sourceFiles = { 0:False,
 						1:['data_init.txt','data_minimized.txt'],
@@ -54,7 +54,7 @@ if __name__ == '__main__':
 						5:['data_init.txt','ScriptGroup.0.txt'], #--- only one partition! for multiple ones, use 'submit.py'
 						6:['sortieproc.0'], 
 						7:['compressed_model.pb','frozen_model.pb','init.lmp'], 
-					 }[6] #--- to be copied from the above directory. set it to '0' if no file
+					 }[0] #--- to be copied from the above directory. set it to '0' if no file
 		#
 		EXEC_DIR = '/home/kamran.karimi1/Project/git/lammps2nd/lammps/src' #--- path for executable file
 #		EXEC_DIR = '/home/kamran.karimi1/Project/opt/deepmd-kit/bin' #--- path for executable file: deep potential
@@ -111,8 +111,8 @@ if __name__ == '__main__':
 					11:' ',
 					'p0':' swapped_600.dat 10.0 %s'%(os.getcwd()+'/../postprocess'),
 					'p1':' swapped_600.dat ElasticConst.txt DumpFileModu.xyz %s'%(os.getcwd()+'/../postprocess'),
-					'p2':' %s 3.52 26.0 18.0 26.0 data_init.txt 2 1 1.0'%(os.getcwd()+'/lmpScripts'),
-					'p21':' %s 3.52 26.0 18.0 26.0 data_init.txt 2 2 1.0 0.0'%(os.getcwd()+'/lmpScripts'),
+					'p2':' %s 3.52 52.0 18.0 26.0 data_init.txt 2 1 1.0'%(os.getcwd()+'/lmpScripts'),
+					'p21':' %s 3.52 52.0 18.0 26.0 data_init.txt 2 2 1.0 0.0'%(os.getcwd()+'/lmpScripts'),
 					'p3':' data_minimized.txt init_xyz.conf %s 1000.0'%(os.getcwd()+'/lmpScripts'),
 					'p4':' data_minimized.txt data_minimized.txt %s 1'%(os.getcwd()+'/lmpScripts'),
 					'p5':' ',
@@ -133,14 +133,14 @@ if __name__ == '__main__':
 					7:['p21',51,'p3','p5',1.0], #--- dislocate, minimize, kart input, kart.sh to bash shell ,invoke kart
 					8:['p2','p6',51,'p7','p3','p5',1.0], #--- dislocate, add H, minimize, create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
 					9:['p7','p3','p5',1.0], #--- create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
-				  }[ 8 ]
+				  }[ 7 ]
 		Pipeline = list(map(lambda x:LmpScript[x],indices))
 	#	Variables = list(map(lambda x:Variable[x], indices))
 		EXEC = list(map(lambda x:np.array(['lmp','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
 	#        print('EXEC=',EXEC)
 		#
 		EXEC_lmp = ['lmp_mpi','lmp_serial','_lmp'][0]
-		durtn = ['95:59:59','00:09:59','167:59:59'][ 0 ]
+		durtn = ['95:59:59','00:09:59','167:59:59'][ 1 ]
 		mem = '12gb'
 		partition = ['gpu-v100','parallel','cpu2019','single'][1]
 		#--
