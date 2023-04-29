@@ -3,19 +3,17 @@ def makeOAR( EXEC_DIR, node, core, time ):
 	print >> someFile, '#!/bin/bash\n'
 	print >> someFile, 'EXEC_DIR=%s\n' %( EXEC_DIR )
 	print >> someFile, 'MEAM_library_DIR=%s\n' %( MEAM_library_DIR )
-#	print >> someFile, 'source ~/Project/opt/deepmd-kit/bin/activate ~/Project/opt/deepmd-kit\nexport OMP_NUM_THREADS=%s'%(nThreads*nNode) #--- deep potential stuff
-	print >> someFile, 'module load openmpi/4.0.2-gnu730\nmodule load lib/openblas/0.3.13-gnu\n'
+	print >> someFile, 'conda activate deepmd\nexport OMP_NUM_THREADS=%s'%(nThreads*nNode) #--- deep potential stuff
+#	print >> someFile, 'source /mnt/opt/spack-0.17/share/spack/setup-env.sh\nspack load openmpi@4.0.5 %gcc@9.3.0\nspack load openblas@0.3.18%gcc@9.3.0\nspack load python@3.8.12%gcc@8.3.0\n\n',
+#	print >> someFile, 'export LD_LIBRARY_PATH=/mnt/opt/tools/cc7/lapack/3.5.0-x86_64-gcc46/lib:${LD_LIBRARY_PATH}\n'
 
 	#--- run python script 
-#	 print >> someFile, "$EXEC_DIR/%s < in.txt -var OUT_PATH %s -var MEAM_library_DIR %s"%( EXEC, OUT_PATH, MEAM_library_DIR )
-#	cutoff = 1.0 / rho ** (1.0/3.0)
 	for script,var,indx, execc in zip(Pipeline,Variables,range(100),EXEC):
-		if execc == 'lmp': #_mpi' or EXEC == 'lmp_serial':
+		if execc == 'lmp': 
 			print >> someFile, "mpirun --oversubscribe -np %s $EXEC_DIR/%s < %s -echo screen -var OUT_PATH \'%s\' -var PathEam %s -var INC \'%s\' %s\n"%(nThreads*nNode, EXEC_lmp, script, OUT_PATH, '${MEAM_library_DIR}', SCRPT_DIR, var)
 		elif execc == 'py':
 			print >> someFile, "python3 %s %s\n"%(script, var)
 		elif execc == 'kmc':
-#			print >> someFile, "time mpiexec %s %s\n"%(script, var)
 			print >> someFile, "mpirun --oversubscribe -np %s -x Buffer=3.5 -x PathEam=%s -x INC=\'%s\' %s %s\n"%(nThreads*nNode,'${MEAM_library_DIR}', SCRPT_DIR,var,script)
 			
 	someFile.close()										  
@@ -35,7 +33,7 @@ if __name__ == '__main__':
 					5:'hydrogenDiffusionInAlT1000KDislocated', 
 					6:'hydrogenDiffusionInAlBigMultipleTemps100H/temp0', #'hydrogenFree',
 					4:'mitStuff2nd', 
-				   }[6]
+				   }[4]
 		sourcePath = os.getcwd() +\
 					{	
 						0:'/junk',
@@ -44,7 +42,7 @@ if __name__ == '__main__':
 						5:'/dataFiles/reneData',
 						4:'/mitPotential',
 						6:'/hydrogenFree',
-					}[ 6 ] #--- must be different than sourcePath. set it to 'junk' if no path
+					}[ 4 ] #--- must be different than sourcePath. set it to 'junk' if no path
 			#
 		sourceFiles = { 0:False,
 						1:['data_init.txt','data_minimized.txt'],
@@ -54,13 +52,15 @@ if __name__ == '__main__':
 						5:['data_init.txt','ScriptGroup.0.txt'], #--- only one partition! for multiple ones, use 'submit.py'
 						6:['sortieproc.0'], 
 						7:['compressed_model.pb','frozen_model.pb','init.lmp'], 
-					 }[6] #--- to be copied from the above directory. set it to '0' if no file
+					 }[7] #--- to be copied from the above directory. set it to '0' if no file
 		#
 		EXEC_DIR = {0:'~/Project/git/lammps2nd/lammps/src', #--- path for executable file
-					1:'~/Project/opt/deepmd-kit/bin' #--- path for executable file: deep potential
-					}[0]
+					1:'~/Project/opt/anaconda3/envs/deepmd/bin' #--- path for executable file: deep potential
+					}[1]
 		#
-		MEAM_library_DIR='/home/kamran.karimi1/Project/git/lammps2nd/lammps/potentials'
+		MEAM_library_DIR={0:'/home/kamran.karimi1/Project/git/lammps2nd/lammps/potentials',
+						  1:'.'
+						}[1]
 		#
 		SCRPT_DIR = os.getcwd()+'/lmpScripts' 
 		#
@@ -134,16 +134,16 @@ if __name__ == '__main__':
 					7:['p21',51,'p3','p5',1.0], #--- dislocate, minimize, kart input, kart.sh to bash shell ,invoke kart
 					8:['p2','p6',51,'p7','p3','p5',1.0], #--- dislocate, add H, minimize, create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
 					9:['p7','p3','p5',1.0], #--- create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
-				  }[ 8 ]
+				  }[ 2 ]
 		Pipeline = list(map(lambda x:LmpScript[x],indices))
-	#	Variables = list(map(lambda x:Variable[x], indices))
 		EXEC = list(map(lambda x:np.array(['lmp','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
-	#        print('EXEC=',EXEC)
 		#
-		EXEC_lmp = ['lmp_mpi','lmp_serial','_lmp'][0]
-		durtn = ['95:59:59','00:09:59','167:59:59'][ 2 ]
+		EXEC_lmp = {0:'lmp_g++_openmpi',
+					'mit':'lmp',
+					}['mit']
+		durtn = ['95:59:59','00:09:59','167:59:59'][ 1 ]
 		mem = '12gb'
-		partition = ['gpu-v100','parallel','cpu2019','single'][1]
+		partition = ['INTEL_PHI','INTEL_CASCADE'][0]
 		#--
 		DeleteExistingFolder = True
 		if DeleteExistingFolder:

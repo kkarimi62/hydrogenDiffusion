@@ -32,4 +32,4 @@ dump 1 all custom 200 traj.dump id type x y z
 
 velocity all create $T ${rn} rot yes mom yes dist gaussian
 fix 1 all npt temp $T $T $(dt*100) x 0 0 $(dt*1000) z 0 0 $(dt*1000)
-run 10000
+run 10 #000
