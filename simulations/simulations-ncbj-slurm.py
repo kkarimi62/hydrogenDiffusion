@@ -9,8 +9,11 @@ def makeOAR( EXEC_DIR, node, core, time ):
 
 	#--- run python script 
 	for script,var,indx, execc in zip(Pipeline,Variables,range(100),EXEC):
-		if execc == 'lmp': 
-			print >> someFile, "mpirun --oversubscribe -np %s $EXEC_DIR/%s < %s -echo screen -var OUT_PATH \'%s\' -var PathEam %s -var INC \'%s\' %s\n"%(nThreads*nNode, EXEC_lmp, script, OUT_PATH, '${MEAM_library_DIR}', SCRPT_DIR, var)
+		if execc == 'lmp':
+			if EXEC_lmp == 'lmp':
+				print >> someFile, "$EXEC_DIR/%s < %s -echo screen -var OUT_PATH \'%s\' -var PathEam %s -var INC \'%s\' %s\n"%(nThreads*nNode, EXEC_lmp, script, OUT_PATH, '${MEAM_library_DIR}', SCRPT_DIR, var)
+			else: 
+				print >> someFile, "mpirun --oversubscribe -np %s $EXEC_DIR/%s < %s -echo screen -var OUT_PATH \'%s\' -var PathEam %s -var INC \'%s\' %s\n"%(nThreads*nNode, EXEC_lmp, script, OUT_PATH, '${MEAM_library_DIR}', SCRPT_DIR, var)
 		elif execc == 'py':
 			print >> someFile, "python3 %s %s\n"%(script, var)
 		elif execc == 'kmc':
