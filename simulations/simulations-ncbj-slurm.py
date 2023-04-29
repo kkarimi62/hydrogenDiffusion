@@ -3,7 +3,7 @@ def makeOAR( EXEC_DIR, node, core, time ):
 	print >> someFile, '#!/bin/bash\n'
 	print >> someFile, 'EXEC_DIR=%s\n' %( EXEC_DIR )
 	print >> someFile, 'MEAM_library_DIR=%s\n' %( MEAM_library_DIR )
-	print >> someFile, 'conda init bash\nconda activate deepmd\nexport OMP_NUM_THREADS=%s'%(nThreads*nNode) #--- deep potential stuff
+	print >> someFile, 'conda activate deepmd\nexport OMP_NUM_THREADS=%s'%(nThreads*nNode) #--- deep potential stuff
 #	print >> someFile, 'source /mnt/opt/spack-0.17/share/spack/setup-env.sh\nspack load openmpi@4.0.5 %gcc@9.3.0\nspack load openblas@0.3.18%gcc@9.3.0\nspack load python@3.8.12%gcc@8.3.0\n\n',
 #	print >> someFile, 'export LD_LIBRARY_PATH=/mnt/opt/tools/cc7/lapack/3.5.0-x86_64-gcc46/lib:${LD_LIBRARY_PATH}\n'
 
