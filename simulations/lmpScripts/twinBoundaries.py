@@ -67,9 +67,9 @@ import LammpsPostProcess as lp
 #--- modify atom types and associated masses 
 if __name__ == '__main__':
 #--- modify atom types and associated masses 
-	ntype = int(sys.argv[7])
-	mass=dict(zip(range(1,ntype+1),np.random.random(size=ntype))) #{1:58.693, # Ni
-	ratio = np.array(list(map(float,sys.argv[8:])))
+    ntype = int(sys.argv[7])
+    mass=dict(zip(range(1,ntype+1),np.random.random(size=ntype))) #{1:58.693, # Ni
+    ratio = np.array(list(map(float,sys.argv[8:])))
 #        2:58.933195, # Co
 
 #    mass={#1:63.55, #cu
@@ -91,7 +91,7 @@ if __name__ == '__main__':
 	#--- construct unit cell
 #    os.system('atomsk --create fcc %s Ni orient 11-2 111 -110 Al_unitcell.cfg'%a)
 #    os.system('atomsk --create fcc %s Ni orient 111 11-2 -110 Al_unitcell.cfg'%a)
-	os.system('atomsk --create fcc %s Al orient 110 -111 1-12 Al_unitcell.cfg'%a)
+    os.system('atomsk --create fcc %s Al orient 110 -111 1-12 Al_unitcell.cfg'%a)
 	#--- duplicate
     os.system('atomsk Al_unitcell.cfg -duplicate %s %s %s Al_supercell.cfg'%(m,n,k))
 	#--- build twin boundary
