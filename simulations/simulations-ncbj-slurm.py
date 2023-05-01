@@ -65,6 +65,7 @@ if __name__ == '__main__':
 		MEAM_library_DIR={0:'/home/kamran.karimi1/Project/git/lammps2nd/lammps/potentials',
 						  1:'.'
 						}[1]
+		py_lib_path = '~/Project/git/HeaDef/postprocess'
 		#
 		SCRPT_DIR = os.getcwd()+'/lmpScripts' 
 		#
@@ -124,7 +125,7 @@ if __name__ == '__main__':
 					'p5':' ',
 					'p6':' %s data_init.txt data_init.txt 100'%(os.getcwd()+'/lmpScripts'),
 					'p7':' sortieproc.0 0 Topo_ignore',
-					'p8':' %s 3.52 35.0 20.0 20.0 data_init.txt 2 1.0 0.0'%(os.getcwd()+'/../postprocess'),
+					'p8':' %s 3.52 35.0 20.0 20.0 data_init.txt 2 1.0 0.0'%(py_lib_path),
 					 1.0:'-x DataFile=data_minimized.txt',
 					 2.0:'-x DataFile=data_minimized.txt',
 					} 
