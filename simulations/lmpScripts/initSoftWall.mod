@@ -1,6 +1,3 @@
-# NOTE: This script can be modified for different atomic structures, 
-# units, etc. See in.elastic for more info.
-#
 
 # Define the finite deformation size. Try several values of this
 # variable to verify that results do not depend on it.
@@ -21,6 +18,13 @@ variable atomjiggle equal 1.0e-5
 # metal units, elastic constants in GPa
 units		metal
 atom_style      atomic
+
+
+#--- 
+boundary    	p s p
+atom_modify map array
+
+
 variable cfac equal 1.0e-4
 variable cunits string GPa
 
@@ -36,12 +40,14 @@ variable maxiter equal 100000
 variable maxeval equal 100000
 variable dmax equal 1.0e-2
 
-#--- 
-boundary    	p p p
 #---
 
 #--- Need to set mass to something, just to satisfy LAMMPS
-#mass 1 1.0e-20
+mass 1 58.933
+mass 2 51.996
+#mass 3 55.845
+#mass 4 1.008
+#mass 5 54.938
 
 #--- discretization time
 variable            dt        equal     0.005         # Time step

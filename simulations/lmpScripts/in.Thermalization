@@ -32,6 +32,7 @@ velocity                  all       create     $T     97364  mom    yes  rot  ye
 #thermo                    100
 #thermo_style              custom    step temp etotal pe press vol
 fix                      f1        all        npt temp   $T  $T  ${damp_t}  iso ${p0} $P ${damp_p} drag	1.0 ##fixedpoint 0.0 0.0 0.0
+#fix 1 all npt temp $T $T $(dt*100) x 0 0 $(dt*1000) z 0 0 $(dt*1000)
 
 #-----------------------------
 #--- compute & dump variables

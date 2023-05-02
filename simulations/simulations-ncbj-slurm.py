@@ -65,7 +65,8 @@ if __name__ == '__main__':
 		MEAM_library_DIR={0:'/home/kamran.karimi1/Project/git/lammps2nd/lammps/potentials',
 						  1:'.'
 						}[1]
-		py_lib_path = '~/Project/git/HeaDef/postprocess'
+		home_dir = os.path.expanduser('~')
+		py_lib_path = '%s/Project/git/HeaDef/postprocess'%home_dir
 		#
 		SCRPT_DIR = os.getcwd()+'/lmpScripts' 
 		#
@@ -115,7 +116,7 @@ if __name__ == '__main__':
 					8:' -var buff 0.0 -var T 300.0 -var sigm 1.0 -var sigmdt 0.0001 -var ndump 100 -var ParseData 1 -var DataFile Equilibrated_0.dat -var DumpFile dumpSheared.xyz',
 					9:' -var natoms 1000 -var cutoff 3.52 -var ParseData 1',
 					10:' -var ParseData 1 -var DataFile swapped_600.dat',
-					11:' ',
+					11:' -var T 300 -var rn %s -var dump_every 200 -var ParseData 1 -var DataFile init.lmp -var DumpFile traj.dump'%np.random.randint(1001,100000),
 					'p0':' swapped_600.dat 10.0 %s'%(os.getcwd()+'/../postprocess'),
 					'p1':' swapped_600.dat ElasticConst.txt DumpFileModu.xyz %s'%(os.getcwd()+'/../postprocess'),
 					'p2':' %s 3.52 52.0 18.0 26.0 data_init.txt 2 1 1.0'%(os.getcwd()+'/lmpScripts'),
@@ -141,7 +142,7 @@ if __name__ == '__main__':
 					7:['p21',51,'p3','p5',1.0], #--- dislocate, minimize, kart input, kart.sh to bash shell ,invoke kart
 					8:['p2','p6',51,'p7','p3','p5',1.0], #--- dislocate, add H, minimize, create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
 					9:['p7','p3','p5',1.0], #--- create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
-					12:['p8', 51, 7], #--- twin boundary by atomsk, minimize, thermalize
+					12:['p8', 51], # 7], #--- twin boundary by atomsk, minimize, thermalize
 				  }[ 12 ]
 		Pipeline = list(map(lambda x:LmpScript[x],indices))
 		EXEC = list(map(lambda x:np.array(['lmp','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
