@@ -28,7 +28,7 @@ if __name__ == '__main__':
 
 		nruns	 = range(1)
 		#
-		nThreads = 8
+		nThreads = 4 #8
 		nNode	 = 1
 		#
 		jobname  = {
@@ -36,7 +36,7 @@ if __name__ == '__main__':
 					5:'hydrogenDiffusionInAlT1000KDislocated', 
 					6:'hydrogenDiffusionInAlBigMultipleTemps100H/temp0', #'hydrogenFree',
 					4:'mitStuff2nd', 
-					7:'biCrystal', 
+					7:'biCrystal2nd', 
 				   }[7]
 		sourcePath = os.getcwd() +\
 					{	
@@ -109,10 +109,10 @@ if __name__ == '__main__':
 					6:' -var buff 0.0 -var T 300 -var P 0.0 -var gammaxy 1.0 -var gammadot 1.0e-04 -var nthermo 10000 -var ndump 1000 -var ParseData 1 -var DataFile Equilibrated_300.dat -var DumpFile dumpSheared.xyz',
 					4:' -var T 600.0 -var t_sw 20.0 -var DataFile Equilibrated_600.dat -var nevery 100 -var ParseData 1 -var WriteData swapped_600.dat', 
 					5:' -var buff 0.0 -var nevery 1000 -var ParseData 0 -var natoms 1000 -var ntype 2 -var cutoff 3.54  -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt -var seed0 %s -var seed1 %s -var seed2 %s -var seed3 %s'%tuple(np.random.randint(1001,9999,size=4)), 
-					51:' -var buff 3.5 -var nevery 1000 -var ParseData 1 -var DataFile data_init.txt -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt', 
+					51:' -var buff 0.0 -var buffy 5.0 -var nevery 1000 -var ParseData 1 -var DataFile data_init.txt -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt', 
 					7:' -var buff 0.0 -var T 1500.0 -var P 0.0 -var nevery 100 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData equilibrated.dat',
 					71:' -var buff 0.0 -var T 0.1 -var P 0.0 -var nevery 100 -var ParseData 1 -var DataFile swapped_600.dat -var DumpFile dumpThermalized2.xyz -var WriteData Equilibrated_0.dat',
-					72:' -var buff 0.0 -var T 1500.0 -var nevery 100 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData Equilibrated_300.dat',
+					72:' -var seed %s -var buff 0.0 -var buffy 5.0 -var T 300.0 -var nevery 100 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData equilibrated.dat'%np.random.randint(1001,9999),
 					8:' -var buff 0.0 -var T 300.0 -var sigm 1.0 -var sigmdt 0.0001 -var ndump 100 -var ParseData 1 -var DataFile Equilibrated_0.dat -var DumpFile dumpSheared.xyz',
 					9:' -var natoms 1000 -var cutoff 3.52 -var ParseData 1',
 					10:' -var ParseData 1 -var DataFile swapped_600.dat',
@@ -126,7 +126,7 @@ if __name__ == '__main__':
 					'p5':' ',
 					'p6':' %s data_init.txt data_init.txt 100'%(os.getcwd()+'/lmpScripts'),
 					'p7':' sortieproc.0 0 Topo_ignore',
-					'p8':' %s 3.52 35.0 20.0 20.0 data_init.txt 2 1.0 0.0'%(py_lib_path),
+					'p8':' %s 3.52 35.0 20.0 20.0 data_init.txt 5 1 2 3 4 5 0.25 0.25 0.25 0.0 0.25'%(py_lib_path),
 					 1.0:'-x DataFile=data_minimized.txt',
 					 2.0:'-x DataFile=data_minimized.txt',
 					} 
@@ -142,7 +142,7 @@ if __name__ == '__main__':
 					7:['p21',51,'p3','p5',1.0], #--- dislocate, minimize, kart input, kart.sh to bash shell ,invoke kart
 					8:['p2','p6',51,'p7','p3','p5',1.0], #--- dislocate, add H, minimize, create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
 					9:['p7','p3','p5',1.0], #--- create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
-					12:['p8', 51], # 7], #--- twin boundary by atomsk, minimize, thermalize
+					12:['p8', 51, 72], #--- twin boundary by atomsk, minimize, thermalize
 				  }[ 12 ]
 		Pipeline = list(map(lambda x:LmpScript[x],indices))
 		EXEC = list(map(lambda x:np.array(['lmp','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	

@@ -28,9 +28,9 @@ variable 				  Nstep  	equal	floor(${t_eq}/${dt}) #--- timesteps
 #variable tmp equal press
 #variable p0 equal ${tmp}
 
-velocity                  bulk       create     ${T}     ${seed}  mom    yes  rot  yes  dist  gaussian  # Dynamics starts
+velocity                  bulk       create     ${Thi}     ${seed}  mom    yes  rot  yes  dist  gaussian  # Dynamics starts
 
-fix                      f1        bulk        nvt temp   ${T}  ${T}  ${damp_t}  #iso ${p0} $P ${damp_p} drag	1.0 ##fixedpoint 0.0 0.0 0.0
+fix                      f1        bulk        nvt temp   ${Tlo}  ${Thi}  ${damp_t}  #iso ${p0} $P ${damp_p} drag	1.0 ##fixedpoint 0.0 0.0 0.0
 
 #-----------------------------
 #--- compute & dump variables

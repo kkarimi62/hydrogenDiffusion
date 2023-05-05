@@ -30,10 +30,13 @@ def WriteDataFile(AtomskOutpt, mass, ratios, LmpInput):
 #    atoms.z -= rcent[2]
 
     if len(mass) > 1: #--- multi-component alloy: assign random types
-		
+        types = list(mass.keys())
+        types.sort()		
+
         dff=pd.DataFrame(atoms.__dict__)
-        itype = 1
-        dff['type']=itype
+        itype = 0#1
+        typei = types[itype]
+        dff['type']=typei
         indices = dff.index
         ntype=len(mass)
         sizeTot = len(dff)
@@ -41,18 +44,19 @@ def WriteDataFile(AtomskOutpt, mass, ratios, LmpInput):
 		#--- add up to one!
         sizes = (ratios * sizeTot).astype(int)
         sizes[-1] = sizeTot - np.sum(sizes[:-1])
-        sizes=dict(zip(range(1,ntype+1),sizes))
+        sizes=dict(zip(types,sizes))
 		
 #        assert size * ntype <= sizeTot
         indxxx = {}
-        for itype in range(2,ntype+1):
-            size = sizes[itype]
-            indxxx[itype] = np.random.choice(indices, size=size, replace=None)
+        for itype in range(1,ntype):
+            typei = types[itype]
+            size = sizes[typei]
+            indxxx[typei] = np.random.choice(indices, size=size, replace=None)
 #            dff.iloc[indxxx[itype]]['type'] = ntype - itype
-            row_indexer = indxxx[itype]
+            row_indexer = indxxx[typei]
             col_indexer = 'type'
-            dff.loc[row_indexer,col_indexer] = itype 
-            indices = list(set(indices)-set(indxxx[itype]))
+            dff.loc[row_indexer,col_indexer] = typei 
+            indices = list(set(indices)-set(indxxx[typei]))
             sizeTot -= size		
         atoms = lp.Atoms( **dff.to_dict(orient='series') )
 #        pdb.set_trace()	
@@ -68,8 +72,9 @@ import LammpsPostProcess as lp
 if __name__ == '__main__':
 #--- modify atom types and associated masses 
     ntype = int(sys.argv[7])
-    mass=dict(zip(range(1,ntype+1),np.random.random(size=ntype))) #{1:58.693, # Ni
-    ratio = np.array(list(map(float,sys.argv[8:])))
+    types = np.array(list(map(int,sys.argv[8:8+ntype])))
+    mass=dict(zip(types,np.random.random(size=ntype))) #{1:58.693, # Ni
+    ratio = np.array(list(map(float,sys.argv[8+ntype:])))
 #        2:58.933195, # Co
 
 #    mass={#1:63.55, #cu
@@ -89,13 +94,13 @@ if __name__ == '__main__':
     os.system('rm *.cfg *.lmp *.xyz *.xsf')
     #--- Crystallographic orientation of the system
 	#--- construct unit cell
-#    os.system('atomsk --create fcc %s Ni orient 11-2 111 -110 Al_unitcell.cfg'%a)
+    os.system('atomsk --create fcc %s Al orient 11-2 111 -110 Al_unitcell.cfg'%a)
 #    os.system('atomsk --create fcc %s Ni orient 111 11-2 -110 Al_unitcell.cfg'%a)
-    os.system('atomsk --create fcc %s Al orient 110 -111 1-12 Al_unitcell.cfg'%a)
+#    os.system('atomsk --create fcc %s Al orient 110 -111 1-12 Al_unitcell.cfg'%a)
 	#--- duplicate
     os.system('atomsk Al_unitcell.cfg -duplicate %s %s %s Al_supercell.cfg'%(m,n,k))
 	#--- build twin boundary
-    for i in range(2):
+    for i in range(1):
         os.system('atomsk Al_supercell.cfg -mirror 0 Y -wrap Al_supercell_mirror.cfg')
         os.system('atomsk --merge Y 2 Al_supercell.cfg Al_supercell_mirror.cfg data.cfg')
         os.system('mv data.cfg Al_supercell.cfg;rm Al_supercell_mirror.cfg')

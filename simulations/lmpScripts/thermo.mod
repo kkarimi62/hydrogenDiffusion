@@ -20,6 +20,6 @@
 #fix extra all print ${varn} "${varStep} ${varTime} ${varEzz} ${varTemp} ${varPe} ${varPxx} ${varPyy} ${varSzz} ${varVol}" screen no title "step time ezz temp pe pxx pyy szz vol" file thermo.txt
 
 thermo 100
-thermo_style custom step temp pe pyz etotal press pxx pyy pzz vol lx ly lz
+thermo_style custom step temp pe press vol
 thermo_modify norm no
 

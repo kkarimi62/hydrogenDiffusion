@@ -11,7 +11,10 @@ include ${INC}/potential.mod
 include ${INC}/mass.mod
 
 #--- fix buffer zone
-#include ${INC}/buffer.mod
+include ${INC}/buffer.mod
+
+#--- thermo
+include ${INC}/thermo.mod
 
 # -------------------------------------- Minimization -------------------------------------------#
 

@@ -6,10 +6,10 @@ variable xxhi	equal xhi
 variable x1		equal ${xxhi}-${buff}
 #
 variable yylo	equal ylo
-variable y0	equal ${yylo}+${buff}
+variable y0	equal ${yylo}+${buffy}
 
 variable yyhi	equal yhi
-variable y1		equal ${yyhi}-${buff}
+variable y1		equal ${yyhi}-${buffy}
 #
 region up block INF INF ${y1} INF INF INF
 region down block INF INF INF ${y0} INF INF
@@ -30,4 +30,6 @@ velocity downn set 0 0 0
 velocity lg set 0 0 0
 velocity rg set 0 0 0
 
+group boundary union upp downn lg rg
+group bulk subtract all boundary
 
