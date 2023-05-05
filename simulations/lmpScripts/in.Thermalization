@@ -27,18 +27,18 @@ run	0
 variable tmp equal press
 variable p0 equal ${tmp}
 
-velocity                  all       create     $T     97364  mom    yes  rot  yes  dist  gaussian  # Dynamics starts
+velocity                  all       create     $T     ${seed}  mom    yes  rot  yes  dist  gaussian  # Dynamics starts
  
-#thermo                    100
-#thermo_style              custom    step temp etotal pe press vol
-fix                      f1        all        npt temp   $T  $T  ${damp_t}  iso ${p0} $P ${damp_p} drag	1.0 ##fixedpoint 0.0 0.0 0.0
-#fix 1 all npt temp $T $T $(dt*100) x 0 0 $(dt*1000) z 0 0 $(dt*1000)
+include ${INC}/thermo.mod
+
+#fix                      f1        all        npt temp   $T  $T  ${damp_t}  iso ${p0} $P ${damp_p} drag	1.0 ##fixedpoint 0.0 0.0 0.0
+fix f1 all npt temp $T $T ${damp_t} x ${p0} ${P} ${damp_p} z ${p0} $P ${damp_p}
 
 #-----------------------------
 #--- compute & dump variables
 #-----------------------------
-dump        1 all custom ${nevery} ${OUT_PATH}/${DumpFile} id type x y z c_1[1] c_1[2] c_1[3] c_1[4] c_1[5] c_1[6]
-dump_modify 1 flush yes format line "%d %d %4.3e %4.3e %4.3e %4.3e %4.3e %4.3e %4.3e %4.3e %4.3e"
+dump        1 all custom ${nevery} ${OUT_PATH}/${DumpFile} id type x y z #c_1[1] c_1[2] c_1[3] c_1[4] c_1[5] c_1[6]
+dump_modify 1 flush yes format line "%d %d %4.3e %4.3e %4.3e" # %4.3e %4.3e %4.3e %4.3e %4.3e %4.3e"
 
 #dump                      mydump all custom ${nevery} equilibrium.dump id type x y z
 run                       ${Nstep}
