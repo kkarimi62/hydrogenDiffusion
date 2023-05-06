@@ -8,6 +8,12 @@ include ${INC}/CreateBox.mod
 # ---------- Define Interatomic Potential --------------------- 
 include ${INC}/potential.mod
 
+#--- fix buffer zone
+include ${INC}/buffer.mod
+
+#--- thermalize two partial dislocations
+include ${INC}/thermo.mod
+
 #------------------------------- Random number generator --------------------------------#
 
   # Initializes random number generator
@@ -48,7 +54,7 @@ include ${INC}/potential.mod
   variable        temperature_mc equal $T
   variable        deltamu1 equal 0.021
   variable        deltamu2 equal -0.31
-  variable        target_concentration equal 0.3333
+  variable        target_concentration equal 0.25 #0.3333
   variable        kappa equal 1e3
 
 
@@ -56,8 +62,11 @@ include ${INC}/potential.mod
 
 
   reset_timestep  0 
-  fix             1  all npt temp $T $T ${damp_t} iso 0.0 0.0 ${damp_p} fixedpoint 0.0 0.0 0.0
-  fix             mc all sgcmc ${nsteps_mc} ${swap_fraction} ${temperature_mc} ${deltamu1} ${deltamu2} &
+#  fix             1  all npt temp $T $T ${damp_t} iso 0.0 0.0 ${damp_p} fixedpoint 0.0 0.0 0.0
+  fix             1  bulk nvt temp $T $T ${damp_t} 
+#  fix             mc all sgcmc ${nsteps_mc} ${swap_fraction} ${temperature_mc} ${deltamu1} ${deltamu2} &
+#                  randseed 1234 variance ${kappa} ${target_concentration} ${target_concentration}
+  fix             mc bulk sgcmc ${nsteps_mc} ${swap_fraction} ${temperature_mc} ${deltamu1} ${deltamu2} &
                   randseed 1234 variance ${kappa} ${target_concentration} ${target_concentration}
   #variable        rnd equal round(random(0,999999,${RANDOM}))
 #  thermo          10
@@ -67,9 +76,10 @@ include ${INC}/potential.mod
 #-----------------------------
 #--- compute & dump variables
 #-----------------------------
-compute     1 all stress/atom NULL pair
-dump        11 all custom ${n_sw} ${OUT_PATH}/Swapped_${T}.dump id type x y z fx fy fz c_1[1] c_1[2] c_1[3] c_1[4] c_1[5] c_1[6]
-dump_modify 11 flush yes format line "%d %d %5.4e %5.4e %5.4e %4.3e %4.3e %4.3e %4.3e %4.3e %4.3e %4.3e %4.3e %4.3e"
+#compute     1 all stress/atom NULL pair
+#dump        11 all custom ${n_sw} ${OUT_PATH}/Swapped_${T}.dump id type x y z fx fy fz c_1[1] c_1[2] c_1[3] c_1[4] c_1[5] c_1[6]
+dump        11 all custom ${nevery} ${OUT_PATH}/${DumpFile}.dump id type x y z #fx fy fz c_1[1] c_1[2] c_1[3] c_1[4] c_1[5] c_1[6]
+dump_modify 11 flush yes format line "%d %d %4.3e %4.3e %4.3e"
 
 #  dump            mydump all custom 1000 Swapped_${T}.dump id type x y z
 #  restart         ${t_sw}       Swap_$TK.restart 
