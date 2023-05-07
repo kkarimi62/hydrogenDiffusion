@@ -119,7 +119,7 @@ if __name__ == '__main__':
 					'p5':' ',
 					'p6':' %s data_init.txt data_init.txt 1'%(os.getcwd()+'/lmpScripts'),
 					'p7':' sortieproc.0 0 Topo_ignore',
-					 1.0:'-x DataFile=data_minimized.txt',
+					 1.0:'-x DataFile=data_init.txt',
 					 2.0:'-x DataFile=data_minimized.txt',
 					} 
 			return Variable
