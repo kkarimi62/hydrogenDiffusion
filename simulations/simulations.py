@@ -32,7 +32,7 @@ if __name__ == '__main__':
     #
     jobname  = {
                 3:'hydrogenDiffusionInAlMultipleTemp/Temp1000K', 
-                5:'defectedCrystall4th',#'pureCrystall', 
+                5:'defectedCrystall5th',#'pureCrystall', 
                 6:'hydrogenDiffusionInAlBigMultipleTemps10H/temp0', #'hydrogenFree',
                 4:'mitStuff2nd', 
                }[5]
