@@ -132,7 +132,7 @@ if __name__ == '__main__':
                 5:['p2', 'p6',51,'p3','p5',1.0], #--- put a dislocation, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
                 6:[5,'p3','p5',1.0], #--- minimize, kart input, kart.sh to bash shell ,invoke kart
 #					7:['p21',51,'p3','p5',1.0], #--- dislocate, minimize, kart input, kart.sh to bash shell ,invoke kart
-                7:[5,'p6','p3','p5',1.0], #--- minimize, add H, kart input, kart.sh to bash shell ,invoke kart
+                7:[5,'p6','p7','p3','p5',1.0], #--- minimize, add H, create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
                 8:['p2','p6',51,'p7','p3','p5',1.0], #--- dislocate, add H, minimize, create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
                 9:['p7','p3','p5',1.0], #--- create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
               }[ 7 ]
