@@ -26,7 +26,7 @@ setenv NSPECIES                       2 #3 #5     # The number of different atom
 setenv ATOMIC_SYMBOLS					'Al:inactive H:active' #'Ni Co Cr Fe Mn' #"Ni Co Cr" #'Ni Co Cr Fe Mn' #"Ni Co Cr"
 #setenv NTRAVAILLEUR                     3     # The number of cores associated with forces calculations per ARTnouveau search (default:1)
 #setenv Random_seed 					19279 # Random number generator (use only for debugging!)
-SOFT_ACTIVITY						.false.
+#SOFT_ACTIVITY						.false.
 ###################################### Restart options #####################################################
 
 setenv RESTART_KMC                   .false.  # IF true, restart from previous run
