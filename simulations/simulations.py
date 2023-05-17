@@ -32,7 +32,7 @@ if __name__ == '__main__':
     #
     jobname  = {
                 3:'hydrogenDiffusionInAlMultipleTemp/Temp1000K', 
-                5:'dislocatedWithHydrogenMulti',#'hydrogenOnlyLong',#'pureCrystall', 
+                5:'dislocatedWithHydrogen2nd',#'hydrogenOnlyLong',#'pureCrystall', 
                 6:'hydrogenDiffusionInAlBigMultipleTemps10H/temp0', #'hydrogenFree',
                 4:'mitStuff2nd', 
                }[5]
@@ -112,7 +112,7 @@ if __name__ == '__main__':
                 11:' ',
                 'p0':' swapped_600.dat 10.0 %s'%(os.getcwd()+'/../postprocess'),
                 'p1':' swapped_600.dat ElasticConst.txt DumpFileModu.xyz %s'%(os.getcwd()+'/../postprocess'),
-                'p2':' %s 3.52 52.0 18.0 26.0 data_minimized.txt 4 2 1.0 0.0'%(os.getcwd()+'/lmpScripts'),
+                'p2':' %s 3.52 30.0 14.0 13.0  data_minimized.txt 4 2 1.0 0.0'%(os.getcwd()+'/lmpScripts'),
                 'p21':' %s 3.52 52.0 18.0 26.0 data_init.txt 2 2 1.0 0.0'%(os.getcwd()+'/lmpScripts'),
                 'p3':' data_minimized.txt init_xyz.conf %s 1000.0'%(os.getcwd()+'/lmpScripts'),
                 'p4':' data_minimized.txt data_minimized.txt %s 1'%(os.getcwd()+'/lmpScripts'),
