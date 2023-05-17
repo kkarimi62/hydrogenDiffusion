@@ -112,12 +112,12 @@ if __name__ == '__main__':
                 11:' ',
                 'p0':' swapped_600.dat 10.0 %s'%(os.getcwd()+'/../postprocess'),
                 'p1':' swapped_600.dat ElasticConst.txt DumpFileModu.xyz %s'%(os.getcwd()+'/../postprocess'),
-                'p2':' %s 3.52 52.0 18.0 26.0 data_init.txt 4 2 1.0 0.0'%(os.getcwd()+'/lmpScripts'),
+                'p2':' %s 3.52 52.0 18.0 26.0 data_minimized.txt 4 2 1.0 0.0'%(os.getcwd()+'/lmpScripts'),
                 'p21':' %s 3.52 52.0 18.0 26.0 data_init.txt 2 2 1.0 0.0'%(os.getcwd()+'/lmpScripts'),
                 'p3':' data_minimized.txt init_xyz.conf %s 1000.0'%(os.getcwd()+'/lmpScripts'),
                 'p4':' data_minimized.txt data_minimized.txt %s 1'%(os.getcwd()+'/lmpScripts'),
                 'p5':' ',
-                'p6':' %s data_init.txt data_minimized.txt 1'%(os.getcwd()+'/lmpScripts'),
+                'p6':' %s data_minimized.txt data_minimized.txt 1'%(os.getcwd()+'/lmpScripts'),
                 'p7':' sortieproc.0 0 Topo_ignore',
                  1.0:'-x DataFile=data_minimized.txt',
                  2.0:'-x DataFile=data_minimized.txt',
@@ -133,7 +133,7 @@ if __name__ == '__main__':
                 6:[5,'p3','p5',1.0], #--- minimize, kart input, kart.sh to bash shell ,invoke kart
 #					7:['p21',51,'p3','p5',1.0], #--- dislocate, minimize, kart input, kart.sh to bash shell ,invoke kart
                 7:[5,'p6',51,'p3','p5',1.0], #--- minimize, add H, minimize,kart input, kart.sh to bash shell ,invoke kart
-                8:['p2','p6',51,'p3','p5',1.0], #--- dislocate, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
+                8:['p2',51,'p6',51,'p3','p5',1.0], #--- dislocate, minimize,add H, minimize, kart input, kart.sh to bash shell ,invoke kart
                 9:['p7','p3','p5',1.0], #--- create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
               }[ 8 ]
     Pipeline = list(map(lambda x:LmpScript[x],indices))
