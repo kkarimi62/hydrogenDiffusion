@@ -132,7 +132,8 @@ if __name__ == '__main__':
                 5:['p2', 'p6',51,'p3','p5',1.0], #--- put a dislocation, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
                 6:[5,'p3','p5',1.0], #--- minimize, kart input, kart.sh to bash shell ,invoke kart
 #					7:['p21',51,'p3','p5',1.0], #--- dislocate, minimize, kart input, kart.sh to bash shell ,invoke kart
-                7:[5,'p6',51,'p3','p5',1.0], #--- minimize, add H, minimize,kart input, kart.sh to bash shell ,invoke kart
+#                7:[5,'p6',51,'p3','p5',1.0], #--- minimize, add H, minimize,kart input, kart.sh to bash shell ,invoke kart
+                7:['p3','p5',1.0], #--- kart input, kart.sh to bash shell ,invoke kart
                 8:['p2','p6',51,'p7','p3','p5',1.0], #--- dislocate, add H, minimize, create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
                 9:['p7','p3','p5',1.0], #--- create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
               }[ 7 ]
@@ -146,7 +147,7 @@ if __name__ == '__main__':
     mem = '12gb'
     partition = ['gpu-v100','parallel','cpu2019','single'][1]
     #--
-    DeleteExistingFolder = True
+    DeleteExistingFolder = False
     if DeleteExistingFolder:
         print('rm %s'%jobname)
         os.system( 'rm -rf %s;mkdir -p %s' % (jobname,jobname) ) #--- rm existing

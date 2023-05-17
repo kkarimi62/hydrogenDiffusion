@@ -29,9 +29,9 @@ setenv ATOMIC_SYMBOLS					'Al:inactive H:active' #'Ni Co Cr Fe Mn' #"Ni Co Cr" #
 #SOFT_ACTIVITY						.false.
 ###################################### Restart options #####################################################
 
-setenv RESTART_KMC                   .false.  # IF true, restart from previous run
+setenv RESTART_KMC                   .true. #.false.  # IF true, restart from previous run
 setenv RESTART_FILE               "this_conf" # The file name used to continue a simulation from where it was last stopped
-setenv RESTART_IMPORT                .false.  # Start a NEW simulation but with the current KMC event catalogue (events.uft and topos.list)
+setenv RESTART_IMPORT                .true. #.false.  # Start a NEW simulation but with the current KMC event catalogue (events.uft and topos.list)
 setenv NEW_CATALOGUE                 .false.  #don't change! IF true, will continue simulation but will rebuild event catalogue from scratch
 
 
