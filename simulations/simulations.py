@@ -25,14 +25,14 @@ if __name__ == '__main__':
     import os
     import numpy as np
 
-    nruns	 = range(8)
+    nruns	 = range(1)
     #
     nThreads = 8
     nNode	 = 1
     #
     jobname  = {
                 3:'hydrogenDiffusionInAlMultipleTemp/Temp1000K', 
-                5:'hydrogenOnlyLong',#'pureCrystall', 
+                5:'dislocatedWithHydrogen',#'hydrogenOnlyLong',#'pureCrystall', 
                 6:'hydrogenDiffusionInAlBigMultipleTemps10H/temp0', #'hydrogenFree',
                 4:'mitStuff2nd', 
                }[5]
@@ -102,7 +102,7 @@ if __name__ == '__main__':
                 6:' -var buff 0.0 -var T 300 -var P 0.0 -var gammaxy 1.0 -var gammadot 1.0e-04 -var nthermo 10000 -var ndump 1000 -var ParseData 1 -var DataFile Equilibrated_300.dat -var DumpFile dumpSheared.xyz',
                 4:' -var T 600.0 -var t_sw 20.0 -var DataFile Equilibrated_600.dat -var nevery 100 -var ParseData 1 -var WriteData swapped_600.dat', 
                 5:' -var buff 0.0 -var buffy 0.0 -var nevery 1000 -var ParseData 0 -var natoms 1000 -var ntype 2 -var cutoff 3.54  -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt -var seed0 %s -var seed1 %s -var seed2 %s -var seed3 %s'%tuple(np.random.randint(1001,9999,size=4)), 
-                51:' -var buff 0.0 -var nevery 1000 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt', 
+                51:' -var buff 0.0 -var buffy 0.0 -var nevery 1000 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt', 
                 7:' -var buff 0.0 -var T 1500.0 -var P 0.0 -var nevery 100 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData Equilibrated_300.dat',
                 71:' -var buff 0.0 -var T 0.1 -var P 0.0 -var nevery 100 -var ParseData 1 -var DataFile swapped_600.dat -var DumpFile dumpThermalized2.xyz -var WriteData Equilibrated_0.dat',
                 72:' -var buff 0.0 -var T 1500.0 -var nevery 100 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData Equilibrated_300.dat',
@@ -112,12 +112,12 @@ if __name__ == '__main__':
                 11:' ',
                 'p0':' swapped_600.dat 10.0 %s'%(os.getcwd()+'/../postprocess'),
                 'p1':' swapped_600.dat ElasticConst.txt DumpFileModu.xyz %s'%(os.getcwd()+'/../postprocess'),
-                'p2':' %s 3.52 52.0 18.0 26.0 data_init.txt 2 1 1.0'%(os.getcwd()+'/lmpScripts'),
+                'p2':' %s 3.52 26.0 9.0 13.0 data_init.txt 2 1 1.0'%(os.getcwd()+'/lmpScripts'),
                 'p21':' %s 3.52 52.0 18.0 26.0 data_init.txt 2 2 1.0 0.0'%(os.getcwd()+'/lmpScripts'),
                 'p3':' data_minimized.txt init_xyz.conf %s 1000.0'%(os.getcwd()+'/lmpScripts'),
                 'p4':' data_minimized.txt data_minimized.txt %s 1'%(os.getcwd()+'/lmpScripts'),
                 'p5':' ',
-                'p6':' %s data_minimized.txt data_minimized.txt 20'%(os.getcwd()+'/lmpScripts'),
+                'p6':' %s data_init.txt data_minimized.txt 1'%(os.getcwd()+'/lmpScripts'),
                 'p7':' sortieproc.0 0 Topo_ignore',
                  1.0:'-x DataFile=data_minimized.txt',
                  2.0:'-x DataFile=data_minimized.txt',
@@ -132,22 +132,21 @@ if __name__ == '__main__':
                 5:['p2', 'p6',51,'p3','p5',1.0], #--- put a dislocation, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
                 6:[5,'p3','p5',1.0], #--- minimize, kart input, kart.sh to bash shell ,invoke kart
 #					7:['p21',51,'p3','p5',1.0], #--- dislocate, minimize, kart input, kart.sh to bash shell ,invoke kart
-#                7:[5,'p6',51,'p3','p5',1.0], #--- minimize, add H, minimize,kart input, kart.sh to bash shell ,invoke kart
-                7:['p3','p5',1.0], #--- kart input, kart.sh to bash shell ,invoke kart
-                8:['p2','p6',51,'p7','p3','p5',1.0], #--- dislocate, add H, minimize, create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
+                7:[5,'p6',51,'p3','p5',1.0], #--- minimize, add H, minimize,kart input, kart.sh to bash shell ,invoke kart
+                8:['p2','p6',51,'p3','p5',1.0], #--- dislocate, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
                 9:['p7','p3','p5',1.0], #--- create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
-              }[ 7 ]
+              }[ 8 ]
     Pipeline = list(map(lambda x:LmpScript[x],indices))
 #	Variables = list(map(lambda x:Variable[x], indices))
     EXEC = list(map(lambda x:np.array(['lmp','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
 #        print('EXEC=',EXEC)
     #
     EXEC_lmp = ['lmp_mpi','lmp_serial','_lmp'][0]
-    durtn = ['23:59:59','00:09:59','167:59:59'][ 2 ]
+    durtn = ['23:59:59','00:09:59','167:59:59'][ 0 ]
     mem = '12gb'
     partition = ['gpu-v100','parallel','cpu2019','single'][1]
     #--
-    DeleteExistingFolder = False
+    DeleteExistingFolder = True
     if DeleteExistingFolder:
         print('rm %s'%jobname)
         os.system( 'rm -rf %s;mkdir -p %s' % (jobname,jobname) ) #--- rm existing

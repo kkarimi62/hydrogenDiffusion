@@ -17,7 +17,7 @@ setenv INI_FILE_NAME             'init_xyz.conf'   # The file name containing th
  
 ###################################### Simulation Details ##################################################
 
-setenv NBRE_KMC_STEPS                1000       # The max number of KMC steps to be executed
+setenv NBRE_KMC_STEPS                1 #1000       # The max number of KMC steps to be executed
 setenv TEMPERATURE                   ${temp} #500.0    # The simulated temperature in kelvin
 
 setenv NUMBER_ATOMS                   ${natom} #864     # The total number of atoms 
@@ -29,9 +29,9 @@ setenv ATOMIC_SYMBOLS					'Al:inactive H:active' #'Ni Co Cr Fe Mn' #"Ni Co Cr" #
 #SOFT_ACTIVITY						.false.
 ###################################### Restart options #####################################################
 
-setenv RESTART_KMC                   .true. #.false.  # IF true, restart from previous run
+setenv RESTART_KMC                   .false.  # IF true, restart from previous run
 setenv RESTART_FILE               "this_conf" # The file name used to continue a simulation from where it was last stopped
-setenv RESTART_IMPORT                .true. #.false.  # Start a NEW simulation but with the current KMC event catalogue (events.uft and topos.list)
+setenv RESTART_IMPORT                .false.  # Start a NEW simulation but with the current KMC event catalogue (events.uft and topos.list)
 setenv NEW_CATALOGUE                 .false.  #don't change! IF true, will continue simulation but will rebuild event catalogue from scratch
 
 
