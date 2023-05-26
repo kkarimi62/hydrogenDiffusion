@@ -35,7 +35,7 @@ variable cunits string GPa
 
 # Define minimization parameters
 variable etol equal 0.0 
-variable ftol equal 1.0e-06
+variable ftol equal 1.0e-0
 variable maxiter equal 100000
 variable maxeval equal 100000
 variable dmax equal 1.0e-2
@@ -50,7 +50,7 @@ variable dmax equal 1.0e-2
 #mass 5 54.938
 
 #--- discretization time
-variable            dt        equal     0.005         # Time step
+variable            dt        equal     0.001         # Time step
 
 #--- thermostat parameters
 variable            damp_t    equal     100*${dt}     # Thermostat damping

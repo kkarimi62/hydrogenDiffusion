@@ -11,11 +11,9 @@ include ${INC}/potential.mod
 #--- fix buffer zone
 include ${INC}/buffer.mod
 
-#--- thermalize two partial dislocations
-include ${INC}/thermo.mod
 
 # -------------------------------------- General Variables --------------------------------------#
-variable                  t_eq      equal     100.0*${damp_t}         # Equlibration time
+variable                  t_eq      equal     10.0*${damp_t}         # Equlibration time
 variable 				  Nstep  	equal	floor(${t_eq}/${dt}) #--- timesteps
 
 #variable N_comp string CoNiCrMn_GB3
@@ -78,11 +76,11 @@ variable finalTemp equal ${T} #300         	# desired temperature
 #group  upper region upper
 #group  lower region lower
 #group  boundary union upper lower
-#group  mobile subtract all boundary
+#group  bulk subtract all boundary
 #fix             1 lower setforce 0 0 0
 #fix             2 upper setforce 0 0 0
 
-#fix              3  mobile npt temp ${initTemp} ${initTemp} ${damp_t} y 0 0 1 z 0 0 1 
+#fix              3  bulk npt temp ${initTemp} ${initTemp} ${damp_t} y 0 0 1 z 0 0 1 
 #dump	c all custom 2500 MD_temp${N_comp}_${initTemp}.dump id type x y z vx vy vz
 
 #run                    ${equilTime}
@@ -99,8 +97,8 @@ variable finalTemp equal ${T} #300         	# desired temperature
 ###################################################
 
 #timestep 0.001
-#fix              1  mobile npt temp ${initTemp} ${initTemp} ${damp_t} y 0 0 1 z 0 0 1  
-fix             1  bulk nvt temp $T $T ${damp_t} 
+#fix              1  bulk npt temp ${initTemp} ${initTemp} ${damp_t} y 0 0 1 z 0 0 1  
+fix             f1  bulk nvt temp $T $T ${damp_t} 
 #fix             2 lower setforce 0 0 0
 #fix             3 upper setforce 0 0 0
 variable      ran1 equal round(random(0,999999,10))
@@ -113,21 +111,27 @@ variable      ran7 equal round(random(0,999999,436))
 variable      ran8 equal round(random(0,999999,3103))
 variable      ran9 equal round(random(0,999999,887))
 variable      ran10 equal round(random(0,999999,3408))
-fix 4 mobile atom/swap 50 200 ${ran1} ${initTemp} ke no  types 1 2 
-fix 5 mobile atom/swap 50 200 ${ran4} ${initTemp} ke no  types 1 3
-fix 7 mobile atom/swap 50 200 ${ran7} ${initTemp} ke no  types 1 5
-fix 6 mobile atom/swap 50 200 ${ran5} ${initTemp} ke no  types 2 3
-fix 8 mobile atom/swap 50 200 ${ran8} ${initTemp} ke no  types 2 5
-fix 9 mobile atom/swap 50 200 ${ran10} ${initTemp} ke no  types 3 5
+fix 4 bulk atom/swap 50 ${nsw} ${ran1} ${initTemp} ke no  types 1 2 
+fix 5 bulk atom/swap 50 ${nsw} ${ran4} ${initTemp} ke no  types 1 3
+fix 7 bulk atom/swap 50 ${nsw} ${ran7} ${initTemp} ke no  types 1 5
+fix 6 bulk atom/swap 50 ${nsw} ${ran5} ${initTemp} ke no  types 2 3
+fix 8 bulk atom/swap 50 ${nsw} ${ran8} ${initTemp} ke no  types 2 5
+fix 9 bulk atom/swap 50 ${nsw} ${ran10} ${initTemp} ke no  types 3 5
 
 #-----------------------------
 #--- compute & dump variables
 #-----------------------------
-dump        1 all custom ${nevery} ${OUT_PATH}/${DumpFile} id type x y z c_1[1] c_1[2] c_1[3] c_1[4] c_1[5] c_1[6]
-dump_modify 1 flush yes format line "%d %d %4.3e %4.3e %4.3e %4.3e %4.3e %4.3e %4.3e %4.3e %4.3e"
+dump        1 all custom ${dump_every} ${OUT_PATH}/${DumpFile} id type x y z #c_1[1] c_1[2] c_1[3] c_1[4] c_1[5] c_1[6]
+dump_modify 1 flush yes format line "%d %d %4.3e %4.3e %4.3e" # %4.3e %4.3e %4.3e %4.3e %4.3e %4.3e"
 
 #dump	a all custom 100 MD-MC_temp${N_comp}_${initTemp}.dump id type x y z vx vy vz
 #thermo 1000
 #thermo_style custom step  f_4[1] f_4[2] f_5[1] f_5[2] f_6[1] f_6[2] f_7[1] f_7[2] f_8[1] f_8[2] f_9[1] f_9[2] temp pe etotal press vol  ke
+#--- set discretization time 
+timestep	${dt}
+
+#--- thermalize two partial dislocations
+include ${INC}/thermo.mod
+
 run                       ${Nstep}
 

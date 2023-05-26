@@ -15,7 +15,7 @@ include ${INC}/buffer.mod
 include ${INC}/thermo.mod
 
 # -------------------------------------- General Variables --------------------------------------#
-variable                  t_eq      equal     100.0*${damp_t}         # Equlibration time
+variable                  t_eq      equal     10.0*${damp_t}         # Equlibration time
 variable 				  Nstep  	equal	floor(${t_eq}/${dt}) #--- timesteps
 
 
@@ -31,6 +31,7 @@ variable 				  Nstep  	equal	floor(${t_eq}/${dt}) #--- timesteps
 velocity                  bulk       create     ${T}     ${seed}  mom    yes  rot  yes  dist  gaussian  # Dynamics starts
 
 fix                      f1        bulk        nvt temp   ${T}  ${T}  ${damp_t}  #iso ${p0} $P ${damp_p} drag	1.0 ##fixedpoint 0.0 0.0 0.0
+#fix                      f1        bulk        npt temp   ${T}  ${T}  ${damp_t}  x 0 0 ${damp_p} y 0 0 ${damp_p} z 0 0 ${damp_p} #drag	1.0 ##fixedpoint 0.0 0.0 0.0
 
 #-----------------------------
 #--- compute & dump variables
@@ -38,10 +39,14 @@ fix                      f1        bulk        nvt temp   ${T}  ${T}  ${damp_t} 
 dump        1 all custom ${nevery} ${OUT_PATH}/${DumpFile} id type x y z #c_1[1] c_1[2] c_1[3] c_1[4] c_1[5] c_1[6]
 dump_modify 1 flush yes format line "%d %d %4.3e %4.3e %4.3e" # %4.3e %4.3e %4.3e %4.3e %4.3e %4.3e"
 
+#--- set discretization time 
+timestep	${dt}
+
 #dump                      mydump all custom ${nevery} equilibrium.dump id type x y z
 run                       ${Nstep}
 
 unfix                     f1
+undump                     1
 reset_timestep            0
 # -------------------------------------- Write Data ----------------------------------------------#
 
