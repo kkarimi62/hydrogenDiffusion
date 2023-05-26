@@ -36,7 +36,7 @@ if __name__ == '__main__':
 					5:'hydrogenDiffusionInAlT1000KDislocated', 
 					6:'hydrogenDiffusionInAlBigMultipleTemps100H/temp0', #'hydrogenFree',
 					4:'mitStuff2nd', 
-					7:'biCrystal3rd', 
+					7:'biCrystal4th', 
 				   }[7]
 		sourcePath = os.getcwd() +\
 					{	
@@ -89,6 +89,7 @@ if __name__ == '__main__':
 						9:'in.elastic',
 						10:'in.elasticSoftWall',
 						11:'in.relax',
+						12:'in.swap_GB4',
 						'p0':'partition.py', #--- python file
 						'p1':'WriteDump.py',
 						'p2':'DislocateEdge.py',
@@ -117,6 +118,7 @@ if __name__ == '__main__':
 					9:' -var natoms 1000 -var cutoff 3.52 -var ParseData 1',
 					10:' -var ParseData 1 -var DataFile swapped_600.dat',
 					11:' -var T 300 -var rn %s -var dump_every 200 -var ParseData 1 -var DataFile init.lmp -var DumpFile traj.dump'%np.random.randint(1001,100000),
+					12:' -var buff 0.0 -var buffy 5.0 -var T 300 -var rn %s -var dump_every 200 -var ParseData 1 -var DataFile equilibrated.dat -var DumpFile traj.dump'%np.random.randint(1001,100000),
 					'p0':' swapped_600.dat 10.0 %s'%(os.getcwd()+'/../postprocess'),
 					'p1':' swapped_600.dat ElasticConst.txt DumpFileModu.xyz %s'%(os.getcwd()+'/../postprocess'),
 					'p2':' %s 3.52 52.0 18.0 26.0 data_init.txt 2 1 1.0'%(os.getcwd()+'/lmpScripts'),
@@ -143,7 +145,7 @@ if __name__ == '__main__':
 					8:['p2','p6',51,'p7','p3','p5',1.0], #--- dislocate, add H, minimize, create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
 					9:['p7','p3','p5',1.0], #--- create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
 					12:['p8', 51, 72], #--- twin boundary by atomsk, minimize, thermalize
-					13:['p8', 51, 4], #--- twin boundary by atomsk, minimize, thermalize
+					13:['p8', 51, 72, 12], #--- twin boundary by atomsk, minimize, thermalize, swap
 				  }[ 13 ]
 		Pipeline = list(map(lambda x:LmpScript[x],indices))
 		EXEC = list(map(lambda x:np.array(['lmp','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
