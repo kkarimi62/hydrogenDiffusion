@@ -3,7 +3,7 @@ def makeOAR( EXEC_DIR, node, core, time ):
 	print >> someFile, '#!/bin/bash\n'
 	print >> someFile, 'EXEC_DIR=%s\n' %( EXEC_DIR )
 	print >> someFile, 'MEAM_library_DIR=%s\n' %( MEAM_library_DIR )
-	print >> someFile, 'source ~/Project/opt/anaconda3/etc/profile.d/conda.sh\nconda activate deepmd\nexport OMP_NUM_THREADS=%s'%(nThreads*nNode) #--- deep potential stuff
+	print >> someFile, 'source ~/Project/opt/anaconda3/etc/profile.d/conda.sh\nconda activate deepmd3rd\nexport OMP_NUM_THREADS=%s'%(nThreads*nNode) #--- deep potential stuff
 #	print >> someFile, 'source /mnt/opt/spack-0.17/share/spack/setup-env.sh\nspack load openmpi@4.0.5 %gcc@9.3.0\nspack load openblas@0.3.18%gcc@9.3.0\nspack load python@3.8.12%gcc@8.3.0\n\n',
 #	print >> someFile, 'export LD_LIBRARY_PATH=/mnt/opt/tools/cc7/lapack/3.5.0-x86_64-gcc46/lib:${LD_LIBRARY_PATH}\n'
 
@@ -36,7 +36,7 @@ if __name__ == '__main__':
 					5:'hydrogenDiffusionInAlT1000KDislocated', 
 					6:'hydrogenDiffusionInAlBigMultipleTemps100H/temp0', #'hydrogenFree',
 					4:'mitStuff2nd', 
-					7:'biCrystal4th', 
+					7:'biCrystal5th', 
 				   }[7]
 		sourcePath = os.getcwd() +\
 					{	
@@ -59,7 +59,7 @@ if __name__ == '__main__':
 					 }[7] #--- to be copied from the above directory. set it to '0' if no file
 		#
 		EXEC_DIR = {0:'~/Project/git/lammps2nd/lammps/src', #--- path for executable file
-					1:'~/Project/opt/anaconda3/envs/deepmd/bin' #--- path for executable file: deep potential
+					1:'~/Project/opt/anaconda3/envs/deepmd3rd/bin' #--- path for executable file: deep potential
 					}[1]
 		#
 		MEAM_library_DIR={0:'/home/kamran.karimi1/Project/git/lammps2nd/lammps/potentials',
@@ -118,7 +118,7 @@ if __name__ == '__main__':
 					9:' -var natoms 1000 -var cutoff 3.52 -var ParseData 1',
 					10:' -var ParseData 1 -var DataFile swapped_600.dat',
 					11:' -var T 300 -var rn %s -var dump_every 200 -var ParseData 1 -var DataFile init.lmp -var DumpFile traj.dump'%np.random.randint(1001,100000),
-					12:' -var buff 0.0 -var buffy 5.0 -var T 300 -var rn %s -var dump_every 200 -var ParseData 1 -var DataFile equilibrated.dat -var DumpFile traj.dump'%np.random.randint(1001,100000),
+					12:' -var buff 0.0 -var buffy 5.0 -var T 300 -var swap_every 100 -var swap_atoms 40 -var rn %s -var dump_every 100 -var ParseData 1 -var DataFile equilibrated.dat -var DumpFile traj.dump'%np.random.randint(1001,100000),
 					'p0':' swapped_600.dat 10.0 %s'%(os.getcwd()+'/../postprocess'),
 					'p1':' swapped_600.dat ElasticConst.txt DumpFileModu.xyz %s'%(os.getcwd()+'/../postprocess'),
 					'p2':' %s 3.52 52.0 18.0 26.0 data_init.txt 2 1 1.0'%(os.getcwd()+'/lmpScripts'),
@@ -153,7 +153,7 @@ if __name__ == '__main__':
 		EXEC_lmp = {0:'lmp_g++_openmpi',
 					'mit':'lmp',
 					}['mit']
-		durtn = ['23:59:59','00:09:59','167:59:59'][ 0 ]
+		durtn = ['23:59:59','00:09:59','167:59:59'][ 2 ]
 		mem = '12gb'
 		partition = ['INTEL_PHI','INTEL_CASCADE'][0]
 		#--
