@@ -111,12 +111,12 @@ variable      ran7 equal round(random(0,999999,436))
 variable      ran8 equal round(random(0,999999,3103))
 variable      ran9 equal round(random(0,999999,887))
 variable      ran10 equal round(random(0,999999,3408))
-fix 4 bulk atom/swap 50 ${nsw} ${ran1} ${initTemp} ke no  types 1 2 
-fix 5 bulk atom/swap 50 ${nsw} ${ran4} ${initTemp} ke no  types 1 3
-fix 7 bulk atom/swap 50 ${nsw} ${ran7} ${initTemp} ke no  types 1 5
-fix 6 bulk atom/swap 50 ${nsw} ${ran5} ${initTemp} ke no  types 2 3
-fix 8 bulk atom/swap 50 ${nsw} ${ran8} ${initTemp} ke no  types 2 5
-fix 9 bulk atom/swap 50 ${nsw} ${ran10} ${initTemp} ke no  types 3 5
+fix 4 bulk atom/swap ${swap_every} ${swap_atoms} ${ran1} ${initTemp} ke no  types 1 2 
+fix 5 bulk atom/swap ${swap_every} ${swap_atoms} ${ran4} ${initTemp} ke no  types 1 3
+fix 7 bulk atom/swap ${swap_every} ${swap_atoms} ${ran7} ${initTemp} ke no  types 1 5
+fix 6 bulk atom/swap ${swap_every} ${swap_atoms} ${ran5} ${initTemp} ke no  types 2 3
+fix 8 bulk atom/swap ${swap_every} ${swap_atoms} ${ran8} ${initTemp} ke no  types 2 5
+fix 9 bulk atom/swap ${swap_every} ${swap_atoms} ${ran10} ${initTemp} ke no  types 3 5
 
 #-----------------------------
 #--- compute & dump variables
