@@ -24,7 +24,7 @@ def WriteDataFile(AtomskOutpt,outpt):
     #--- center
     #--- add box bounds
     l = 2.0*3.0 #--- put H within a cube with size l
-    distance = 3.0 #--- distance from extended dislocation
+    distance = 0.0 #3.0 #--- distance from extended dislocation
     
     rcent = np.matmul(box.CellVector,np.array([.5,.5,.5])) + box.CellOrigin
     rcent += np.array([-0.5*l,distance,-0.5*l]) #--- new origin
