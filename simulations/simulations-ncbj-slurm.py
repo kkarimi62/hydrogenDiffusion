@@ -36,7 +36,7 @@ if __name__ == '__main__':
 					5:'hydrogenDiffusionInAlT1000KDislocated', 
 					6:'hydrogenDiffusionInAlBigMultipleTemps100H/temp0', #'hydrogenFree',
 					4:'mitStuff2nd', 
-					7:'biCrystal5th', 
+					7:'biCrystal6th', 
 				   }[7]
 		sourcePath = os.getcwd() +\
 					{	
@@ -118,7 +118,7 @@ if __name__ == '__main__':
 					9:' -var natoms 1000 -var cutoff 3.52 -var ParseData 1',
 					10:' -var ParseData 1 -var DataFile swapped_600.dat',
 					11:' -var T 300 -var rn %s -var dump_every 200 -var ParseData 1 -var DataFile init.lmp -var DumpFile traj.dump'%np.random.randint(1001,100000),
-					12:' -var buff 0.0 -var buffy 5.0 -var T 300 -var swap_every 100 -var swap_atoms 75 -var rn %s -var dump_every 100 -var ParseData 1 -var DataFile equilibrated.dat -var DumpFile traj.dump'%np.random.randint(1001,100000),
+					12:' -var buff 0.0 -var buffy 5.0 -var T 300 -var swap_every 100 -var swap_atoms 267 -var rn %s -var dump_every 100 -var ParseData 1 -var DataFile equilibrated.dat -var DumpFile traj.dump'%np.random.randint(1001,100000),
 					'p0':' swapped_600.dat 10.0 %s'%(os.getcwd()+'/../postprocess'),
 					'p1':' swapped_600.dat ElasticConst.txt DumpFileModu.xyz %s'%(os.getcwd()+'/../postprocess'),
 					'p2':' %s 3.52 52.0 18.0 26.0 data_init.txt 2 1 1.0'%(os.getcwd()+'/lmpScripts'),
@@ -128,7 +128,7 @@ if __name__ == '__main__':
 					'p5':' ',
 					'p6':' %s data_init.txt data_init.txt 100'%(os.getcwd()+'/lmpScripts'),
 					'p7':' sortieproc.0 0 Topo_ignore',
-					'p8':' %s 3.52 35.0 20.0 20.0 data_init.txt 5 1 2 3 4 5 0.25 0.25 0.25 0.0 0.25'%(py_lib_path),
+					'p8':' %s 3.52 25.0 40.0 40.0 data_init.txt 5 1 2 3 4 5 0.25 0.25 0.25 0.0 0.25'%(py_lib_path),
 					 1.0:'-x DataFile=data_minimized.txt',
 					 2.0:'-x DataFile=data_minimized.txt',
 					} 
