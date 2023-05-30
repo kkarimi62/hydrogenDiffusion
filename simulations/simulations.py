@@ -25,14 +25,14 @@ if __name__ == '__main__':
     import os
     import numpy as np
 
-    nruns	 = range(1) #8)
+    nruns	 = range(8)
     #
     nThreads = 8
     nNode	 = 1
     #
     jobname  = {
                 3:'hydrogenDiffusionInAlMultipleTemp/Temp1000K', 
-                5:'pureHydrogenDiffusion',#'dislocatedWithHydrogen6th',#'hydrogenOnlyLong',#'pureCrystall', 
+                5:'pureHydrogenDiffusion2nd',#'dislocatedWithHydrogen6th',#'hydrogenOnlyLong',#'pureCrystall', 
                 6:'hydrogenDiffusionInAlBigMultipleTemps10H/temp0', #'hydrogenFree',
                 4:'mitStuff2nd', 
                }[5]
