@@ -40,6 +40,6 @@ if __name__ == '__main__':
                 string[ inums ] = "\t12:\' -var buff 0.0 -var buffy 5.0 -var T %s -var swap_every 100 -var swap_atoms 267 -var rn %%s -var dump_every 100 -var ParseData 1 -var DataFile equilibrated.dat -var DumpFile traj.dump\'%%np.random.randint(1001,100000),\n"%(temp)
             #---
                 sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
-                os.system( 'python junk%s.py'%count )
+                os.system( 'python2 junk%s.py'%count )
                 os.system( 'rm junk%s.py'%count )
                 count += 1
