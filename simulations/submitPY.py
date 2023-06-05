@@ -1,36 +1,45 @@
 if __name__ == '__main__':
-	import sys
-	import os
-	import numpy as np
-	#---
-	lnums = [ 36, 116  ]
-	string=open('simulations.py').readlines() #--- python script
-#	lnums = [ 33, 97   ]
-#	string=open('simulations-ncbj.py').readlines() #--- python script
-	#---
-	Temps=			{
-				0:1200,
-				1:1400,
-				2:1600,
-				3:1800,
-				4:2000,
-			}
-	#---
-	count = 0
-	for keys_t in Temps:
-				temp = Temps[keys_t]
-			#---	densities
-				inums = lnums[ 0 ] - 1
-				string[ inums ] = "\t6:\'hydrogenDiffusionInAlBigMultipleTemps10H/temp%s\',\n"%(keys_t) #--- change job name
-			#---
-				inums = lnums[ 1 ] - 1
-				string[ inums ] = "\t\'p3\':\' data_minimized.txt init_xyz.conf %%s %s\'%%(os.getcwd()+\'/lmpScripts\'),\n"%temp
-#				string[ inums ] = "\t\'p21\':\' %%s 3.52 %s 18.0 26.0 data_init.txt 2 2 1.0 0.0\'%%(os.getcwd()+\'/lmpScripts\'),\n"%temp
-#				string[ inums ] = "\t\'p7\':\' sortieproc.0 %s Topo_ignore\',\n"%(temp)
-				
-#				string[ inums ] = "\t72:\' -var buff 0.0 -var T %s -var nevery 10 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData Equilibrated_%s.dat\',\n"%(temp,temp)
-			#---
-				sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
-				os.system( 'python junk%s.py'%count )
-				os.system( 'rm junk%s.py'%count )
-				count += 1
+    import sys
+    import os
+    import numpy as np
+    #---
+#    lnums = [ 36, 116  ]
+#    string=open('simulations.py').readlines() #--- python script
+    lnums = [ 39, 116, 121 ]
+    string=open('simulations-ncbj-slurm.py').readlines() #--- python script
+    #---
+    Temps=			{
+#                 0:1200,
+#                 1:1400,
+#                 2:1600,
+#                 3:1800,
+#                 4:2000,
+                0:600,
+                1:700,
+                2:800,
+                3:900,
+                4:1000,
+            }
+    #---
+    count = 0
+    for keys_t in Temps:
+                temp = Temps[keys_t]
+            #---	densities
+                inums = lnums[ 0 ] - 1
+#                string[ inums ] = "\t6:\'hydrogenDiffusionInAlBigMultipleTemps10H/temp%s\',\n"%(keys_t) #--- change job name
+                string[ inums ] = "\t7:\'biCrystalMultipleTemp/temp%s\',\n"%(keys_t) #--- change job name
+            #---
+                inums = lnums[ 1 ] - 1
+#                string[ inums ] = "\t\'p3\':\' data_minimized.txt init_xyz.conf %%s %s\'%%(os.getcwd()+\'/lmpScripts\'),\n"%temp
+    #				string[ inums ] = "\t\'p21\':\' %%s 3.52 %s 18.0 26.0 data_init.txt 2 2 1.0 0.0\'%%(os.getcwd()+\'/lmpScripts\'),\n"%temp
+    #				string[ inums ] = "\t\'p7\':\' sortieproc.0 %s Topo_ignore\',\n"%(temp)
+
+    			string[ inums ] = "\t72:\' -var seed %%s -var buff 0.0 -var buffy 5.0 -var T %s -var nevery 100 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData Equilibrated_%s.dat\'%%np.random.randint(1001,9999),\n"%(temp)
+
+                inums = lnums[ 2 ] - 1
+    			string[ inums ] = "\t12:\' -var buff 0.0 -var buffy 5.0 -var T %s -var swap_every 100 -var swap_atoms 267 -var rn %%s -var dump_every 100 -var ParseData 1 -var DataFile equilibrated.dat -var DumpFile traj.dump\'%%np.random.randint(1001,100000),\n"%(temp)
+            #---
+                sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
+                os.system( 'python junk%s.py'%count )
+                os.system( 'rm junk%s.py'%count )
+                count += 1
