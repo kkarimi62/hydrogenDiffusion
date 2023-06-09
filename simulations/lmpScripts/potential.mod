@@ -21,7 +21,7 @@ pair_coeff * * ${PathEam}/library_AlH.meam Al H ${PathEam}/parameters_AlH.meam A
 #pair_coeff * *
 
 
-# Setup neighbor style
+# Setup neighbor  style
 #neighbor 2.0 bin
 #neigh_modify delay 10 every 1 check yes
 
