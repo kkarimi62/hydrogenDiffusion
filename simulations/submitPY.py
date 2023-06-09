@@ -3,7 +3,7 @@ if __name__ == '__main__':
     import os
     import numpy as np
     #---
-    lnums = [ 36, 72  ]
+    lnums = [ 36, 108  ]
     string=open('simulations.py').readlines() #--- python script
 #    lnums = [ 39, 116, 121 ]
 #    string=open('simulations-ncbj-slurm.py').readlines() #--- python script
@@ -41,5 +41,5 @@ if __name__ == '__main__':
             #---
                 sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
                 os.system( 'python2 junk%s.py'%count )
-#                 os.system( 'rm junk%s.py'%count )
+                 os.system( 'rm junk%s.py'%count )
                 count += 1
