@@ -100,11 +100,11 @@ sys.path.append(lib_path)
 import LammpsPostProcess2nd as lp
 import utility as utl 
 
-#os.system('atomsk %s -add-atom H random %s final.cfg'%(inputt,natom))
-#os.system('atomsk final.cfg lmp')
-WriteDataFile(inputt,outpt)
+os.system('atomsk %s -add-atom H random %s final.cfg'%(inputt,natom))
+os.system('atomsk final.cfg lmp')
+#WriteDataFile(inputt,outpt)
 #os.system('atomsk final.cfg lmp')
 #os.system('rm final.lmp')
-#os.system('mv final.lmp %s'%outpt)
+os.system('mv final.lmp %s'%outpt)
 os.system('rm *.cfg')
 
