@@ -36,7 +36,7 @@ setenv NEW_CATALOGUE                 .false.  #don't change! IF true, will conti
 
 
 #################################### Basin parameters #################################
-setenv OSCILL_TREAT            BMRM       # choose between BMRM, TABU or NON
+setenv OSCILL_TREAT            TABU #BMRM       # choose between BMRM, TABU or NON
 setenv BASIN_LOCAL		.false.	
 setenv MIN_SIG_BARRIER                 0.1    # Max height of barrier and inv. barrier for an event to be considered inside a basin
 
@@ -96,17 +96,17 @@ setenv RADIUS_INITIAL_DEFORMATION 3.0     # Cutoff for local-move (in angstroems
 setenv EIGENVALUE_THRESHOLD      -1.0     # Eigenvalue threshold for leaving basin
 
 setenv EXIT_FORCE_THRESHOLD       0.1    # Threshold for convergence at saddle point
-setenv FORCE_THRESHOLD_PERP_REL   0.05    # Threshold for perpendicular relaxation
+setenv FORCE_THRESHOLD_PERP_REL   0.1 #0.05    # Threshold for perpendicular relaxation
 
-setenv FINE_EXIT_FORCE_THRESHOLD       0.05    # finner Threshold for convergence at saddle point 
-setenv FINE_FORCE_THRESHOLD_PERP_REL   0.01    # finner Threshold for perpendicular relaxation
+setenv FINE_EXIT_FORCE_THRESHOLD       0.1 #0.05    # finner Threshold for convergence at saddle point 
+setenv FINE_FORCE_THRESHOLD_PERP_REL   0.1 #0.01    # finner Threshold for perpendicular relaxation
 
 #kam setenv MIN_NUMBER_KSTEPS          2       # Min. number of ksteps before calling lanczos
 setenv INCREMENT_SIZE             0.1     # Overall scale for the increment moves in activation
 
 setenv INITIAL_STEP_SIZE          1.00    # Size of initial displacement, in A
 setenv BASIN_FACTOR               3.00
-setenv MIN_NUMBER_KSTEPS          3       # Min. number of ksteps before calling lanczos
+setenv MIN_NUMBER_KSTEPS          10 #3       # Min. number of ksteps before calling lanczos
 setenv MAX_PERP_MOVES_BASIN       6       # Maximum number of perpendicular steps leaving basin
 setenv MAX_PERP_MOVES_ACTIV       20       # Maximum number of perpendicular steps during activation
 setenv MAX_ITER_BASIN             40      # Maximum number of iteraction for leaving the basin (kter)
