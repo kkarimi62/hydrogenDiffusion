@@ -98,8 +98,8 @@ setenv EIGENVALUE_THRESHOLD      -1.0     # Eigenvalue threshold for leaving bas
 setenv EXIT_FORCE_THRESHOLD       0.1    # Threshold for convergence at saddle point
 setenv FORCE_THRESHOLD_PERP_REL   0.1 #0.05    # Threshold for perpendicular relaxation
 
-setenv FINE_EXIT_FORCE_THRESHOLD       0.1 #0.05    # finner Threshold for convergence at saddle point 
-setenv FINE_FORCE_THRESHOLD_PERP_REL   0.1 #0.01    # finner Threshold for perpendicular relaxation
+setenv FINE_EXIT_FORCE_THRESHOLD       0.05    # finner Threshold for convergence at saddle point 
+setenv FINE_FORCE_THRESHOLD_PERP_REL   0.01    # finner Threshold for perpendicular relaxation
 
 #kam setenv MIN_NUMBER_KSTEPS          2       # Min. number of ksteps before calling lanczos
 setenv INCREMENT_SIZE             0.1     # Overall scale for the increment moves in activation
