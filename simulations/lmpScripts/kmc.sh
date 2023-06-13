@@ -79,8 +79,8 @@ setenv PAR_DISP_THRESH2       0.00001     # max displacement squared which trigg
                                             
 ################ FIRE MINIMIZATION ###############
 # setenv DTMAX_FIRE           0.15        # default value
-setenv DTMAX_FIRE           0.25        # default value
-setenv DTMAX_FIRE_MIN       0.05        # default value=DTMAX_FIRE
+#setenv DTMAX_FIRE           0.25        # default value
+#setenv DTMAX_FIRE_MIN       0.05        # default value=DTMAX_FIRE
 # setenv MAX_ITER_FIRE        1500        # default value
 # setenv NORM_CRITERIUM       0.0005      # default value
 # setenv FMAX_CRITERIUM       0.0005      # default value
