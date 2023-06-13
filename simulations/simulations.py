@@ -16,7 +16,7 @@ def makeOAR( EXEC_DIR, node, core, time ):
 			print >> someFile, "python3 %s %s\n"%(script, var)
 		elif execc == 'kmc':
 #			print >> someFile, "time mpiexec %s %s\n"%(script, var)
-			print >> someFile, "mpirun --oversubscribe -np %s -x Buffer=0.0 -x PathEam=%s -x INC=\'%s\' %s %s\n"%(nThreads*nNode,'${MEAM_library_DIR}', SCRPT_DIR,var,script)
+			print >> someFile, "time mpirun --oversubscribe -np %s -x Buffer=0.0 -x PathEam=%s -x INC=\'%s\' %s %s >> time.txt\n"%(nThreads*nNode,'${MEAM_library_DIR}', SCRPT_DIR,var,script)
 			
 	someFile.close()										  
 
@@ -174,7 +174,7 @@ if __name__ == '__main__':
         makeOAR( path, 1, nThreads, durtn) # --- make oar script
         os.system( 'chmod +x oarScript.sh; mv oarScript.sh %s' % ( writPath) ) # --- create folder & mv oar scrip & cp executable
         jobname0 = jobname.split('/')[0] #--- remove slash
-        os.system( 'time sbatch --partition=%s --mem=%s --time=%s --job-name %s.%s --output %s.%s.out --error %s.%s.err \
+        os.system( 'sbatch --partition=%s --mem=%s --time=%s --job-name %s.%s --output %s.%s.out --error %s.%s.err \
                         --chdir %s -c %s -n %s %s/oarScript.sh >> jobID.txt'\
                        % ( partition, mem, durtn, jobname0, counter, jobname0, counter, jobname0, counter \
                            , writPath, nThreads, nNode, writPath ) ) # --- runs oarScript.sh! 
