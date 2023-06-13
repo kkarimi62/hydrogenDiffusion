@@ -16,7 +16,7 @@ def makeOAR( EXEC_DIR, node, core, time ):
 			print >> someFile, "python3 %s %s\n"%(script, var)
 		elif execc == 'kmc':
 #			print >> someFile, "time mpiexec %s %s\n"%(script, var)
-			print >> someFile, "time mpirun --oversubscribe -np %s -x Buffer=0.0 -x PathEam=%s -x INC=\'%s\' %s %s >> time.txt\n"%(nThreads*nNode,'${MEAM_library_DIR}', SCRPT_DIR,var,script)
+			print >> someFile, "time mpirun --oversubscribe -np %s -x Buffer=0.0 -x PathEam=%s -x INC=\'%s\' %s %s\n"%(nThreads*nNode,'${MEAM_library_DIR}', SCRPT_DIR,var,script)
 			
 	someFile.close()										  
 
