@@ -25,7 +25,7 @@ if __name__ == '__main__':
     import os
     import numpy as np
 
-    nruns	 = range(8)
+    nruns	 = range(1) #8)
     #
     nThreads = 16 #8
     nNode	 = 1
@@ -33,7 +33,7 @@ if __name__ == '__main__':
     jobname  = {
                 3:'hydrogenDiffusionInAlMultipleTemp/Temp1000K', 
                 4:'mitStuff2nd', 
-                5:'pureHydrogenDiffusionLowDensity3rd', #'pureHydrogenDiffusion_md',#'',
+                5:'hydrogenDiffusionDislocated', #'pureHydrogenDiffusion_md',#'',
                 6:'hydrogenDiffusionInAlBigMultipleTemps10H/temp0', #'hydrogenFree',
                }[5]
     sourcePath = os.getcwd() +\
@@ -133,10 +133,10 @@ if __name__ == '__main__':
                 6:[5,'p3','p5',1.0], #--- minimize, kart input, kart.sh to bash shell ,invoke kart
 #					7:['p21',51,'p3','p5',1.0], #--- dislocate, minimize, kart input, kart.sh to bash shell ,invoke kart
                 7:[5,'p6',51,'p3','p5',1.0], #--- minimize, add H, minimize,kart input, kart.sh to bash shell ,invoke kart
-#                8:['p2',51,'p6',51,'p3','p5',1.0], #--- dislocate, minimize,add H, minimize, kart input, kart.sh to bash shell ,invoke kart
                 9:['p7','p3','p5',1.0], #--- create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
 #                82:[5,'p6',51,72], #--- minimize,add H, minimize, thermalize
                 81:[5,'p6',51,'p3','p5',1.0], #--- minimize,add H, minimize, kart input, kart.sh to bash shell ,invoke kart
+                91:['p2',51,'p6',51,'p3','p5',1.0], #--- dislocate, minimize,add H, minimize, kart input, kart.sh to bash shell ,invoke kart
               }[ 81 ]
     Pipeline = list(map(lambda x:LmpScript[x],indices))
 #	Variables = list(map(lambda x:Variable[x], indices))
