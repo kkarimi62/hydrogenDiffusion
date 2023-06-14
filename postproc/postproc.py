@@ -28,13 +28,13 @@ if __name__ == '__main__':
     jobname  = {
                 '3':'NiNatom16KTemp1400K', 
                 '4':'CantorNatom16KTemp1400KEnsemble8', 
-                '5':'pureHydrogenDiffusion4th', 
+                '5':'pureHydrogenDiffusionLowDensity', 
                 }['5']
     DeleteExistingFolder = True
     readPath = os.getcwd() + {
                                 '3':'/../simulations/NiNatom16KTemp1400K',
                                 '4':'/../simulations/CantorNatom16KTemp1000KEnsemble8',
-                                '5':'/../simulations/pureHydrogenDiffusion4th',
+                                '5':'/../simulations/pureHydrogenDiffusionLowDensity',
                             }['5'] #--- source
     EXEC_DIR = '.'     #--- path for executable file
     durtn = '23:59:59'
