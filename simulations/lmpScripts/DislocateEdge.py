@@ -105,18 +105,18 @@ if method == '5':
     epsilon = -0.5 / (m+1)
     os.system('atomsk Al_unitcell.cfg -duplicate %s %s %s -deform X %s 0.0 top.xsf'%(var2,var1,k,epsilon))
     os.system('atomsk --merge Y 2 bottom.xsf top.xsf data.cfg') 
-#if method == '6':
-#    radius = 5.0
-#    os.system('atomsk Al_supercell.cfg -disloc loop  0.501*box 0.501*box 0.501*box Y %s %s 0.0 0.0 0.33 data.cfg'%(radius,bmag))
+if method == '6':
+    radius = 5.0
+    os.system('atomsk Al_supercell.cfg -disloc loop  0.501*box 0.501*box 0.501*box Y %s %s 0.0 0.0 0.33 data.cfg'%(radius,bmag))
 #    os.system('atomsk Al_supercell.cfg -dislocation loop  0.5*box 0.5*box 0.5*box Y %s 0.0 -%s 0.0 0.33 data.cfg'%(radius,bmag))
 #    os.system('atomsk Al_supercell.cfg -select in cylinder Y 0.5*box 0.5*box %s -select rm below 13.2 Y -select rm above 15.5 Y -remove-atoms select data.cfg'%radius)
 #    os.system('atomsk Al_supercell.xsf -dislocation loop 0.5*box 0.5*box 0.5*box Y 7 0 0 2.336 0.33 data.cfg')
 #    os.system('atomsk Al_supercell.xsf \
-#-select in cylinder Y 0.5*box 0.5*box 20 \
-#-select rm below 50.0 Y \
-#-select rm above 52.336 Y \
-#-remove-atoms select \
-#data.cfg')
+# -select in cylinder Y 0.5*box 0.5*box 20 \
+# -select rm below 50.0 Y \
+# -select rm above 52.336 Y \
+# -remove-atoms select \
+# data.cfg')
 
 os.system('atomsk data.cfg -center com final.cfg')
 os.system('atomsk final.cfg lmp')
