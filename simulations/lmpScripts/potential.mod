@@ -30,7 +30,7 @@ pair_coeff * * ${PathEam}/library_AlH.meam Al H ${PathEam}/parameters_AlH.meam A
 
 #--- kart settings
 neighbor        0.0  bin # multi
-neigh_modify    check no one 50 page 550 #binsize 0.1
+#neigh_modify    check no one 50 page 550 #binsize 0.1
 
 
 # Setup minimization style
