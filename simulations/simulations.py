@@ -117,7 +117,7 @@ if __name__ == '__main__':
                 'p3':' data_minimized.txt init_xyz.conf %s 1000.0'%(os.getcwd()+'/lmpScripts'),
                 'p4':' data_minimized.txt data_minimized.txt %s 1'%(os.getcwd()+'/lmpScripts'),
                 'p5':' ',
-                'p6':' %s data_minimized.txt data_minimized.txt 1'%(os.getcwd()+'/../../HeaDef/postprocess'),
+                'p6':' %s data_minimized.txt data_minimized.txt 10'%(os.getcwd()+'/../../HeaDef/postprocess'),
                 'p7':' sortieproc.0 0 Topo_ignore',
                  1.0:'-x DataFile=data_minimized.txt',
                  2.0:'-x DataFile=data_minimized.txt',
@@ -144,7 +144,7 @@ if __name__ == '__main__':
 #        print('EXEC=',EXEC)
     #
     EXEC_lmp = ['lmp_mpi','lmp_serial','_lmp'][0]
-    durtn = ['23:59:59','00:29:59','167:59:59'][ 1 ]
+    durtn = ['23:59:59','00:59:59','167:59:59'][ 1 ]
     mem = '12gb'
     partition = ['gpu-v100','parallel','cpu2019','single'][2]
     #--
