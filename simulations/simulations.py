@@ -27,7 +27,7 @@ if __name__ == '__main__':
 
     nruns	 = range(8)
     #
-    nThreads = 16 #8
+    nThreads = 8 #16 #8
     nNode	 = 1
     #
     jobname  = {
@@ -144,7 +144,7 @@ if __name__ == '__main__':
 #        print('EXEC=',EXEC)
     #
     EXEC_lmp = ['lmp_mpi','lmp_serial','_lmp'][0]
-    durtn = ['23:59:59','00:59:59','167:59:59'][ 1 ]
+    durtn = ['23:59:59','00:04:59','167:59:59'][ 1 ]
     mem = '12gb'
     partition = ['gpu-v100','parallel','cpu2019','single'][2]
     #--
