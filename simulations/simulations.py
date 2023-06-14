@@ -25,7 +25,7 @@ if __name__ == '__main__':
     import os
     import numpy as np
 
-    nruns	 = range(1) #8)
+    nruns	 = range(8)
     #
     nThreads = 16 #8
     nNode	 = 1
@@ -33,7 +33,7 @@ if __name__ == '__main__':
     jobname  = {
                 3:'hydrogenDiffusionInAlMultipleTemp/Temp1000K', 
                 4:'mitStuff2nd', 
-                5:'hydrogenDiffusionDislocated', #'pureHydrogenDiffusion_md',#'',
+                5:'hydrogenDiffusionExtendedDislocation', #'pureHydrogenDiffusion_md',#'',
                 6:'hydrogenDiffusionInAlBigMultipleTemps10H/temp0', #'hydrogenFree',
                }[5]
     sourcePath = os.getcwd() +\
