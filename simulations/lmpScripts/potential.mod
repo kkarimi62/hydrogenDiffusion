@@ -23,15 +23,14 @@ pair_coeff * * ${PathEam}/library_AlH.meam Al H ${PathEam}/parameters_AlH.meam A
 
 # Setup neighbor  style
 #neighbor 2.0 bin
-#neigh_modify delay 10 every 1 check yes
+#neigh_modify delay 10 
 
 #neighbor 1.0 nsq
-#neigh_modify once no every 1 delay 0 check yes
 
 
 #--- kart settings
 neighbor        0.0  bin # multi
-neigh_modify    delay 0 every 1 check no one 50 page 550 #binsize 0.1
+neigh_modify    check no one 50 page 550 #binsize 0.1
 
 
 # Setup minimization style
