@@ -3,6 +3,8 @@
 #--- set natom and box size (output of KartInput.py)
 set natom=`cat .natom.txt`
 set lx=`cat .lx.txt`
+set ly=`cat .ly.txt`
+set lz=`cat .lz.txt`
 set temp=`cat .temp.txt`
 
 #--- set directories for lmp scripts
@@ -21,7 +23,7 @@ setenv NBRE_KMC_STEPS                100 #0       # The max number of KMC steps 
 setenv TEMPERATURE                   ${temp} #500.0    # The simulated temperature in kelvin
 
 setenv NUMBER_ATOMS                   ${natom} #864     # The total number of atoms 
-setenv SIMULATION_BOX                ${lx} #21.47   # The size of the simulation box (x, y and z)
+setenv SIMULATION_BOX                ${lx} ${ly} ${lz} #21.47   # The size of the simulation box (x, y and z)
 setenv NSPECIES                       2 #3 #5     # The number of different atom types (default: 2)
 setenv ATOMIC_SYMBOLS					'Al:inactive H:active' #'Ni Co Cr Fe Mn' #"Ni Co Cr" #'Ni Co Cr Fe Mn' #"Ni Co Cr"
 #setenv NTRAVAILLEUR                     3     # The number of cores associated with forces calculations per ARTnouveau search (default:1)
