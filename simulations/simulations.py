@@ -33,7 +33,7 @@ if __name__ == '__main__':
     jobname  = {
                 3:'hydrogenDiffusionInAlMultipleTemp/Temp1000K', 
                 4:'mitStuff2nd', 
-                5:'hydrogenDiffusionExtendedDislocation4th', #'pureHydrogenDiffusionLowDensity4th',#'', #'hydrogenDiffusionLoop',#'hydrogenDiffusionExtendedDislocation',#'',
+                5:'pureHydrogenDiffusionLowDensity5th',#'hydrogenDiffusionExtendedDislocation4th', #'',#'', #'hydrogenDiffusionLoop',#'hydrogenDiffusionExtendedDislocation',#'',
                 6:'hydrogenDiffusionInAlBigMultipleTemps10H/temp0', #'hydrogenFree',
                }[5]
     sourcePath = os.getcwd() +\
@@ -137,17 +137,17 @@ if __name__ == '__main__':
                 7:[5,'p6',51,'p3','p5',1.0], #--- minimize, add H, minimize,kart input, kart.sh to bash shell ,invoke kart
                 9:['p7','p3','p5',1.0], #--- create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
 #                82:[5,'p6',51,72], #--- minimize,add H, minimize, thermalize
-                81:[5,'p6',51,'p3','p5',1.0], #--- minimize,add H, minimize, kart input, kart.sh to bash shell ,invoke kart
                 100:['p22',51,'p6',51,'p3','p5',1.0], #--- loop, minimize,add H, minimize, kart input, kart.sh to bash shell ,invoke kart
                 91:['p2',51,'p6',51,'p3','p5',1.0], #--- dislocate, minimize,add H, minimize, kart input, kart.sh to bash shell ,invoke kart
-              }[ 91 ]
+                81:[5,'p6',51,'p3','p5',1.0], #--- minimize,add H, minimize, kart input, kart.sh to bash shell ,invoke kart
+              }[ 81 ]
     Pipeline = list(map(lambda x:LmpScript[x],indices))
 #	Variables = list(map(lambda x:Variable[x], indices))
     EXEC = list(map(lambda x:np.array(['lmp','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
 #        print('EXEC=',EXEC)
     #
     EXEC_lmp = ['lmp_mpi','lmp_serial','_lmp'][0]
-    durtn = ['23:59:59','00:59:59','167:59:59'][ 2 ]
+    durtn = ['23:59:59','00:59:59','167:59:59'][ 0 ]
     mem = '12gb'
     partition = ['gpu-v100','parallel','cpu2019','single'][2]
     #--
