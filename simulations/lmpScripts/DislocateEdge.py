@@ -84,8 +84,8 @@ var2=m+1
 bmag = a / 2.0 ** 0.5
 os.system('rm *.cfg *.lmp *.xyz *.xsf')
 #--- Crystallographic orientation of the system
-#os.system('atomsk --create fcc %s Al orient 110 -111 1-12 Al_unitcell.cfg'%a)
-os.system('atomsk --create fcc %s Al orient 11-2 111 -110 Al_unitcell.cfg'%a)
+os.system('atomsk --create fcc %s Al orient 110 -111 1-12 Al_unitcell.cfg'%a) #--- atomask xample
+#os.system('atomsk --create fcc %s Al orient 11-2 111 -110 Al_unitcell.cfg'%a)
 #os.system('atomsk --create fcc 4.046 Al orient [11-2] [111] [-110] -duplicate 28 14 30 Al_supercell.xsf')
 os.system('atomsk Al_unitcell.cfg -duplicate %s %s %s Al_supercell.cfg'%(m,n,k))
 
@@ -100,7 +100,7 @@ if method == '3':
     os.system('atomsk Al_supercell.cfg -dislocation 0.51*box 0.51*box edge_add Z Y %s 0.33 data.cfg'%(bmag))
 #---  Remove a half-plane below the glide plane
 if method == '4':
-    os.system('atomsk Al_supercell.cfg -dislocation 0.51*box 0.51*box edge_rm Z Y %s 0.33 data.cfg'%(bmag))
+    os.system('atomsk Al_supercell.cfg -dislocation 0.499*box 0.499*box edge_rm Z Y %s 0.33 data.cfg'%(bmag))
 #--- Construct a dislocation by superimposing two crystals
 if method == '5':
     epsilon = 0.5 / m
