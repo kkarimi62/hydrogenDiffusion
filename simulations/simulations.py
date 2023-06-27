@@ -33,7 +33,7 @@ if __name__ == '__main__':
     jobname  = {
                 3:'hydrogenDiffusionInAlMultipleTemp/Temp1000K', 
                 4:'mitStuff2nd', 
-                5:'hydrogenDiffusionLoop',#'hydrogenDiffusionExtendedDislocation5th', #'',#'hydrogenDiffusionExtendedDislocation',#'',
+                5:'hydrogenDiffusionLoop2nd',#'hydrogenDiffusionExtendedDislocation5th', #'',#'hydrogenDiffusionExtendedDislocation',#'',
                 6:'hydrogenDiffusionInAlBigMultipleTemps10H/temp0', #'hydrogenFree',
                }[5]
     sourcePath = os.getcwd() +\
@@ -78,6 +78,7 @@ if __name__ == '__main__':
                     4:'in.vsgc', 
                     5:'in.minimization', 
                     51:'in.minimization', 
+                    52:'in.minimization_aniso', 
                     6:'in.shearDispTemp', 
                     8:'in.shearLoadTemp',
                     9:'in.elastic',
@@ -88,6 +89,7 @@ if __name__ == '__main__':
                     'p2':'DislocateEdge.py',
                     'p21':'DislocateEdge.py',
                     'p22':'DislocateEdge.py',
+                    'p23':'frankLoop.py',
                     'p3':'kartInput.py',
                     'p4':'takeOneOut.py',
                     'p5':'bash-to-csh.py',
@@ -103,7 +105,8 @@ if __name__ == '__main__':
                 6:' -var buff 0.0 -var T 300 -var P 0.0 -var gammaxy 1.0 -var gammadot 1.0e-04 -var nthermo 10000 -var ndump 1000 -var ParseData 1 -var DataFile Equilibrated_300.dat -var DumpFile dumpSheared.xyz',
                 4:' -var T 600.0 -var t_sw 20.0 -var DataFile Equilibrated_600.dat -var nevery 100 -var ParseData 1 -var WriteData swapped_600.dat', 
                 5:' -var buff 0.0 -var buffy 0.0 -var nevery 1000 -var ParseData 0 -var natoms 500 -var ntype 2 -var cutoff 3.54  -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt -var seed0 %s -var seed1 %s -var seed2 %s -var seed3 %s'%tuple(np.random.randint(1001,9999,size=4)), 
-                51:' -var buff 0.0 -var buffy 0.0 -var pxx 0.0 -var pyy 10000.0 -var pzz 0.0 -var nevery 1000 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt', 
+                51:' -var buff 0.0 -var buffy 0.0 -var nevery 1000 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt', 
+                52:' -var buff 0.0 -var buffy 0.0 -var pyy 100000.0 -var nevery 1000 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt', 
                 7:' -var buff 0.0 -var T 1500.0 -var P 0.0 -var nevery 100 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData Equilibrated_300.dat',
                 71:' -var buff 0.0 -var T 0.1 -var P 0.0 -var nevery 100 -var ParseData 1 -var DataFile swapped_600.dat -var DumpFile dumpThermalized2.xyz -var WriteData Equilibrated_0.dat',
                 72:' -var buff 0.0 -var buffy 0.0 -var Tinit 1000 -var T 1000.0 -var seed %s -var nevery 100 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData Equilibrated.dat'%np.random.randint(1001,9999),
@@ -115,7 +118,7 @@ if __name__ == '__main__':
                 'p1':' swapped_600.dat ElasticConst.txt DumpFileModu.xyz %s'%(os.getcwd()+'/../postprocess'),
                 'p2':' %s 3.54 34.0 18.0 8.0  data_minimized.txt 4 2 1.0 0.0'%(os.getcwd()+'/lmpScripts'),
                 'p21':' %s 3.54 52.0 18.0 26.0 data_init.txt 2 2 1.0 0.0'%(os.getcwd()+'/lmpScripts'),
-                'p22':' %s 3.54 30.0 14.0 13.0 data_minimized.txt 6 2 1.0 0.0'%(os.getcwd()+'/lmpScripts'),
+                'p23':' %s 3.54 30.0 14.0 13.0 data_minimized.txt 6 5.0 2 1.0 0.0'%(os.getcwd()+'/lmpScripts'),
                 'p3':' data_minimized.txt init_xyz.conf %s 1000.0'%(os.getcwd()+'/lmpScripts'),
                 'p4':' data_minimized.txt data_minimized.txt %s 1'%(os.getcwd()+'/lmpScripts'),
                 'p5':' ',
@@ -139,7 +142,7 @@ if __name__ == '__main__':
 #                82:[5,'p6',51,72], #--- minimize,add H, minimize, thermalize
                 81:[5,'p6',51,'p3','p5',1.0], #--- minimize,add H, minimize, kart input, kart.sh to bash shell ,invoke kart
                 91:['p2',51,'p6',51,'p3','p5',1.0], #--- dislocate, minimize,add H, minimize, kart input, kart.sh to bash shell ,invoke kart
-                100:['p22',51,'p6',51,'p3','p5',1.0], #--- loop, minimize,add H, minimize, kart input, kart.sh to bash shell ,invoke kart
+                100:['p23',51, 52], #, 'p6',51,'p3','p5',1.0], #--- loop, minimize, pressurize, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
               }[ 100 ]
     Pipeline = list(map(lambda x:LmpScript[x],indices))
 #	Variables = list(map(lambda x:Variable[x], indices))
