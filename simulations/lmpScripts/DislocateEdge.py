@@ -61,20 +61,16 @@ def WriteDataFile(AtomskOutpt, mass, ratios, LmpInput):
 
 pathlib = sys.argv[1]
 sys.path.append(pathlib)
-#import LammpsPostProcess as lp
 import LammpsPostProcess2nd as lp
 
 
 #--- modify atom types and associated masses 
 ntype = int(sys.argv[8])
-mass=dict(zip(range(1,ntype+1),np.random.random(size=ntype))) #{1:58.693, # Ni
+mass=dict(zip(range(1,ntype+1),np.random.random(size=ntype)))
 ratio = np.array(list(map(float,sys.argv[9:])))
-#        2:58.933195, # Co
-#        3:51.9961 #Cr,
-#       } 
 #
-a = float(sys.argv[2]) #3.52
-lx, ly, lz = float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5]) #40.0, 20.0, 40.0 Angstrom
+a = float(sys.argv[2])
+lx, ly, lz = float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5])
 method = sys.argv[7]
 m,n,k = int(lx/a*4.0**(1.0/3)), int(ly/a), int(lz/a)
 #
@@ -84,7 +80,7 @@ var2=m+1
 bmag = a / 2.0 ** 0.5
 os.system('rm *.cfg *.lmp *.xyz *.xsf')
 #--- Crystallographic orientation of the system
-os.system('atomsk --create fcc %s Al orient 110 -111 1-12 Al_unitcell.cfg'%a) #--- atomask xample
+os.system('atomsk --create fcc %s Al orient 110 -111 1-12 Al_unitcell.cfg'%a) #--- atomask example
 #os.system('atomsk --create fcc %s Al orient 11-2 111 -110 Al_unitcell.cfg'%a)
 #os.system('atomsk --create fcc 4.046 Al orient [11-2] [111] [-110] -duplicate 28 14 30 Al_supercell.xsf')
 os.system('atomsk Al_unitcell.cfg -duplicate %s %s %s Al_supercell.cfg'%(m,n,k))
@@ -109,17 +105,11 @@ if method == '5':
     os.system('atomsk Al_unitcell.cfg -duplicate %s %s %s -deform X %s 0.0 top.xsf'%(var2,var1,k,epsilon))
     os.system('atomsk --merge Y 2 bottom.xsf top.xsf data.cfg') 
 if method == '6':
-    radius = 5.0
+    radius = 5.0 * b
 #    os.system('atomsk Al_supercell.cfg -disloc loop  0.501*box 0.501*box 0.501*box Y %s %s 0.0 0.0 0.33 data.cfg'%(radius,bmag)) #--- glide loop
 #    os.system('atomsk Al_supercell.cfg -dislocation loop  0.5*box 0.5*box 0.5*box Y %s 0.0 -%s 0.0 0.33 data.cfg'%(radius,bmag)) #--- frank loop
-#    os.system('atomsk Al_supercell.cfg -select in cylinder Y 0.5*box 0.5*box %s -select rm below 13.2 Y -select rm above 15.5 Y -remove-atoms select data.cfg'%radius)
+   os.system('atomsk Al_supercell.cfg -select in cylinder Y 0.5*box 0.5*box %s -select rm below 13.2 Y -select rm above 15.5 Y -remove-atoms select data.cfg'%radius)
 #    os.system('atomsk Al_supercell.xsf -dislocation loop 0.5*box 0.5*box 0.5*box Y 7 0 0 2.336 0.33 data.cfg')
-#    os.system('atomsk Al_supercell.xsf \
-# -select in cylinder Y 0.5*box 0.5*box 20 \
-# -select rm below 50.0 Y \
-# -select rm above 52.336 Y \
-# -remove-atoms select \
-# data.cfg')
 
 os.system('atomsk data.cfg -center com final.cfg')
 os.system('atomsk final.cfg lmp')
