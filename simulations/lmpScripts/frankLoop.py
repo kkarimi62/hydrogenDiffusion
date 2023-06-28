@@ -118,7 +118,8 @@ if method == '6':
     filtr = np.all([atoms.y >= ymin, atoms.y < ymax,
 		    (atoms.x-rc[0])**2+(atoms.z-rc[2])**2 < radius ** 2],axis=0)
     #--- print
-    atoms = lp.Atoms( **atoms[~filtr].to_dict(orient='series') )
+    atoms = lp.Atoms( **atoms[~filtr].to_dict(orient='series') )    
+    atoms.id = range(1,len(atoms.id)+1)
     lp.WriteDataFile(atoms,box,{1:1.0}).Write('final.lmp')
 #    os.system('atomsk Al_supercell.cfg -select in cylinder Y 0.5*box 0.5*box %s -select rm below %s Y -select rm above %s Y -remove-atoms select data.cfg'%(radius,ymin,ymax))
 #    os.system('atomsk Al_supercell.cfg -select in cylinder Y 0.5*box 0.5*box %s -select rm below 0.45*box Y -select rm above 0.55*box Y -remove-atoms select data.cfg'%(radius))
