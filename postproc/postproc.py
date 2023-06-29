@@ -34,7 +34,7 @@ if __name__ == '__main__':
     readPath = os.getcwd() + {
                                 '3':'/../simulations/NiNatom16KTemp1400K',
                                 '4':'/../simulations/CantorNatom16KTemp1000KEnsemble8',
-                                '5':'/../simulations/hydrogenDiffusionExtendedDislocation5th',
+                                '5':'/../simulations/pureHydrogenDiffusionLowDensity12th',
                             }['5'] #--- source
     EXEC_DIR = '.'     #--- path for executable file
     durtn = '23:59:59'
