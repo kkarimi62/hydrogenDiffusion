@@ -38,8 +38,8 @@ if __name__ == '__main__':
                             }['5'] #--- source
     EXEC_DIR = '.'     #--- path for executable file
     durtn = '23:59:59'
-    mem = '8gb'
-    partition = ['parallel','cpu2019','bigmem','single'][3] 
+    mem = '64gb'
+    partition = ['parallel','cpu2019','bigmem','single'][2] 
     argv = "%s"%(readPath) #--- don't change! 
     PYFILdic = { 
         0:'postproc.ipynb',
