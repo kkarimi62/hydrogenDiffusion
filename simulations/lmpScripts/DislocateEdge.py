@@ -108,7 +108,7 @@ if method == '6':
     radius = 5.0 * b
 #    os.system('atomsk Al_supercell.cfg -disloc loop  0.501*box 0.501*box 0.501*box Y %s %s 0.0 0.0 0.33 data.cfg'%(radius,bmag)) #--- glide loop
 #    os.system('atomsk Al_supercell.cfg -dislocation loop  0.5*box 0.5*box 0.5*box Y %s 0.0 -%s 0.0 0.33 data.cfg'%(radius,bmag)) #--- frank loop
-   os.system('atomsk Al_supercell.cfg -select in cylinder Y 0.5*box 0.5*box %s -select rm below 13.2 Y -select rm above 15.5 Y -remove-atoms select data.cfg'%radius)
+    os.system('atomsk Al_supercell.cfg -select in cylinder Y 0.5*box 0.5*box %s -select rm below 13.2 Y -select rm above 15.5 Y -remove-atoms select data.cfg'%radius)
 #    os.system('atomsk Al_supercell.xsf -dislocation loop 0.5*box 0.5*box 0.5*box Y 7 0 0 2.336 0.33 data.cfg')
 
 os.system('atomsk data.cfg -center com final.cfg')
