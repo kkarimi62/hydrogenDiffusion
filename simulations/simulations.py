@@ -33,7 +33,7 @@ if __name__ == '__main__':
     jobname  = {
                 3:'hydrogenDiffusionInAlMultipleTemp/Temp1000K', 
                 4:'mitStuff2nd', 
-                5:'singleHydrogenDiffusionExtendedDislocation6th',#'multiHydrogenDiffusionLong',#'hydrogenDiffusionLoop4th',
+                5:'singleHydrogenDiffusionExtendedDislocation',#'multiHydrogenDiffusionLong',#'hydrogenDiffusionLoop4th',
                 6:'hydrogenDiffusionInAlBigMultipleTemps10H/temp0', #'hydrogenFree',
                }[5]
     sourcePath = os.getcwd() +\
