@@ -156,7 +156,7 @@ if __name__ == '__main__':
                     }['mit']
         durtn = ['23:59:59','00:09:59','167:59:59'][ 2 ]
         mem = '12gb'
-        partition = ['INTEL_PHI','INTEL_CASCADE'][0]
+        partition = ['INTEL_PHI','INTEL_CASCADE','INTEL_SKYLAKE','INTEL_IVY','INTEL_HASWELL'][1]
         #--
         DeleteExistingFolder = True
         if DeleteExistingFolder:
