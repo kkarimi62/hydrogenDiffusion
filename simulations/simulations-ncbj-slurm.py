@@ -129,8 +129,8 @@ if __name__ == '__main__':
                     'p6':' %s data_minimized.txt data_minimized.txt 1'%(os.getcwd()+'/lmpScripts'),
                     'p7':' sortieproc.0 0 Topo_ignore',
                     'p8':' %s 3.52 25.0 40.0 40.0 data_init.txt 5 1 2 3 4 5 0.25 0.25 0.25 0.0 0.25'%(py_lib_path),
-                     1.0:'-x DataFile=data_minimized.txt',
-                     2.0:'-x DataFile=data_minimized.txt',
+                     1.0:'DataFile=data_minimized.txt',
+                     2.0:'DataFile=data_minimized.txt',
                     } 
             return Variable
         #--- different scripts in a pipeline
