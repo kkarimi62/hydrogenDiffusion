@@ -14,7 +14,9 @@ def makeOAR( EXEC_DIR, node, core, time ):
         elif execc == 'py':
             print >> someFile, "python3 %s %s\n"%(script, var)
         elif execc == 'kmc':
-            print >> someFile, "mpirun --oversubscribe -np %s -x Buffer=3.5 -x PathEam=%s -x INC=\'%s\' %s %s\n"%(nThreads*nNode,'${MEAM_library_DIR}', SCRPT_DIR,var,script)
+            print >> someFile, "export PathEam=${MEAM_library_DIR}\nexport INC=%s\nexport %s\n"%(SCRPT_DIR,var)
+            print >> someFile, "source %s \n"%('kmc_bash.sh')
+            print >> someFile, "time srun %s\n"%(kmc_exec)
 
     someFile.close()										  
 
@@ -55,11 +57,11 @@ if __name__ == '__main__':
                         7:['compressed_model.pb','frozen_model.pb','init.lmp'], 
                      }[0] #--- to be copied from the above directory. set it to '0' if no file
         #
-        EXEC_DIR = {0:'~/Project/git/lammps2nd/lammps/src', #--- path for executable file
+        EXEC_DIR = {0:'~/Project/git/lammps-27May2021/src', #--- path for executable file
                     1:'~/Project/opt/anaconda3/envs/deepmd3rd/bin' #--- path for executable file: deep potential
                     }[0]
         #
-        MEAM_library_DIR={0:'/home/kamran.karimi1/Project/git/lammps2nd/lammps/potentials',
+        MEAM_library_DIR={0:'~/Project/git/lammps-27May2021/potentials',
                           1:'.'
                         }[0]
         home_dir = os.path.expanduser('~')
@@ -106,7 +108,7 @@ if __name__ == '__main__':
                     0:' -var natoms 100000 -var cutoff 3.52 -var ParseData 0 -var ntype 3 -var DumpFile dumpInit.xyz -var WriteData data_init.txt',
                     6:' -var buff 0.0 -var T 300 -var P 0.0 -var gammaxy 1.0 -var gammadot 1.0e-04 -var nthermo 10000 -var ndump 1000 -var ParseData 1 -var DataFile Equilibrated_300.dat -var DumpFile dumpSheared.xyz',
                     4:' -var buff 0.0 -var buffy 5.0 -var T 600.0 -var t_sw 20.0 -var DataFile data_minimized.dat -var nevery 100 -var ParseData 1 -var WriteData swapped.dat -var DumpFile swapped.dump', 
-                    5:' -var buff 0.0 -var nevery 1000 -var ParseData 0 -var natoms 500 -var ntype 2 -var cutoff 3.54  -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt -var seed0 %s -var seed1 %s -var seed2 %s -var seed3 %s'%tuple(np.random.randint(1001,9999,size=4)), 
+                    5:' -var buff 0.0 -var buffy 0.0 -var nevery 1000 -var ParseData 0 -var natoms 500 -var ntype 2 -var cutoff 3.54  -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt -var seed0 %s -var seed1 %s -var seed2 %s -var seed3 %s'%tuple(np.random.randint(1001,9999,size=4)), 
                     51:' -var buff 0.0 -var buffy 0.0 -var nevery 1000 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt', 
                     7:' -var buff 0.0 -var T 1500.0 -var P 0.0 -var nevery 100 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData equilibrated.dat',
                     71:' -var buff 0.0 -var T 0.1 -var P 0.0 -var nevery 100 -var ParseData 1 -var DataFile swapped_600.dat -var DumpFile dumpThermalized2.xyz -var WriteData Equilibrated_0.dat',

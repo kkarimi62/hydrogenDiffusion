@@ -39,9 +39,9 @@ def WriteDataFile(AtomskOutpt,outpt):
     wrap = lp.Wrap( atoms, box )
     filtr = wrap.isInside()
 
-    sfile=open('ovito.xyz','w')
-    utl.PrintOvito(pd.DataFrame(df[filtr]), sfile, 'junk', attr_list=['type','x', 'y', 'z','id'])
-    sfile.close()
+#     sfile=open('ovito.xyz','w')
+#     utl.PrintOvito(pd.DataFrame(df[filtr]), sfile, 'junk', attr_list=['type','x', 'y', 'z','id'])
+#     sfile.close()
 
     
 
@@ -98,7 +98,7 @@ natom = int(sys.argv[4])
 
 sys.path.append(lib_path)
 import LammpsPostProcess2nd as lp
-import utility as utl 
+#import utility as utl 
 
 os.system('atomsk %s -add-atom H random %s final.cfg'%(inputt,natom))
 os.system('atomsk final.cfg lmp')
