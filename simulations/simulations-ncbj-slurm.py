@@ -60,6 +60,7 @@ if __name__ == '__main__':
         EXEC_DIR = {0:'~/Project/git/lammps-27May2021/src', #--- path for executable file
                     1:'~/Project/opt/anaconda3/envs/deepmd3rd/bin' #--- path for executable file: deep potential
                     }[0]
+        kmc_exec = '/mnt/home/kkarimi/Project/git/kart-master/src/KMCART_exec'
         #
         MEAM_library_DIR={0:'~/Project/git/lammps-27May2021/potentials',
                           1:'.'
