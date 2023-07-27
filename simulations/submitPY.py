@@ -5,7 +5,7 @@ if __name__ == '__main__':
     #---
 #     lnums = [ 36, 108  ]
 #     string=open('simulations.py').readlines() #--- python script
-    lnums = [ 39, 129 ]
+    lnums = [ 36, 126 ]
     string=open('simulations-ncbj-slurm.py').readlines() #--- python script
     #---
 #     Temps=			{
