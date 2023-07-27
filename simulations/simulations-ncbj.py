@@ -13,7 +13,7 @@ def makeOAR( EXEC_DIR, node, core, time ):
             elif execc == 'py':
                 print >> someFile, "python3 --version\npython3 %s %s\n"%(script, var)
             elif execc == 'kmc':
-                print >> someFile, "export PathEam=${MEAM_library_DIR}\nexport INC=%s\nexport %s\n"%(SCRPT_DIR,var)
+                print >> someFile, "export PathEam=${MEAM_library_DIR}\nexport INC=%s\nexport Buffer=0.0\nexport %s\n"%(SCRPT_DIR,var)
                 print >> someFile, "source %s \n"%('kmc_bash.sh')
                 print >> someFile, "srun %s\n"%(kmc_exec)
 
