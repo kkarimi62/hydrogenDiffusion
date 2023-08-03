@@ -27,12 +27,12 @@ if __name__ == '__main__':
     nNode    = 1
     nThreads = 1
     jobname  = {
-                '1':'multiHydrogenDiffusionLong/rho/rho0', 
-                }['1']
+                '4':'multiHydrogenDiffusionLong/rho/rho0', 
+                }['4']
     DeleteExistingFolder = True
     readPath = os.getcwd() + {
-                                '1':'/../simulations/multiHydrogenDiffusionLong/rho/rho0',
-                            }['1'] #--- source
+                                '4':'/../simulations/multiHydrogenDiffusionLong/rho/rho0',
+                            }['4'] #--- source
     EXEC_DIR = '.'     #--- path for executable file
     durtn = '23:59:59'
     mem = '32gb'
