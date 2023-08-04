@@ -24,13 +24,13 @@ if __name__ == '__main__':
         import os
         import numpy as np
 
-        nruns	 = range(8)
+        nruns	 = range(1) #8)
         #
-        nThreads = 16
+        nThreads = 2 #16
         nNode	 = 1
         #
         jobname  = {
-                    5:'multiHydrogenDiffusionLong/rho/rho0',
+                    5:'multiHydrogenDislocated/rho/rho0', #'multiHydrogenDiffusionLong/rho/rho0',
                     4:'mitStuff', 
                    }[5]
         sourcePath = os.getcwd() +\
@@ -105,7 +105,7 @@ if __name__ == '__main__':
                     11:' ',
                     'p0':' swapped_600.dat 10.0 %s'%(os.getcwd()+'/../postprocess'),
                     'p1':' swapped_600.dat ElasticConst.txt DumpFileModu.xyz %s'%(os.getcwd()+'/../postprocess'),
-                    'p2':' %s 3.52 26.0 18.0 26.0 data_init.txt 4 2 1.0 0.0'%(os.getcwd()+'/lmpScripts'),
+                    'p2':' %s 3.52 26.0 18.0 26.0 data_minimized.txt 4 2 1.0 0.0'%(os.getcwd()+'/lmpScripts'),
                     'p3':' data_minimized.txt init_xyz.conf %s 1000.0'%(os.getcwd()+'/lmpScripts'),
                     'p4':' data_minimized.txt data_minimized.txt %s 1'%(os.getcwd()+'/lmpScripts'),
                     'p5':' ',
@@ -117,11 +117,11 @@ if __name__ == '__main__':
         #--- different scripts in a pipeline
         indices = {
                     0:[5,7,6], #--- minimize, thermalize, shear(disp. controlled)
-                    1:['p2','p6', 51, 72], #--- put a dislocation, add interstitial, minimize, thermalize
                     2:[11], #--- mit stuff
                     4:[5, 'p6',51],#,'p3','p5',1.0], #--- create lattice, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
                     81:[5,'p6',51,'p3','p5',1.0], #--- minimize,add H, minimize, kart input, kart.sh to bash shell ,invoke kart
-                  }[81]
+                    1:['p2','p6', 51],#, 'p3','p5',1.0], #--- put a dislocation, add interstitial, minimize, kart input, kart.sh to bash shell ,invoke kart
+                  }[1]
         Pipeline = list(map(lambda x:LmpScript[x],indices))
     #	Variables = list(map(lambda x:Variable[x], indices))
         EXEC = list(map(lambda x:np.array(['lmp_g++_openmpi','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
