@@ -128,9 +128,9 @@ if __name__ == '__main__':
     #        print('EXEC=',EXEC)
         #
         EXEC_lmp = ['lmp_g++_openmpi'][0]
-        durtn = ['95:59:59','00:14:59','167:59:59'][ 2 ]
+        durtn = ['95:59:59','00:14:59','167:59:59'][ 1 ]
         mem = '8gb'
-        partition = ['INTEL_PHI','INTEL_CASCADE','INTEL_SKYLAKE','INTEL_IVY','INTEL_HASWELL'][1]
+        partition = ['INTEL_PHI','INTEL_CASCADE','INTEL_SKYLAKE','INTEL_IVY','INTEL_HASWELL'][3]
         #--
         DeleteExistingFolder = True
         if DeleteExistingFolder:
