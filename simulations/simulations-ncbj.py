@@ -120,7 +120,7 @@ if __name__ == '__main__':
                     2:[11], #--- mit stuff
                     4:[5, 'p6',51],#,'p3','p5',1.0], #--- create lattice, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
                     81:[5,'p6',51,'p3','p5',1.0], #--- minimize,add H, minimize, kart input, kart.sh to bash shell ,invoke kart
-                    1:['p2','p6', 51],#, 'p3','p5',1.0], #--- put a dislocation, add interstitial, minimize, kart input, kart.sh to bash shell ,invoke kart
+                    1:['p2',51,'p6', 51],#, 'p3','p5',1.0], #--- put a dislocation, add interstitial, minimize, kart input, kart.sh to bash shell ,invoke kart
                   }[1]
         Pipeline = list(map(lambda x:LmpScript[x],indices))
     #	Variables = list(map(lambda x:Variable[x], indices))
