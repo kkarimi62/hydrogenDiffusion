@@ -24,9 +24,9 @@ if __name__ == '__main__':
         import os
         import numpy as np
 
-        nruns	 = range(1) #8)
+        nruns	 = range(8)
         #
-        nThreads = 2 #16
+        nThreads = 16
         nNode	 = 1
         #
         jobname  = {
@@ -120,7 +120,7 @@ if __name__ == '__main__':
                     2:[11], #--- mit stuff
                     4:[5, 'p6',51],#,'p3','p5',1.0], #--- create lattice, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
                     81:[5,'p6',51,'p3','p5',1.0], #--- minimize,add H, minimize, kart input, kart.sh to bash shell ,invoke kart
-                    1:['p2',51,'p6', 51],#, 'p3','p5',1.0], #--- put a dislocation, add interstitial, minimize, kart input, kart.sh to bash shell ,invoke kart
+                    1:['p2',51,'p6', 51, 'p3','p5',1.0], #--- put a dislocation, add interstitial, minimize, kart input, kart.sh to bash shell ,invoke kart
                   }[1]
         Pipeline = list(map(lambda x:LmpScript[x],indices))
     #	Variables = list(map(lambda x:Variable[x], indices))
@@ -128,7 +128,7 @@ if __name__ == '__main__':
     #        print('EXEC=',EXEC)
         #
         EXEC_lmp = ['lmp_g++_openmpi'][0]
-        durtn = ['95:59:59','00:14:59','167:59:59'][ 1 ]
+        durtn = ['95:59:59','00:14:59','167:59:59'][ 2 ]
         mem = '8gb'
         partition = ['INTEL_PHI','INTEL_CASCADE','INTEL_SKYLAKE','INTEL_IVY','INTEL_HASWELL'][3]
         #--
