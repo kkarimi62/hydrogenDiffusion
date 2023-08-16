@@ -3,10 +3,10 @@ if __name__ == '__main__':
     import os
     import numpy as np
     #---
-#     lnums = [ 36, 108  ]
-#     string=open('simulations.py').readlines() #--- python script
-    lnums = [ 33, 112 ]
-    string=open('simulations-ncbj.py').readlines() #--- python script
+    lnums = [ 36, 125  ]
+    string=open('simulations.py').readlines() #--- python script
+#    lnums = [ 33, 112 ]
+#    string=open('simulations-ncbj.py').readlines() #--- python script
     #---
 #     Temps=			{
 #                 0:400,
