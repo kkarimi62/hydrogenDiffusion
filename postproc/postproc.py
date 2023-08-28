@@ -28,7 +28,7 @@ if __name__ == '__main__':
     jobname  = {
                 '3':'NiNatom16KTemp1400K', 
                 '4':'CantorNatom16KTemp1400KEnsemble8', 
-                '5':'folder=hydrogenDiffusionLoop4th', #'multiHydrogenDislocated/rho/rho0',#'multiHydrogenDiffusionLong',#'singleHydrogenDiffusionLong', 
+                '5':'hydrogenDiffusionLoop4th', #'multiHydrogenDislocated/rho/rho0',#'multiHydrogenDiffusionLong',#'singleHydrogenDiffusionLong', 
                 }['5']
     DeleteExistingFolder = True
     readPath = os.getcwd() + {
