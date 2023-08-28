@@ -22,6 +22,7 @@ if __name__ == '__main__':
                 1:2,
                 2:4,
                 3:8,
+                4:16,
             }
     #---
     count = 0
@@ -29,7 +30,7 @@ if __name__ == '__main__':
                 rho = Rho[keys_t]
             #---	densities
                 inums = lnums[ 0 ] - 1
-                string[ inums ] = "\t5:\'multiHydrogenDislocated/rho/rho%s\',\n"%(keys_t) #--- change job name
+                string[ inums ] = "\t5:\'hydrogenDiffusionLoopMultipleHydrogen/rho/rho%s\',\n"%(keys_t) #--- change job name
 #                string[ inums ] = "\t7:\'biCrystalMultipleTemp2nd/temp%s\',\n"%(keys_t) #--- change job name
             #---
                 inums = lnums[ 1 ] - 1

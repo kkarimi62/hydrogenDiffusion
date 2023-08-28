@@ -33,7 +33,7 @@ if __name__ == '__main__':
     jobname  = {
                 3:'hydrogenDiffusionInAlMultipleTemp/Temp1000K', 
                 4:'mitStuff2nd', 
-                5:'test4th', #'multiHydrogenDislocated/rho/rho3', #'multiHydrogenDiffusionLong/rho/rho0',
+                5:'hydrogenDiffusionLoopMultipleHydrogen/rho/rho0', #'multiHydrogenDislocated/rho/rho3', #'multiHydrogenDiffusionLong/rho/rho0',
                 6:'hydrogenDiffusionInAlBigMultipleTemps10H/temp0', #'hydrogenFree',
                }[5]
     sourcePath = os.getcwd() +\
@@ -122,7 +122,7 @@ if __name__ == '__main__':
                 'p3':' data_minimized.txt init_xyz.conf %s 1000.0'%(os.getcwd()+'/lmpScripts'),
                 'p4':' data_minimized.txt data_minimized.txt %s 1'%(os.getcwd()+'/lmpScripts'),
                 'p5':' ',
-                'p6':' %s data_minimized.txt data_minimized.txt 8'%(os.getcwd()+'/../../HeaDef/postprocess'),
+                'p6':' %s data_minimized.txt data_minimized.txt 1'%(os.getcwd()+'/../../HeaDef/postprocess'),
                 'p7':' sortieproc.0 0 Topo_ignore',
                  1.0:'-x DataFile=data_minimized.txt',
                  2.0:'-x DataFile=data_minimized.txt',
@@ -140,10 +140,10 @@ if __name__ == '__main__':
                 7:[5,'p6',51,'p3','p5',1.0], #--- minimize, add H, minimize,kart input, kart.sh to bash shell ,invoke kart
                 9:['p7','p3','p5',1.0], #--- create Topo_ignore, kart input, kart.sh to bash shell ,invoke kart
 #                82:[5,'p6',51,72], #--- minimize,add H, minimize, thermalize
-                100:['p23',51, 52, 'p6',51,'p3','p5',1.0], #--- loop, minimize, pressurize, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
                 81:[5,'p6',51,'p3','p5',1.0], #--- minimize,add H, minimize, kart input, kart.sh to bash shell ,invoke kart
                 91:['p2',51,'p6',51,'p3','p5',1.0], #--- dislocate, minimize,add H, minimize, kart input, kart.sh to bash shell ,invoke kart
-              }[ 91 ]
+                100:['p23',51, 52, 'p6',51,'p3','p5',1.0], #--- loop, minimize, pressurize, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
+              }[ 100 ]
     Pipeline = list(map(lambda x:LmpScript[x],indices))
 #	Variables = list(map(lambda x:Variable[x], indices))
     EXEC = list(map(lambda x:np.array(['lmp','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
