@@ -34,7 +34,7 @@ if __name__ == '__main__':
 #                string[ inums ] = "\t7:\'biCrystalMultipleTemp2nd/temp%s\',\n"%(keys_t) #--- change job name
             #---
                 inums = lnums[ 1 ] - 1
-                string[ inums ] = "\t\'p6\':\' %%s data_minimized.txt data_minimized.txt %s'%%(os.getcwd()+\'/lmpScripts\'),\n"%rho
+                string[ inums ] = "\t\'p6\':\' %%s data_minimized.txt data_minimized.txt %s'%%(os.getcwd()+\'/../../HeaDef/postprocess\'),\n"%rho
 #                string[ inums ] = "\t\'p3\':\' data_minimized.txt init_xyz.conf %%s %s\'%%(os.getcwd()+\'/lmpScripts\'),\n"%temp
     #				string[ inums ] = "\t\'p21\':\' %%s 3.52 %s 18.0 26.0 data_init.txt 2 2 1.0 0.0\'%%(os.getcwd()+\'/lmpScripts\'),\n"%temp
     #				string[ inums ] = "\t\'p7\':\' sortieproc.0 %s Topo_ignore\',\n"%(temp)

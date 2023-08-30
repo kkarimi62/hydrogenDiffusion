@@ -142,7 +142,7 @@ if __name__ == '__main__':
 #                82:[5,'p6',51,72], #--- minimize,add H, minimize, thermalize
                 81:[5,'p6',51,'p3','p5',1.0], #--- minimize,add H, minimize, kart input, kart.sh to bash shell ,invoke kart
                 91:['p2',51,'p6',51,'p3','p5',1.0], #--- dislocate, minimize,add H, minimize, kart input, kart.sh to bash shell ,invoke kart
-                100:['p23',51, 52, 'p6',51,'p3','p5',1.0], #--- loop, minimize, pressurize, add H, minimize, kart input, kart.sh to bash shell ,invoke kart
+                100:['p23',51, 52, 'p6',51,'p3','p5',1.0], #--- loop, minimize (zero p!), pressurize, add H, minimize (zero p!), kart input, kart.sh to bash shell ,invoke kart
               }[ 100 ]
     Pipeline = list(map(lambda x:LmpScript[x],indices))
 #	Variables = list(map(lambda x:Variable[x], indices))
