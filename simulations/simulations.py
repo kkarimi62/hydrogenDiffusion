@@ -109,7 +109,7 @@ if __name__ == '__main__':
                 52:' -var buff 0.0 -var buffy 0.0 -var pyy 100000.0 -var nevery 1000 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt', 
                 7:' -var buff 0.0 -var T 1500.0 -var P 0.0 -var nevery 100 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData Equilibrated_300.dat',
                 71:' -var buff 0.0 -var T 0.1 -var P 0.0 -var nevery 100 -var ParseData 1 -var DataFile swapped_600.dat -var DumpFile dumpThermalized2.xyz -var WriteData Equilibrated_0.dat',
-                72:' -var buff 0.0 -var buffy 5.0 -var Tinit 700.0 -var T 700.0 -var seed %s -var nevery 100 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData Equilibrated.dat'%np.random.randint(1001,9999),
+                72:' -var buff 0.0 -var buffy 0.0 -var buffz 3.0 -var Tinit 700.0 -var T 700.0 -var seed %s -var nevery 100 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData Equilibrated.dat'%np.random.randint(1001,9999),
                 8:' -var buff 0.0 -var T 300.0 -var sigm 1.0 -var sigmdt 0.0001 -var ndump 100 -var ParseData 1 -var DataFile Equilibrated_0.dat -var DumpFile dumpSheared.xyz',
                 9:' -var natoms 1000 -var cutoff 3.52 -var ParseData 1',
                 10:' -var ParseData 1 -var DataFile swapped_600.dat',
