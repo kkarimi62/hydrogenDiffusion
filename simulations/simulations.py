@@ -27,7 +27,7 @@ if __name__ == '__main__':
 
     nruns	 = range(3) #8)
     #
-    nThreads = 2 #16  #8
+    nThreads = 16 #2 #16  #8
     nNode	 = 1
     #
     jobname  = {
@@ -35,7 +35,7 @@ if __name__ == '__main__':
                 4:'mitStuff2nd', 
                 5:'hydrogenDiffusionLoopMultipleHydrogen/rho/rho0', #'multiHydrogenDislocated/rho/rho3', #'multiHydrogenDiffusionLong/rho/rho0',
                 6:'hydrogenDiffusionLoopMultipleHydrogenMd/temp3', #'hydrogenFree',
-               }[6]
+               }[5]
     sourcePath = os.getcwd() +\
                 {	
                     0:'/junk',
@@ -122,7 +122,7 @@ if __name__ == '__main__':
                 'p3':' data_minimized.txt init_xyz.conf %s 1000.0'%(os.getcwd()+'/lmpScripts'),
                 'p4':' data_minimized.txt data_minimized.txt %s 1'%(os.getcwd()+'/lmpScripts'),
                 'p5':' ',
-                'p6':' %s data_minimized.txt data_minimized.txt 10'%(os.getcwd()+'/../../HeaDef/postprocess'),
+                'p6':' %s data_minimized.txt data_minimized.txt 1'%(os.getcwd()+'/../../HeaDef/postprocess'),
                 'p7':' sortieproc.0 0 Topo_ignore',
                  1.0:'-x DataFile=data_minimized.txt',
                  2.0:'-x DataFile=data_minimized.txt',
@@ -142,16 +142,16 @@ if __name__ == '__main__':
 #                82:[5,'p6',51,72], #--- minimize,add H, minimize, thermalize
                 81:[5,'p6',51,'p3','p5',1.0], #--- minimize,add H, minimize, kart input, kart.sh to bash shell ,invoke kart
                 91:['p2',51,'p6',51,'p3','p5',1.0], #--- dislocate, minimize,add H, minimize, kart input, kart.sh to bash shell ,invoke kart
+                101:['p23',51, 52, 'p6',51,72], #--- loop, minimize (zero p!), pressurize, add H, minimize (zero p!), thermalize
                 100:['p23',51, 52, 'p6',51,'p3','p5',1.0], #--- loop, minimize (zero p!), pressurize, add H, minimize (zero p!), kart input, kart.sh to bash shell ,invoke kart
-                101:['p23',51, 52, 'p6',51,72], #--- loop, minimize (zero p!), pressurize, add H, minimize (zero p!), kart input, kart.sh to bash shell ,invoke kart
-              }[ 101 ]
+              }[ 100 ]
     Pipeline = list(map(lambda x:LmpScript[x],indices))
 #	Variables = list(map(lambda x:Variable[x], indices))
     EXEC = list(map(lambda x:np.array(['lmp','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
 #        print('EXEC=',EXEC)
     #
     EXEC_lmp = ['lmp_mpi','lmp_serial','_lmp'][0]
-    durtn = ['23:59:59','00:14:59','167:59:59'][ 2 ]
+    durtn = ['23:59:59','00:14:59','167:59:59'][ 0 ]
     mem = '12gb'
     partition = ['gpu-v100','parallel','cpu2019','single'][2]
     #--
