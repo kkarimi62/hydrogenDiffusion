@@ -25,7 +25,7 @@ if __name__ == '__main__':
     import os
     import numpy as np
 
-    nruns	 = range(3) #8)
+    nruns	 = range(8)
     #
     nThreads = 16 #2 #16  #8
     nNode	 = 1
