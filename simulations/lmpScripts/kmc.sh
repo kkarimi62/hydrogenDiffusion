@@ -109,7 +109,7 @@ setenv FINE_EXIT_FORCE_THRESHOLD       0.05    # finner Threshold for convergenc
 setenv FINE_FORCE_THRESHOLD_PERP_REL   0.01    # finner Threshold for perpendicular relaxation
 
 #kam setenv MIN_NUMBER_KSTEPS          2       # Min. number of ksteps before calling lanczos
-setenv INCREMENT_SIZE             0.1     # Overall scale for the increment moves in activation
+setenv INCREMENT_SIZE             0.01 #0.1     # Overall scale for the increment moves in activation
 
 setenv INITIAL_STEP_SIZE          1.00    # Size of initial displacement, in A
 setenv BASIN_FACTOR               3.00
