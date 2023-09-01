@@ -25,7 +25,7 @@ df = rd.coord_atoms_broken[ 0 ]
 sfile = open(output,'w')
 sfile.write('run_id:            0\ntotal energy :    0.0000\n')
 sfile.write('%s\t%s\t%s\n'%(lx,ly,lz))
-np.savetxt(sfile,np.c_[df.type,df.x-xlo,df.y-ylo,df.z-zlo],fmt='%i %s %s %s')
+np.savetxt(sfile,np.c_[df.type,df.x-xlo,df.y-ylo,df.z-zlo],fmt='%i %16.15f %16.15f %16.15f')
 sfile.close()
 
 sfile = open('.natom.txt','w')
@@ -33,15 +33,15 @@ sfile.write( '%s\n'%(len(df)))
 sfile.close()
 
 sfile = open('.lx.txt','w')
-sfile.write( '%s\n'%np.ceil(lx))
+sfile.write( '%16.15f\n'%lx) #np.ceil(lx))
 sfile.close()
 
 sfile = open('.ly.txt','w')
-sfile.write( '%s\n'%np.ceil(ly))
+sfile.write( '%16.15f\n'%ly) #np.ceil(ly))
 sfile.close()
 
 sfile = open('.lz.txt','w')
-sfile.write( '%s\n'%np.ceil(lz))
+sfile.write( '%16.15f\n'%lz) #np.ceil(lz))
 sfile.close()
 
 sfile = open('.temp.txt','w')
