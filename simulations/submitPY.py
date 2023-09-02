@@ -27,7 +27,7 @@ if __name__ == '__main__':
     #---
     count = 0
     for keys_t in Rho:
-                temp = Rho[keys_t]
+                rho = Rho[keys_t]
             #---	densities
                 inums = lnums[ 0 ] - 1
                 string[ inums ] = "\t6:\'hydrogenDiffusionLoopMultipleHydrogen/rho/rho%s\',\n"%(keys_t) #--- change job name
